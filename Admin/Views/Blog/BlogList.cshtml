@@ -1,0 +1,55 @@
+﻿@using Client.Models;
+@model List<BlogDto>
+
+
+
+<main>
+    <div class="container my-4">
+        <nav dir="rtl" style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='%236c757d'/%3E%3C/svg%3E&#34;);" aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="/home/index">خانه</a></li>
+                <li class="breadcrumb-item active" aria-current="page">مجله</li>
+            </ol>
+        </nav>
+        <div class="row">
+            @if (Model.Any())
+            {
+                @foreach (var item in Model)
+                {
+                    <div class="col-12 col-lg-4 col-md-3 col-sm-12">
+                        <div class="card">
+                            <div class="card-header ">@item.Title</div>
+                            <div class="card-body" style="height:350px;">
+                                <figure>
+                                    <img src="@item.ImageLink" class="card-img-top" alt="image" style="height:150px;">
+                                </figure>
+                                @if (item.Description.Length > 100)
+                                {
+                                    <span class="claimedRight">@item.Description.Substring(0,100)</span>
+                                }
+                                else
+                                {
+                                    <span class="claimedRight">@item.Description</span>
+                                }
+                             
+                            </div>
+                            <div class="card-footer">
+                                   <div class="row">
+                                    <a href="/blog/BlogDetail?BlogId=@item.Id" class="btn bg-danger-gradient">بیشتر بخوانید</a>
+                                    <span class="btn bg-info-gradient mx-2 br-20 align-items-center" style="width: fit-content;">
+                                        <i class="fa fa-eye m-1"></i>
+                                        @item.SiteView
+                                    </span>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                }
+            }
+
+        </div>
+    </div>
+
+</main>

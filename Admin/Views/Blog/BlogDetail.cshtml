@@ -1,0 +1,50 @@
+﻿@using Client.Models;
+@model BlogDto
+
+@{
+    ViewData["Title"] = Model.Title;
+}
+
+<main>
+    <div class="container my-4">
+        <nav dir="rtl" style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='%236c757d'/%3E%3C/svg%3E&#34;);" aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="/home/index">خانه</a></li>
+                <li class="breadcrumb-item active" aria-current="page">مجله</li>
+            </ol>
+        </nav>
+        <div class="row">
+            <div class="card">
+                <div class="row justify-content-between">
+                    <div class="col-6 col-lg-4 col-md-4 col-sm-6">
+                        <h2 class="m-2">@Model.Title</h2>
+                    </div>
+                    <div class="col justify-content-end d-flex align-items-center">
+                        <span>@Model.CreationDateTime.ToLongPersianDateString()</span>
+                        <span class="btn m-2 bg-info-gradient mx-2 br-20 align-items-center" style="width: fit-content;">
+                            <i class="fa fa-eye m-1"></i>
+                            @Model.SiteView
+                        </span>
+                    </div>
+                </div>
+                <hr>
+                <div class="card-body">
+                    <figure>
+                        <img src="@Model.ImageLink"
+                             class="card-img-top"
+                             alt="image"
+                             style="height: 350px;" />
+                    </figure>
+                    <div style="word-break:break-word; width:100%;">
+
+                        @{
+                            var Text = Model.Description.Replace("<img", "<img style=\"max-width:500px;\"").Replace("style=\"font-family:Tahoma,Geneva,sans-serif;\"", "");
+                        }
+                        @Html.Raw(Text)
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>

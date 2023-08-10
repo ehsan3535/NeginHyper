@@ -1,0 +1,280 @@
+﻿@using Secretary.Models.ProductDto;
+@model ProductDto
+
+<!-- BEGIN PAGE CONTENT -->
+<!-- BEGIN BREADCRUMB -->
+<div class="col-md-12">
+    <div class="breadcrumb-box border shadow">
+        <ul class="breadcrumb">
+            <li><a href="ShowWorker"> محصولات</a></li>
+            <li><a href="ShowWorker">محصول جدید </a></li>
+        </ul>
+        <div class="breadcrumb-left">
+            @DNTPersianUtils.Core.FriendlyPersianDateUtils.ToPersianDateTextify(DateTime.Now)
+            <i class="icon-calendar"></i>
+        </div><!-- /.breadcrumb-left -->
+    </div><!-- /.breadcrumb-box -->
+</div><!-- /.col-md-12 -->
+<!-- END BREADCRUMB -->
+<!-- START ADDWORKER -->
+<div class="col-lg-12">
+    <div class="portlet box border shadow">
+        <div class="portlet-heading">
+            <div class="portlet-title">
+                @if (Model is not null)
+                {
+                    @if (Model.Id != Guid.Empty)
+                    {
+                        <h3 class="title">
+                            <i class="icon-settings"></i>
+                            ویرایش محصول
+                        </h3>
+                    }
+                }
+                else
+                {
+                    <h3 class="title">
+                        <i class="icon-settings"></i>
+                        افزودن محصول
+                    </h3>
+                }
+            </div><!-- /.portlet-title -->
+            <div class="buttons-box">
+                <!-- <a class="btn btn-sm btn-default btn-round btn-code" rel="tooltip" title="کدها" href="#">
+                    <i class="icon-arrow-left"></i><span>/</span><i class="icon-arrow-right"></i>
+                </a> -->
+                <div class="code-modal hide">
+                </div>
+                <a class="btn btn-sm btn-default btn-round btn-fullscreen" rel="tooltip" title="تمام صفحه" href="#">
+                    <i class="icon-size-fullscreen"></i>
+                </a>
+                <a class="btn btn-sm btn-default btn-round btn-collapse" rel="tooltip" title="کوچک کردن" href="#">
+                    <i class="icon-arrow-up"></i>
+                </a>
+            </div><!-- /.buttons-box -->
+        </div><!-- /.portlet-heading -->
+        <div class="portlet-body">
+            <form method="post" asp-action="Add_Edit_Product" asp-controller="Product" enctype="multipart/form-data">
+                @if (Model != null)
+                {
+                    @if (Model.Id != Guid.Empty)
+                    {
+                        <input type="text" value="@Model.Id" asp-for="Id" class="form-control" hidden>
+                        <input type="text" value="@Model.Rate" asp-for="Rate" class="form-control" hidden>
+                        <input type="text" value="@Model.TotalRate" asp-for="TotalRate" class="form-control" hidden>
+                    }
+                }
+                <div class="form-group round">
+                    <label>شماره محصول</label>
+                    <input type="number" asp-for="Number" class="form-control" placeholder="شماره محصول">
+                </div><!-- /.form-group -->
+                <div class="form-group">
+                    <label>نام محصول</label>
+                    <div class="input-group">
+                        <span class="input-group-addon">
+                            <i class="icon-basket-loaded fa-flip-horizontal"></i>
+                        </span>
+                        <input type="text" asp-for="Name" class="form-control" placeholder="نام">
+                    </div><!-- /.input-group -->
+                </div><!-- /.form-group -->
+                @* <div class="form-group">
+                <label>طعم</label>
+                <div class="input-group">
+                <span class="input-group-addon">
+                <i class="fas fa-circle-notch"></i>
+                </span>
+                <input type="text" asp-for="Test" class="form-control">
+                </div><!-- /.input-group -->
+                </div><!-- /.form-group -->*@
+                <div class="form-group">
+                    <label>دسته بندی</label>
+                    <div class="input-group">
+                        <span class="input-group-addon">
+                            <i class="icon-options"></i>
+                        </span>
+
+                        <select asp-for="CategorysId" class="form-select">
+                            @foreach (var item in Model.Categories)
+                            {
+                                <option value="@item.Id">@item.Code,@item.Name</option>
+                            }
+                        </select>
+                    </div><!-- /.input-group -->
+                </div><!-- /.form-group -->
+                @*<div class="form-group round">
+                <label>برند</label>
+                <input type="text" asp-for="Brand" class="form-control" placeholder="برند">
+                </div><!-- /.form-group -->*@
+                <div class="form-group round">
+                    <label>قیمت</label>
+                    <input type="number" asp-for="Price" class="form-control" placeholder="قیمت">
+                </div><!-- /.form-group -->
+
+
+                <div class="form-group round">
+                    <label>اعمال تخفیف </label>
+                    <input onclick="func1()" type="checkbox" asp-for="DiscountCheckBox">
+                </div><!-- /.form-group -->
+                @*  خط زیر هیدن هست*@
+                <div id="Discount2" class="form-group round" hidden>
+                    <label>قیمت با تخفیف </label>
+                    <input type="number" asp-for="Discount" class="form-control" placeholder="قیمت با تخفیف">
+                </div><!-- /.form-group -->
+
+                <div class="form-group round">
+                    <label> درجه محصول</label>
+                    <input type="number" asp-for="darage" class="form-control" placeholder="درجه محصول مثلا : 1">
+                </div><!-- /.form-group -->
+
+                <div class="form-group round">
+                    <label>تعداد انبار</label>
+                    <input type="number" asp-for="Count" class="form-control" placeholder=" انبار">
+                </div><!-- /.form-group -->
+                <div class="form-group round">
+                    <label> شیوه نگهداری</label>
+                    <input type="text" asp-for="KeepWay" class="form-control" placeholder=" انبار">
+                </div><!-- /.form-group -->
+                <div class="form-group round">
+                    <label> زمان نگهداری</label>
+                    <input type="text" asp-for="KeepTime" class="form-control" placeholder=" انبار">
+                </div><!-- /.form-group -->
+                <div class="form-group round">
+                    <label>مواد اولیه</label>
+                    <input type="text" asp-for="Matterial" class="form-control" placeholder=" انبار">
+                </div><!-- /.form-group -->
+                <div class="form-group round">
+                    <label>وزن خالص</label>
+                    <input type="text" asp-for="Pureweight" class="form-control" placeholder=" انبار">
+                </div><!-- /.form-group -->
+                <div class="form-group round">
+                    <label>وزن با بسته بندی</label>
+                    <input type="text" asp-for="Allweight" class="form-control" placeholder=" انبار">
+                </div><!-- /.form-group -->
+                <div class="form-group round">
+                    <label> مناسب برای</label>
+                    <input type="text" asp-for="GoodForWhat" class="form-control" placeholder=" انبار">
+                </div><!-- /.form-group -->
+
+
+                <div class="form-group">
+                    <label>توضیحات  محصول </label>
+                    <div class="input-group">
+                        <span class="input-group-addon">
+                            <i class="icon-speech"></i>
+                        </span>
+                        <textarea asp-for="Detail" class="form-control" rows="5" placeholder="جزئیات"></textarea>
+                    </div><!-- /.input-group -->
+                </div><!-- /.form-group -->
+                @if (Model != null)
+                {
+                    if (Model.ProductImages != null && Model.ProductImages.Any())
+                    {
+                        <div class="container text-center">
+                            <div class="row">
+
+                                @foreach (var i in Model.ProductImages)
+                                {
+                                    <div class="col">
+
+                                        <div class="effect bottom-to-top-effect">
+                                            <div class="info-hover">
+                                            </div><!-- /.info-hover -->
+                                            <img src="@i.ImageLink" class="img-center img-responsive" alt="">
+                                            <div data-bs-theme="dark">
+                                                <a type="button" href="/product/DeleteProductImages?ProductImageId=@i.Id" class="btn-close" disabled aria-label="Close"></a>
+                                            </div>
+                                        </div>
+                                        <!-- /.effect -->
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    }
+                }
+
+                <div class="form-group relative">
+                    <input asp-for="File" type="file" class="form-control" multiple="multiple" multiple>
+                    <label> آپلود عکس های محصول</label>
+                    <div class="input-group round">
+                        <input type="text" class="form-control file-input" placeholder="برای آپلود کلیک کنید" multiple="multiple">
+                        <span class="input-group-btn">
+                            <button type="button" class="btn btn-info">
+                                <i class="icon-picture"></i>
+                                آپلود عکس های محصول
+                            </button>
+                        </span>
+                    </div><!-- /.input-group -->
+                    <div class="help-block"></div>
+                </div><!-- /.form-group -->
+                <br />
+
+                @if (Model != null)
+                {
+                    <div class="effect bottom-to-top-effect">
+                        <div class="info-hover">
+                        </div><!-- /.info-hover -->
+                        <img src="@Model.ImageCoverUrl" class="img-center img-responsive" alt="">
+                        @if (Model.ImageCoverUrl != null)
+                        {
+                            <div data-bs-theme="dark">
+                                <a type="button" href="/Product/DeleteProductImages?ImageLink2=@Model.ImageCoverUrl" class="btn-close center-block" disabled aria-label="Close"></a>
+                            </div>
+                        }
+                    </div>
+                    <!-- /.effect -->
+                }
+                <div class="form-group relative">
+                    <input asp-for="File2" type="file" class="form-control">
+                    <label> آپلود عکس کاور محصول</label>
+                    <div class="input-group round">
+                        <input type="text" class="form-control file-input" placeholder="برای آپلود کلیک کنید">
+                        <span class="input-group-btn">
+                            <button type="button" class="btn btn-info">
+                                <i class="icon-picture"></i>
+                                آپلود عکس کاور محصول
+                            </button>
+                        </span>
+                    </div><!-- /.input-group -->
+                    <div class="help-block"></div>
+                </div><!-- /.form-group -->
+                <div class="row">
+                    <button type="submit" class="btn btn-info btn-round btn-block">
+                        <i class="icon-check"></i>
+                        ثبت
+                    </button>
+                </div><!--end row-->
+            </form>
+
+        </div><!-- /.portlet-body -->
+    </div><!-- /.portlet -->
+    <!-- END ADDWORKER -->
+</div><!-- /.row -->
+    </div>
+</div>
+<!-- /#page-content -->
+<!-- END PAGE CONTENT -->
+@section Scripts{
+    <script asp-append-version="true">
+
+
+        if ($('#DiscountCheckBox').is(':checked')) {
+
+                    $('#Discount2').attr("hidden", false);
+                }
+
+        function func1() {
+            console.log('hi');
+
+            if ($('#DiscountCheckBox').is(':checked')) {
+
+                $('#Discount2').attr("hidden", false);
+            }
+            else {
+            console.log('hi');
+
+                $('#Discount2').attr("hidden", true);
+            }
+        }
+    </script>
+
+                }

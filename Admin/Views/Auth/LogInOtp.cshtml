@@ -1,0 +1,171 @@
+﻿@using Client.Models.Dtos;
+@model LoginOtpDto
+
+
+<div class="row justify-content-center w-100">
+    <div class="col-12">
+        <div class="site-login mx-auto">
+            <h2 class="centered-header"> تایید شماره </h2>
+            <div class="row justify-content-between">
+                <span style="text-align:center; width:100%">کد ارسال شده به شماره @TempData["UserName1"].ToString() را وارد نمایید</span>
+            </div>
+            <div class="clearfix">
+                <div class="row justify-content-center">
+                    <div class="col-lg-6 col-sm-8 col-lg-push-3 col-sm-push-2 m-t-30">
+                        <div class="row">
+                            <form asp-action="LogInOtp" asp-controller="Auth" method="POST" role="form">
+
+
+                                <input asp-for="PhoneNumber" autocomplete="off" value="@TempData["UserName1"].ToString()" hidden />
+
+                                @if (TempData["Password"] != null)
+                                {
+                                    <input type="password" autocomplete="off" asp-for="Password" value="@TempData["Password"].ToString()" hidden />
+                                }
+                                else if (TempData["RecoveryOTP"] != null)
+                                {
+                                    <input type="text" asp-for="OTP" autocomplete="off" value="@TempData["RecoveryOTP"].ToString()" hidden />
+                                }
+                                <div class="form-group ltr field-loginform-mobile required">
+                                    <label>کد ورود</label>
+                                    <input type="text"
+                                           style="border:1px solid grey"
+                                           id="loginform-mobile"
+                                           class="form-control py-4 mt-5"
+                                           placeholder="- - - - - -"
+                                           asp-for="Code"
+                                           autocomplete="off"
+                                           required
+                                           autofocus
+
+                                           aria-required="true" />
+                                </div>
+                                <div style="text-align:center; width:100%" class="app">
+                                    <a href="/auth/LogInOtp?PhoneNumber=@TempData["UserName1"].ToString()" id="Sendagain" hidden style="color:cadetblue">ارسال مجدد کد</a>
+                                    <time style="text-align:center; width:100%" id="countdown">2:00</time>
+                                </div>
+                                <button type="submit" class="mt-5 default__button button--medium">ورود</button>
+                                <div class="row justify-content-center">
+                                    <a style="text-align:center; width:100%; margin-right:auto; margin-left:auto;" href="/auth/RecoveryPassword">تغییر شماره تماس</a>
+                                </div>
+
+                            </form>
+                            <br />
+                            <br />
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@*<div class="row justify-content-center w-100">
+    <div class="col-12">
+        <div class="site-login mx-auto">
+            <h2 class="centered-header"> تایید شماره </h2>
+            <div class="row justify-content-between">
+                <span style="text-align:center; width:100%">کد ارسال شده به شماره @TempData["UserName1"].ToString() را وارد نمایید</span>
+            </div>
+            <div class="clearfix">
+                <div class="row justify-content-center">
+                    <div class="col-lg-6 col-sm-8 col-lg-push-3 col-sm-push-2 m-t-30">
+                        <div class="row">
+                            <form asp-action="LogInOtp" asp-controller="Auth" method="POST" role="form">
+
+                                <label>
+                                    <span>کد ورود </span>
+                                    <input type="text" asp-for="Code" required>
+                                    <input asp-for="PhoneNumber" value="@TempData["UserName1"].ToString()" hidden />
+                                    @if (TempData["Password"] != null)
+                                    {
+                                        <input type="password" asp-for="Password" value="@TempData["Password"].ToString()" hidden />
+                                    }
+                                    else if (TempData["RecoveryOTP"] != null)
+                                    {
+                                        <input type="texy" asp-for="OTP" value="@TempData["RecoveryOTP"].ToString()" hidden />
+                                    }
+                                </label>
+                                <div class="app">
+                                    <a href="/auth/LogInOtp?PhoneNumber=@TempData["UserName1"].ToString()" id="Sendagain" hidden style="color:cadetblue">ارسال مجدد کد</a>
+                                    <time id="countdown">2:00</time>
+
+                                </div>
+                                <br>
+
+                                <button type="submit" class="btn btn-success">ورود </button>
+                                <a href="/auth/SignUp">تغییر شماره تماس</a>
+
+                            </form>
+
+                            <br />
+                            <br />
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+*@@*
+<section class="login-signup">
+    <br>
+    <div class="cont mt-5">
+        <form asp-action="LogInOtp" asp-controller="Auth" method="POST" role="form">
+
+            <div class="form sign-in ">
+                <span>کد ارسال شده به شماره @TempData["UserName1"].ToString() را وارد نمایید</span>
+                <label>
+                    <span>کد ورود </span>
+                    <input type="text" asp-for="Code" required>
+                    <input asp-for="PhoneNumber" value="@TempData["UserName1"].ToString()" hidden />
+                    @if (TempData["Password"] != null)
+                    {
+                    <input type="password" asp-for="Password" value="@TempData["Password"].ToString()" hidden />
+                    }
+                    else if (TempData["RecoveryOTP"] != null)
+                    {
+                        <input type="texy" asp-for="OTP" value="@TempData["RecoveryOTP"].ToString()" hidden />
+                    }
+                </label>
+                <div class="app">
+                    <a href="/auth/LogInOtp?PhoneNumber=@TempData["UserName1"].ToString()" id="Sendagain" hidden style="color:cadetblue">ارسال مجدد کد</a>
+                    <time id="countdown">2:00</time>
+
+                </div>
+                <br>
+
+                <button type="submit" class="btn btn-success">ورود </button>
+                <a href="/auth/SignUp">تغییر شماره تماس</a>
+
+            </div>
+        </form>
+    </div>
+</section>*@
+@section Scripts{
+    <script>
+        var seconds = 120;
+
+        function secondPassed() {
+            var minutes = Math.round((seconds - 30) / 60),
+                remainingSeconds = seconds % 60;
+
+            if (remainingSeconds < 10) {
+                remainingSeconds = "0" + remainingSeconds;
+            }
+
+            document.getElementById('countdown').innerHTML = minutes + ":" + remainingSeconds;
+            if (seconds == 0) {
+                clearInterval(countdownTimer);
+                document.getElementById('countdown').innerHTML = "00:00";
+                $("#Sendagain").attr("hidden", false);
+            } else {
+                seconds--;
+            }
+        }
+
+        var countdownTimer = setInterval('secondPassed()', 1000);
+    </script>
+}

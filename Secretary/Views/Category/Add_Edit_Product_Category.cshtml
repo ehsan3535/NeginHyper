@@ -1,0 +1,167 @@
+﻿@using Secretary.Models;
+@model ProductCategoryDto
+
+<!-- BEGIN PAGE CONTENT -->
+<!-- BEGIN BREADCRUMB -->
+<div class="col-md-12">
+    <div class="breadcrumb-box border shadow">
+        <ul class="breadcrumb">
+            <li><a href="ShowWorker"> محصولات</a></li>
+            <li><a href="ShowWorker">افزودن دسته بندی جدید </a></li>
+        </ul>
+        <div class="breadcrumb-left">
+            @DNTPersianUtils.Core.FriendlyPersianDateUtils.ToPersianDateTextify(DateTime.Now)
+            <i class="icon-calendar"></i>
+        </div><!-- /.breadcrumb-left -->
+    </div><!-- /.breadcrumb-box -->
+</div><!-- /.col-md-12 -->
+<!-- END BREADCRUMB -->
+<!-- START ADDWORKER -->
+<div class="col-lg-12">
+    <div class="portlet box border shadow">
+        <div class="portlet-heading">
+            <div class="portlet-title">
+                @if (Model is not null)
+                {
+                    @if (Model.Id != Guid.Empty)
+                    {
+                        <h3 class="title">
+                            <i class="icon-settings"></i>
+                            ویرایش دسته بندی
+                        </h3>
+                    }
+                }
+                else
+                {
+                    <h3 class="title">
+                        <i class="icon-settings"></i>
+                        افزودن دسته بندی
+                    </h3>
+                }
+
+            </div><!-- /.portlet-title -->
+            <div class="buttons-box">
+                <!-- <a class="btn btn-sm btn-default btn-round btn-code" rel="tooltip" title="کدها" href="#">
+                    <i class="icon-arrow-left"></i><span>/</span><i class="icon-arrow-right"></i>
+                </a> -->
+                <div class="code-modal hide">
+                </div>
+                <a class="btn btn-sm btn-default btn-round btn-fullscreen" rel="tooltip" title="تمام صفحه" href="#">
+                    <i class="icon-size-fullscreen"></i>
+                </a>
+                <a class="btn btn-sm btn-default btn-round btn-collapse" rel="tooltip" title="کوچک کردن" href="#">
+                    <i class="icon-arrow-up"></i>
+                </a>
+            </div><!-- /.buttons-box -->
+        </div><!-- /.portlet-heading -->
+        <div class="portlet-body">
+            <form method="post" asp-action="Add_Edit_Product_Category" asp-controller="Category" enctype="multipart/form-data">
+                @if (Model != null)
+                {
+                    @if (Model.Id != Guid.Empty)
+                    {
+                        <input type="text" value="@Model.Id" asp-for="Id" class="form-control" hidden>
+                    }
+                }
+                <div class="form-group">
+                    <label>نام :</label>
+                    <div class="input-group">
+                        <span class="input-group-addon">
+                            <i class="icon-user"></i>
+                        </span>
+                        <input type="text" asp-for="Name" class="form-control" placeholder="نام">
+                    </div><!-- /.input-group -->
+                </div><!-- /.form-group -->
+                <div class="form-group">
+                    <label>ترتیب :</label>
+                    <div class="input-group">
+                        <span class="input-group-addon">
+                            <i class="icon-user"></i>
+                        </span>
+                        <input type="number" asp-for="Order" class="form-control" placeholder="ترتیب">
+                    </div><!-- /.input-group -->
+                </div><!-- /.form-group -->
+                <div class="form-group">
+                    <label> کد:</label>
+                    <div class="input-group">
+                        <span class="input-group-addon">
+                            <i class="icon-user"></i>
+                        </span>
+                        <input type="text" asp-for="Code" class="form-control" placeholder="کد">
+                    </div><!-- /.input-group -->
+                </div><!-- /.form-group -->
+                <div class="form-group">
+                    <label>توضیحات دسته بندی</label>
+                    <div class="input-group">
+                        <span class="input-group-addon">
+                            <i class="icon-speech"></i>
+                        </span>
+                        <textarea asp-for="Description" class="form-control" rows="5" placeholder="توضیحات"></textarea>
+                    </div><!-- /.input-group -->
+                </div><!-- /.form-group -->
+                @if (Model != null)
+                {
+                    <div class="effect bottom-to-top-effect">
+                        <h3>عکس صفحه اصلی</h3>
+                        <div class="info-hover">
+                        </div><!-- /.info-hover -->
+                        <img src="@Model.ImageUrl" class="img-center img-responsive" alt="">
+                        <input type="text" asp-for="ImageUrl" value="@Model.ImageUrl" class="form-control file-input" hidden>
+                    </div>
+                    <!-- /.effect -->
+
+                    <div class="effect bottom-to-top-effect">
+                        <h3>عکس منو</h3>
+                        <div class="info-hover">
+                        </div><!-- /.info-hover -->
+                        <img src="@Model.MenuImageUrl" class="img-center img-responsive" alt="">
+                        <input type="text" asp-for="MenuImageUrl" value="@Model.MenuImageUrl" class="form-control file-input" hidden>
+                    </div>
+                    <!-- /.effect -->
+                }
+                <div class="form-group relative">
+                    <input asp-for="File" type="file" class="form-control">
+                    <label>آپلود فایل صفحه اصلی</label>
+                    <div class="input-group round">
+                        <input type="text" class="form-control file-input" placeholder="برای آپلود کلیک کنید">
+                        <span class="input-group-btn">
+                            <button type="button" class="btn btn-info">
+                                <i class="icon-picture"></i>
+                                آپلود عکس صفحه اصلی
+                            </button>
+                        </span>
+                    </div><!-- /.input-group -->
+                    <div class="help-block"></div>
+                </div><!-- /.form-group -->
+
+
+                <div class="form-group relative">
+                    <input asp-for="MenuImageFile" type="file" class="form-control">
+                    <label>آپلود فایل منو</label>
+                    <div class="input-group round">
+                        <input type="text" class="form-control file-input" placeholder="برای آپلود کلیک کنید">
+                        <span class="input-group-btn">
+                            <button type="button" class="btn btn-info">
+                                <i class="icon-picture"></i>
+                                آپلود عکس منو
+                            </button>
+                        </span>
+                    </div><!-- /.input-group -->
+                    <div class="help-block"></div>
+                </div><!-- /.form-group -->
+                <div class="row">
+                    <button type="submit" class="btn btn-info btn-round btn-block">
+                        <i class="icon-check"></i>
+                        ثبت
+                    </button>
+                </div><!--end row-->
+            </form>
+
+        </div><!-- /.portlet-body -->
+    </div><!-- /.portlet -->
+    <!-- END ADDWORKER -->
+</div><!-- /.row -->
+    </div>
+</div>
+<!-- /#page-content -->
+<!-- END PAGE CONTENT -->

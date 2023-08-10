@@ -1,0 +1,345 @@
+﻿<!DOCTYPE html>
+<html lang="fa" dir="rtl" class="rtl">
+<head>
+    <title>تیم برنامه نویسی کدینیتی</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="قالب مدیریت ایرانی مدیران ">
+    <meta name="keywords" content="قالب مدیریت, قالب داشبورد, قالب ادمین, قالب مدیران, قالب مدیریت راستچین , قالب ایرانی مدیریت, پوسته مدیریت, قالب ادمین داشبورد سایت, قالب مدیریتی, مدیران, قالب مدیریت مدیران, پنل مدیریت, پنل مدیریت مدرن, قالب ادمین متریال, قالب مدیریت بوت استرپ, قالب ادمین بوتسترپ, قالب ادمین سایت, پوسته مدیریتی ایرانی, قالب مدیرتی مدیران ایرانی, بهترین قالب مدیریت, قالب مدیریت ریسپانسیو, قالب مدیریت ارزان, قالب admin">
+    <meta name="fontiran.com:license" content="NE29X">
+    <link rel="shortcut icon" href="~/assets/images/favicon.png">
+
+    <!-- BEGIN CSS -->
+    <link href="~/assets/plugins/bootstrap/bootstrap5/css/bootstrap.rtl.min.css" rel="stylesheet">
+    <link href="~/assets/plugins/metisMenu/dist/metisMenu.min.css" rel="stylesheet">
+    <link href="~/assets/plugins/simple-line-icons/css/simple-line-icons.min.css" rel="stylesheet">
+    <link href="~/assets/plugins/font-awesome/css/all.min.css" rel="stylesheet">
+    <link href="~/assets/plugins/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.min.css" rel="stylesheet">
+    <link href="~/assets/plugins/switchery/dist/switchery.min.css" rel="stylesheet">
+    <link href="~/assets/plugins/sweetalert2/dist/sweetalert2.min.css" rel="stylesheet">
+    <link href="~/assets/plugins/paper-ripple/dist/paper-ripple.min.css" rel="stylesheet">
+    <link href="~/assets/plugins/iCheck/skins/square/_all.css" rel="stylesheet">
+    <link href="~/assets/css/style.css" rel="stylesheet">
+    <link href="~/assets/css/colors.css" rel="stylesheet">
+    <!-- END CSS -->
+    @RenderSection("Style",false)
+
+</head>
+<body class="active-ripple theme-blue fix-header sidebar-extra">
+    <!-- BEGIN LOEADING -->
+    <div id="loader">
+        <div class="spinner"></div>
+    </div><!-- /loader -->
+    <!-- END LOEADING -->
+    <!-- BEGIN HEADER -->
+    <div class="navbar navbar-fixed-top" id="main-navbar">
+        <div class="header-right">
+            <a href="dashboard.html" class="logo-con">
+                <img src="~/assets/Group 8.png" width="40px" height="40px" class="img-responsive center-block" alt="لوگو قالب مدیران"> 
+            </a>
+        </div><!-- /.header-right -->
+        <div class="header-left">
+            <div class="top-bar">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="#" class="btn" id="toggle-sidebar">
+                            <span class="menu"></span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="btn open" id="toggle-sidebar-top">
+                            <i class="icon-user-following"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="btn" id="toggle-dark-mode">
+                            <i class="icon-bulb"></i>
+                        </a>
+                    </li>
+                </ul>
+            </div><!-- /.top-bar -->
+        </div><!-- /.header-left -->
+    </div><!-- /.navbar -->
+    <!-- END HEADER -->
+    <!-- BEGIN WRAPPER -->
+    <div id="wrapper">
+
+        <!-- BEGIN SIDEBAR -->
+        <div id="sidebar">
+            <div class="sidebar-top">
+                <div class="search-box">
+                    <form class="search-form" action="#" method="GET">
+                        <div class="input-group">
+                            <input type="text" class="form-control placeholder-light" placeholder="جستجو..." name="key">
+                            <span class="input-group-btn">
+                                <button type="submit" class="btn btn-round submit">
+                                    <i class="icon-magnifier"></i>
+                                </button>
+                            </span>
+                        </div>
+                    </form>
+                </div><!-- /.search-box -->
+                <div class="user-box">
+                    <a href="#">
+                        <img src="~/assets/images/user/128.png" alt="عکس پروفایل" class="img-circle img-responsive">
+                    </a>
+                    <div class="user-details">
+                        <h4>تیم برنامه نویسی کدینیتی</h4>
+                        <p class="role">ادمین</p>
+                        <div class="dropdown user-login">
+                            <button class="btn btn-xs btn-status dropdown-toggle btn-round" type="button" data-bs-toggle="dropdown" data-hover="dropdown">
+                                <i class="fas fa-circle text-success"></i>
+                                <span>دردسترس</span>
+                            </button>
+                            <ul class="dropdown-menu dropdown-status">
+                                <li>
+                                    <a href="#" class="busy">
+                                        <i class="fas fa-circle text-success"></i>
+                                        <span>دردسترس</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" class="busy">
+                                        <i class="fas fa-circle text-danger"></i>
+                                        <span>مشغول</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <i class="fas fa-circle text-gray"></i>
+                                        <span>مخفی</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <i class="fas fa-circle text-warning"></i>
+                                        <span>سایر</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div><!-- /dropdown -->
+                    </div><!-- /.user-details -->
+                </div><!-- /.user-box -->
+            </div><!-- /.sidebar-top -->
+            <div class="side-menu-container">
+                <ul class="metismenu" id="side-menu">
+                    <li>
+                        <a href="#" class="dropdown-toggle">
+                            <i class=" fas fa-file-lines"></i>
+                            <span>مقاله</span>
+                        </a>
+                        <ul>
+                           
+                            <li>
+                                <a href="/Blog/BlogList" class="">
+                                    <i class="icon-home"></i>
+                                    <span>لیست مقالات </span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/Category/BlogCategoryList" class="">
+                                    <i class="icon-home"></i>
+                                    <span>دسته بندی مقالات </span>
+                                </a>
+                            </li>
+                           
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#" class="">
+                            <i class="fa-unlock"></i>
+                            <span>سئو SEO</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="dropdown-toggle">
+                            <i class=" fas fa-file-lines"></i>
+                            <span>محصولات</span>
+                        </a>
+                        <ul>
+                           
+                            <li>
+                                <a href="/Product/ListProduct" class="">
+                                    <i class="icon-home"></i>
+                                    <span>لیست محصولات </span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/Category/ProductCategoryList" class="">
+                                    <i class="icon-home"></i>
+                                    <span>دسته بندی محصولات </span>
+                                </a>
+                            </li>
+                           
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#" class="dropdown-toggle">
+                            <i class=" fas fa-file-lines"></i>
+                            <span>تخفیف ها</span>
+                        </a>
+                        <ul>
+                            <li>
+                                <a href="/Discount/Add_Edit_Discount" class="">
+                                    <i class="icon-home"></i>
+                                    <span>افزودن کد تخفیف</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/Discount/DiscountList" class="">
+                                    <i class="icon-home"></i>
+                                    <span>لیست تخفیف ها </span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="/Order/OrderList" class="">
+                            <i class="fa-unlock"></i>
+                            <span>لیست سفارشات</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/Auth/UserList" class="">
+                            <i class="fa-unlock"></i>
+                            <span>لیست کاربران</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/Contact/ContactList" class="">
+                            <i class="fa-unlock"></i>
+                            <span>لیست ارتباط با ما</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/Contact/PartnerShipList" class="">
+                            <i class="fa-unlock"></i>
+                            <span>لیست همکاری با ما</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/Contact/NewsletterList" class="">
+                            <i class="fa-unlock"></i>
+                            <span>اعضای خبرنامه</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/Contact/buybulkList" class="">
+                            <i class="fa-unlock"></i>
+                            <span>خرید سازمانی</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/Contact/OurClientList" class="">
+                            <i class="fa-unlock"></i>
+                            <span>مشتریان ما</span>
+                        </a>
+                    </li>
+                    <li class="open active conditional-bg">
+                        <a href="/Notification/NotificationList">
+                            <i class="icon-speech"></i>
+                            <span>اعلانات</span>
+                        </a>
+                    </li> 
+                    <li class="open active conditional-bg">
+                        <a href="/comment/ProductCommentList">
+                            <i class="icon-speech"></i>
+                            <span>نظرات</span>
+                        </a>
+                    </li>
+                   @* <li>
+                        <a href="#" class="dropdown-toggle">
+                            <i class=" fas fa-file-lines"></i>
+                            <span>نظرات</span>
+                        </a>
+                        <ul>
+                            <li>
+                                <a href="/comment/BlogCommentList" class="">
+                                    <i class="icon-home"></i>
+                                    <span>نظرات مقالات</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/comment/ProductCommentList" class="">
+                                    <i class="icon-home"></i>
+                                    <span>نظرات محصولات</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li> *@
+                    <li>
+                        <a href="#" class="dropdown-toggle">
+                            <i class=" fas fa-file-lines"></i>
+                            <span>تنظیمات</span>
+                        </a>
+                        <ul>
+                            <li>
+                                <a href="/Setting/Setting" class="">
+                                    <i class="icon-home"></i>
+                                    <span> تنظیمات کلی</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/Setting/FreeTimes?Day=1" class="">
+                                    <i class="icon-home"></i>
+                                    <span> تنظیمات زمان ارسال</span>
+                                </a>
+                            </li>
+                             @if (User.IsInRole("Admin"))
+                            {
+                                <li>
+                                    <a href="/auth/adminlist" class="">
+                                        <i class="icon-home"></i>
+                                        <span> تغییر رمز عبور</span>
+                                    </a>
+                                </li>
+                            }
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="/Auth/LogOut" class="">
+                            <i class="bi bi-power"></i>
+                            <span>خروج</span>
+                        </a>
+                    </li>
+                  
+                </ul><!-- /#side-menu -->
+            </div><!-- /.side-menu-container -->
+        </div><!-- /#sidebar -->
+        <!-- END SIDEBAR -->
+        <div id="page-content">
+
+            @RenderBody()
+        </div>
+    </div><!-- /#wrapper -->
+    <!-- END WRAPPER -->
+    <!-- BEGIN CODE MODAL -->
+    <div class="modal fade" id="code-modal" role="dialog" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="btn btn-default btn-round btn-icon float-start" id="btn-copy"><i class="far fa-copy"></i></button>
+                    <button type="button" class="close" data-bs-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">کپی کردن کدها</h4>
+                </div>
+                <div class="modal-body"></div>
+            </div> <!-- /.modal-content -->
+        </div> <!-- /.modal-dialog -->
+    </div> <!-- /.modal -->
+    <!-- END CODE MODAL -->
+    <!-- BEGIN JS -->
+    <script src="~/assets/plugins/jquery/dist/jquery-3.6.1.min.js"></script>
+    <script src="~/assets/plugins/bootstrap/bootstrap5/js/bootstrap.bundle.min.js"></script>
+    <script src="~/assets/plugins/metisMenu/dist/metisMenu.min.js"></script>
+    <script src="~/assets/plugins/paper-ripple/dist/PaperRipple.min.js"></script>
+    <script src="~/assets/plugins/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.concat.min.js"></script>
+    <script src="~/assets/plugins/sweetalert2/dist/sweetalert2.min.js"></script>
+    <script src="~/assets/plugins/screenfull/dist/screenfull.min.js"></script>
+    <script src="~/assets/plugins/iCheck/icheck.min.js"></script>
+    <script src="~/assets/plugins/switchery/dist/switchery.js"></script>
+    <script src="~/assets/js/core.js"></script>
+    @RenderSection("Scripts",required: false)
+    @await Component.InvokeAsync("NToastNotify")
+
+</body>
+</html>

@@ -1,0 +1,67 @@
+﻿@*<div class="header header-light head-shadow">
+    <div class="container">
+        <nav id="navigation" class="navigation navigation-landscape">
+            <div class="nav-header">
+                <a class="nav-brand" href="#">
+                    <img src="~/assets_User/img/logo.png" class="logo" alt="" />
+                </a>
+                <div class="nav-toggle"></div>
+            </div>
+            <div class="nav-menus-wrapper" style="transition-property: none;">
+                <ul class="nav-menu">
+
+                    <li class="active">
+                        <a href="/Home/Index">خانه</a>
+                    </li>
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <li class="">
+                            <a href="/Home/UserDashboard">داشبورد<span class="submenu-indicator"></span></a>
+                        </li>
+                    }
+                    <li>
+                        <a href="/Blog/BlogList">مقالات</a>
+                    </li> 
+                    <li>
+                        <a href="/Education/CourseList">دوره آموزشی<span class="submenu-indicator"></span></a>
+                    </li>
+                    <li>
+                        <a href="AddRequestBarname.html">برنامه تمرینی</a>
+                    </li>
+                    <li><a href="/Contact/Add_Edit_Contact">ارتباط با ما</a></li>
+                    <li><a href="/InternShip/Add_Edit_InternShip"> درخواست کارآموزی</a></li>
+                </ul>
+
+                @if (!User.Identity.IsAuthenticated)
+                {
+                    <ul class="nav-menu nav-menu-social align-to-left">
+
+                        <li class="login_click light">
+                            <a href="/Auth/Login">ورود</a>
+                        </li>
+                    </ul>
+                }
+                else
+                {
+                    <ul class="nav-menu nav-menu-social align-to-left">
+                        <li class="login_click theme-bg">
+                            <a href="/Auth/LogOut">خروج</a>
+                        </li>
+                    </ul>
+                    <ul class="nav-menu nav-menu-social align-to-left">
+
+                        <li class="login_click light">
+
+
+                            <a href="/ShopCard/ShopCard_Detail">
+                                <i class="ti-shopping-cart"></i>3
+                            </a>
+
+                        </li>
+                    </ul>
+                }
+            </div>
+        </nav>
+    </div>
+</div>
+*@

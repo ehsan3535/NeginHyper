@@ -1,0 +1,590 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>گیل هایپر</title>
+    <link rel="shortcut icon" href="/FavGilHyper.ico">
+
+    <link rel="stylesheet"
+          href="/assets/css/MyBootstarp.css" />
+    <!-- Datepicker -->
+    <link rel="stylesheet" href="/vendors/datepicker/daterangepicker.css" />
+    <!-- Slick slide -->
+    <link rel="stylesheet" href="/vendors/slick/slick.css" type="text/css">
+    <link rel="stylesheet" href="/vendors/slick/slick-theme.css" type="text/css">
+    <!-- Vmap -->
+    <link rel="stylesheet" href="/vendors/vmap/jqvmap.min.css" />
+    <!-- mmenu -->
+    <link rel="stylesheet"
+          href="/assets/css/MyMenu.css" />
+    <link rel="stylesheet" href="/assets/css/mm.css" type="text/css">
+    <link rel="stylesheet" href="/assets/css/mmenu.css" />
+    <!-- App styles -->
+    <link rel="stylesheet" href="/assets/css/ksh.css" type="text/css" />
+
+    <link rel="stylesheet" href="/assets/css/app.css" type="text/css" />
+    <link rel="stylesheet" href="/vendors/swal/sweetalert2.min.css" type="text/css" />
+
+    <link rel="stylesheet" href="/assets/icons/font-awesome/css/font-awesome.min.css" type="text/css" />
+
+    
+
+
+    <style>
+        html, body {
+            overflow-x: hidden;
+        }
+    </style>
+    @await RenderSectionAsync("Styles",false)
+</head>
+<body dir="rtl">
+    <!-- desktop menu -->
+    <header class="mc_desktop_header">
+        <div class="mc_main_header">
+            <nav class="nav__block">
+                <section class="nav__section_top">
+                    <a class="nav__logo" href="/home/index">
+                        <img src="~/assets/media/src/gil-logo.png" class="nav__logo_img" />
+                    </a>
+
+
+                    <form role="search" method="get" asp-action="Shop" asp-controller="Product">
+
+                        <div class="nav__searchbox">
+                            <img class="serachbox__icon" src="/assets/images/values/search.svg" style="width:30px; height:30px;" />
+                            <input class="searchbox__input fuse__input"
+                                   name="Searched"
+                                   type="text"
+                                   placeholder="نام کالای مورد نظر خود را جستجو کنید" />
+                            <div class="nav__search-result">
+                                <div class="search__results"></div>
+                            </div>
+                        </div>
+
+                        @*                        <button type="submit"><img class="serachbox__icon" src="images/template/search-icon.svg" /></button>
+                        *@
+                    </form>
+
+                    <div class="nav__panel">
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <figure class="panel__figure">
+                                <a class="panel__a" href="/Notification/NotificationList">
+                                    <img src="~/assets/images/values/notifications_FILL0_wght400_GRAD0_opsz48.svg"
+                                     class="panel__figure_img img--basket" />
+                                    <figcaption class="panel__figure_caption">
+                                        اعلانات
+                                    </figcaption>
+                                </a>
+                            </figure>
+
+                            <figure class="panel__figure">
+                                <a class="panel__a" href="/auth/LogOut">
+                                    <img src="~/assets/images/values/logout_FILL0_wght400_GRAD0_opsz48.svg"
+                                     class="panel__figure_img" />
+                                    <figcaption class="panel__figure_caption">خروج</figcaption>
+                                </a>
+                            </figure>
+
+                            @*@await Component.InvokeAsync("ShopCardIcon")*@
+                            @*      <figure class="panel__figure">
+                        <a class="panel__a mt-3" href="/ShopCard/ShopCard_Detail">
+                        <span id="shopcardcount" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+
+                        </span>
+                        <img src="/assets/images/values/basket.svg"
+                        class="panel__figure_img img--basket bg-success br-20 p-1" style="width:50px; height:50px;" />
+                        <figcaption class="panel__figure_caption">
+                        سبد خرید
+                        </figcaption>
+                        </a>
+                        </figure>*@
+
+                        }
+                        else
+                        {
+                            <figure class="panel__figure">
+                                <a class="panel__a" href="/auth/SignUp">
+                                    <img src="/assets/images/values/Icon-login.svg"
+                                     class="panel__figure_img" />
+                                    <figcaption class="panel__figure_caption">عضویت</figcaption>
+                                </a>
+                            </figure>
+                            <figure class="panel__figure">
+                                <a class="panel__a" href="/auth/login">
+                                    <img src="/assets/images/values/Icon-login.svg"
+                                     class="panel__figure_img" />
+                                    <figcaption class="panel__figure_caption">ورود</figcaption>
+                                </a>
+                            </figure>
+
+                        }
+                        <figure class="panel__figure">
+                            <button class="panel__a mt-3" onclick="openBasket()">
+                                <span id="shopcardcount" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+
+                                </span>
+                                <img src="/assets/images/values/basket.svg"
+                                     class="panel__figure_img img--basket bg-success br-20 p-1" style="width:50px; height:50px;" />
+                                <figcaption class="panel__figure_caption">
+                                    سبد خرید
+                                </figcaption>
+                            </button>
+                        </figure>
+
+                    </div>
+                </section>
+                @await Component.InvokeAsync("AllCategorys")
+            </nav>
+        </div>
+    </header>
+    <!-- end desktop menu -->
+    <!-- mobile menu -->
+    @await Component.InvokeAsync("MobileMenue")
+
+    <!-- end mobile menu -->
+    <!-- end of header -->
+    <!-- ============================================================== -->
+    <!--****************************************************************************
+           *******************************************************************************
+           **************************************************************************** -->
+    @RenderBody()
+    <!-- ***************************************************************************
+    ********************************************************************************
+    ********************************************************************************
+     **************************************************************************** -->
+
+    <div id="parallax-world-of-ugg">
+
+        <section>
+            <div class="bg-warning py-2">
+                <br />
+                <div class="container">
+                    <form method="get" asp-action="newsletter" asp-controller="home">
+
+                        <div class="row justify-content-center">
+                            <div class="col-6 col-lg-4 col-md-4 col-sm-6">
+                                <input class="searchbox__input fuse__input"
+                                       type="text"
+                                       name="PhoneNumber"
+                                       placeholder="شماره تماس" />
+                            </div>
+                            <div class="col-6 col-lg-2 col-md-2 col-sm-6">
+                                <button type="submit" class="btn btn-success" style="border-radius: 50px; text-align:center; height:100%">عضویت در خبر نامه </button>
+                                <br />
+                            </div>
+                            <input type="text"
+                                   name="ReturnUrl"
+                                   id="ReturnUrl"
+                                   hidden />
+                        </div>
+                    </form>
+
+
+                </div>
+                <br />
+            </div>
+        </section>
+
+        <section>
+            <div class="parallax-one">
+            </div>
+        </section>
+
+        <section>
+            <div class="">
+
+                <footer class="footer-02 bg-warning text-black" dir="ltr">
+                    <div class="container">
+                        @* <div class="row justify-content-end bg-white ">
+                        <div class="col-12 col-lg-12">
+                        <div class=" my-2">
+                        <form action="#" class="subscribe-form">
+                        <div class="form-group ltr field-loginform-mobile required">
+                        <label class="control-label" for="loginform-mobile">شماره موبایل</label>
+                        <input type="text"
+                        id="loginform-mobile"
+                        class="form-control py-4 w-100"
+                        autofocus
+                        aria-required="true" />
+
+                        <p class="help-block help-block-error"></p>
+                        </div>*@
+                        @*  <div class="form-group d-flex">
+                        <input
+                        type="text"
+                        class="form-control rounded-left"
+                        placeholder="Enter email address"
+                        />
+                        <input
+                        type="submit"
+                        value="عضویت"
+                        class="form-control submit px-3"
+                        />
+                        </div>*@
+                        @*   </form>
+                        </div>
+                        </div>
+                        </div>*@
+                        <div class="container">
+                            <div class="row ">
+                                <div class="col-12 col-lg col-md col-sm-12">
+                                    <h6 class="m-2 bg-white text-black br-20 text-center">
+                                        ضمانت اصالت کالا
+                                        <br /><img src="/assets/images/ic/orginal.png" style="height:100px; letter-spacing:0;">
+                                    </h6>
+                                </div>
+                                <div class="col-12 col-lg col-md col-sm-12">
+                                    <h6 class="m-2 bg-white text-black br-20 text-center">
+                                        تحویل اکسپرس
+                                        <br /><img src="/assets/images/ic//exress.png" style="height:100px; letter-spacing:0;">
+                                    </h6>
+
+                                </div>
+                                <div class="col-12 col-lg col-md col-sm-12">
+                                    <h6 class="m-2 bg-white text-black br-20 text-center">
+                                        پشتیبانی
+                                        <br /><img src="/assets/images/ic/Support.png" style="height:100px; letter-spacing:0;">
+                                    </h6>
+
+                                </div>
+                                <div class="col-12 col-lg col-md col-sm-12">
+                                    <h6 class="m-2 bg-white text-black br-20 text-center">
+                                        پرداخت امن
+                                        <br /><img src="/assets/images/ic/money.png" style="height:100px; letter-spacing:0;">
+                                    </h6>
+                                </div>
+                                <div class="col-12 col-lg col-md col-sm-12">
+                                    <h6 class="m-2 bg-white text-black br-20 text-center">
+                                        انتخاب زمان تحویل
+                                        <br /><img src="/assets/images/ic/time.png" style="height:100px; letter-spacing:0;">
+                                    </h6>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4 col-lg-5">
+                                <div class="row">
+                                    <div class="col-md-12 col-lg-8 mb-md-0 mb-4">
+                                        <h2 class="footer-heading  bg-white br-20">
+                                            <a href="#" class="logo">
+                                                <img src="/assets/media/src/gil-logo.png" width="100%" />
+                                            </a>
+                                        </h2>
+                                        <p class="text-white" dir="rtl">
+                                            گیل هایپر فروشگاهی اینترنتی برای حذف واسطه و خرید مستقیم از کشاورزان گیلانی
+                                        </p>
+                                        @* <a href="#" class="bg-info-gradient px-2 p-1 br-20"
+                                        >read more <span class="ion-ios-arrow-round-forward"></span
+                                        ></a>*@
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-8 col-lg-7 text-black">
+                                <div class="row">
+                                    <div class="col-md-3 mb-md-0 mb-4 border-left text-center">
+                                        <h5 class="footer-heading bg-info br-20">لینک مفید</h5>
+                                        <ul class="list-unstyled text-black">
+                                            <li><a href="/Product/Shop?CategoryId=1fe4d8b1-c9fe-ed11-a9d4-ceb674bf7827" class="py-1 d-block text-white">برنج گیلان</a></li>
+                                            <li><a href="/Product/Shop?CategoryId=20e4d8b1-c9fe-ed11-a9d4-ceb674bf7827" class="py-1 d-block text-white">چای گیلان</a></li>
+                                            <li><a href="/Product/Shop?CategoryId=1de4d8b1-c9fe-ed11-a9d4-ceb674bf7827" class="py-1 d-block text-white">روغن گیلان </a></li>
+                                            <li>
+                                                <a href="/Product/Shop?CategoryId=1de4d8b1-c9fe-ed11-a9d4-ceb674bf7827" class="py-1 d-block text-white">زیتون گیلان</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="col-md-3 mb-md-0 mb-4 border-left text-center">
+                                        <h5 class="footer-heading bg-info br-20">راهنما</h5>
+                                        <ul class="list-unstyled">
+                                            <li><a href="/contact/contactus" class="py-1 d-block text-white">پشتیبانی  </a></li>
+                                            <li><a href="/contact/partnership" class="py-1 d-block text-white">همکاری با ما</a></li>
+                                            <li><a href="/contact/contactus" class="py-1 d-block text-white">ارتباط با ما</a></li>
+                                            <li><a href="/Blog/BlogList" class="py-1 d-block text-white">مجله گیل هایپر</a></li>
+                                        </ul>
+                                    </div>
+                                    @*     <div class="col-md-3 mb-md-0 mb-4 border-left text-center">
+                                    <h5 class="footer-heading bg-info br-20">دسترسی سریع</h5>
+                                    <ul class="list-unstyled">
+                                    <li><a href="#" class="py-1 d-block text-black">Security</a></li>
+                                    <li><a href="#" class="py-1 d-block text-black">Global</a></li>
+                                    <li><a href="#" class="py-1 d-block text-black">Charts</a></li>
+                                    <li><a href="#" class="py-1 d-block text-black">Privacy</a></li>
+                                    </ul>
+                                    </div>*@
+                                    <div class="col-md-3 mb-md-0 mb-4 border-left text-center">
+                                        <h5 class="footer-heading bg-info br-20">شبکه اجتماعی</h5>
+                                        <ul class="list-unstyled">
+                                            <li><a href="#" class="py-1 d-block text-white"><i class="fa fa-google"></i>gilhyper@yahoo.com :ایمیل</a></li>
+                                            <li><a href="#" class="py-1 d-block text-white"><i class="fa fa-whatsapp"></i> واتس آپ:09352001451</a></li>
+                                            <li><a href="#" class="py-1 d-block text-white"><i class="fa fa-telegram"></i> تلگرام :09352001451</a></li>
+                                            <li><a href="https://instagram.com/gilhyper/" class="py-1 d-block text-white"> <i class="fa fa-instagram"></i> اینستاگرام</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row partner-wrap mt-5 bg-info-bright" dir="rtl">
+                            <div class="col-md-12">
+                                <div class="row align-items-center">
+                                  @*  <div class="col-3">
+                                        <img referrerpolicy="origin" id='jxlznbqeesgtjzpeapfujzpe' style='cursor:pointer' onclick='window.open("https://logo.samandehi.ir/Verify.aspx?id=120757&p=rfthuiwkobpdjyoedshwjyoe", "Popup","toolbar=no, scrollbars=no, location=no, statusbar=no, menubar=no, resizable=0, width=450, height=630, top=30")' alt='logo-samandehi' src='https://logo.samandehi.ir/logo.aspx?id=120757&p=nbpdodrflymayndtujynyndt' />
+                                    </div>*@
+                                    <div class="col-3">
+                                        <a referrerpolicy="origin" target="_blank" href="https://trustseal.enamad.ir/?id=34371&amp;Code=m10IsCHzL2aNPWxl6kgM"><img referrerpolicy="origin" src="https://Trustseal.eNamad.ir/logo.aspx?id=34371&amp;Code=m10IsCHzL2aNPWxl6kgM" alt="" style="cursor:pointer" id="m10IsCHzL2aNPWxl6kgM"></a>
+                                    </div>
+                                   @* <div class="col-3">
+                                        <img src="/assets/images/ENAMADpng.parspng.com_.png" width="100px" />
+                                    </div>
+                                    <div class="col-3">
+                                        <img src="/assets/images/samandehipng.parspng.com_.png" width="100px" />
+                                    </div>*@
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mt-5 justify-content-center">
+                            <p class="text-black" style="text-align:center; width:100%;">تمامی حقوق مادی و معنوی برای گیل هایپر محفوض میباشد</p>
+                        </div>
+                    </div>
+                </footer>
+            </div>
+        </section>
+    </div>
+    <!-- footer -->
+    <script src="/assets/js/MyBootstrap.js"></script>
+    <script src="/assets/js/MyJquery.js"></script>
+    <script>
+        function openBasket() {
+            const clientId = document.cookie
+                .split("; ")
+                .find((row) => row.startsWith("guid"))
+                ?.split("=")[1];
+            window.open(`/ShopCard/ShopCard_Detail?ClientId=${clientId}`, "_self");
+        }
+    </script>
+    <script>
+        document.querySelector('.img__btn').addEventListener('click', function () {
+            document.querySelector('.cont').classList.toggle('s--signup');
+        });
+    </script>
+
+    <!-- Plugin scripts -->
+    <script src="/assets/js/MySlick.js"></script>
+
+    <!-- Chartjs -->
+    <script src="/vendors/charts/chartjs/chart.min.js"></script>
+
+    <!-- Circle progress -->
+    <script src="/vendors/circle-progress/circle-progress.min.js"></script>
+
+    <!-- Peity -->
+    <script src="/vendors/charts/peity/jquery.peity.min.js"></script>
+    <script src="/assets/js/examples/charts/peity.js"></script>
+
+    <!-- Datepicker -->
+    <script src="/vendors/datepicker/daterangepicker.js"></script>
+
+    <!-- Slick -->
+    <!-- <script src="/vendors/slick/slick.min.js"></script> -->
+    <!-- Vamp -->
+    <script src="/vendors/vmap/jquery.vmap.min.js"></script>
+    @*<script src="/vendors/vmap/maps/jquery.vmap.usa.js"></script>*@
+    <script src="/assets/js/examples/vmap.js"></script>
+
+    <!-- Dashboard scripts -->
+    <script src="/assets/js/examples/dashboard.js"></script>
+    <div class="colors">
+        <!-- To use theme colors with Javascript -->
+        <div class="bg-primary"></div>
+        <div class="bg-primary-bright"></div>
+        <div class="bg-secondary"></div>
+        <div class="bg-secondary-bright"></div>
+        <div class="bg-info"></div>
+        <div class="bg-info-bright"></div>
+        <div class="bg-success"></div>
+        <div class="bg-success-bright"></div>
+        <div class="bg-danger"></div>
+        <div class="bg-danger-bright"></div>
+        <div class="bg-warning"></div>
+        <div class="bg-warning-bright"></div>
+    </div>
+
+    <!-- App scripts -->
+    <script src="/assets/js/MyMenu.js"></script>
+    <script src="/assets/js/famm.js"></script>
+    <script src="/assets/js/mmenu.js"></script>
+    <script src="/assets/js/app.js"></script>
+
+    <script src="/vendors/swal/sweetalert2.min.js"></script>
+    <script src="/vendors/slick/slick.min.js"></script>
+    <script>
+        function swalLogin() {
+            Swal.fire(
+                'برای مشاهده سبد خرید ابتدا وارد حساب کاربری خود شوید',
+                'در صورت نداشتن حساب عضو شوید',
+                'warning',
+            )
+        }
+
+
+    </script>
+    <script asp-append-version="true">
+
+        // window .onload
+        $(document).ready(function () {
+            const clientId = document.cookie
+                .split("; ")
+                .find((row) => row.startsWith("guid"))
+                ?.split("=")[1];
+            console.log("hey");
+            $.ajax({
+                type: "GET",
+                url: "/ShopCard/ShopCardCount",
+                data: {
+                    ClientId: clientId,
+                },
+                success: function (result) {
+                    $("#shopcardcount").html(result);
+                },
+                error: function (e) {
+                    alert("error => " + e.responseText);
+                }
+            });
+        })
+    </script>
+
+    <script>
+        $(document).ready(function () {
+            const currentUrl = window.location.href;
+            $("#ReturnUrl").val(currentUrl);
+            console.log($("#ReturnUrl").val());
+        });
+
+    </script>
+    <script>
+        function shopShopCard(e) {
+            const clientId = document.cookie
+                .split("; ")
+                .find((row) => row.startsWith("guid"))
+                ?.split("=")[1];
+
+            //var clientId = getCookie("guid");
+            var productId = e;
+            var buyCount = 0;
+            var authenticated = '@User.Identity.IsAuthenticated';
+            //if (authenticated == true) {
+            //    //window.open(`/ShopCard/AddOrRemove?ProductId=${productId}&Count=${buyCount}&AddOrRemove=true`, "_self");
+            //    $.ajax({
+            //        type: "GET",
+            //        url: "/ShopCard/AddOrRemove",
+            //        data: {
+            //            ProductId: productId,
+            //            Count: buyCount,
+            //            AddOrRemove: true,
+            //        },
+            //        success: function (result) {
+            //            //location.reload() ;
+            //            if (result != "Bad") {
+            //                window.open(result, "_self");
+            //            } else {
+            //                alert("مشکلی رخ داده است لطفا بعدا تلاش کنید");
+            //            }
+            //        },
+            //        error: function (e) {
+            //            alert("error => " + e.responseText);
+            //        }
+            //    });
+            //} else {
+            //window.open(`/ShopCard/AddOrRemove?ClientId=${clientId}&ProductId=${productId}&Count=${buyCount}&AddOrRemove=true`, "_self");
+            $.ajax({
+                type: "GET",
+                url: "/ShopCard/AddOrRemove",
+                data: {
+                    ClientId: clientId,
+                    ProductId: productId,
+                    Count: buyCount,
+                    AddOrRemove: true,
+                },
+                success: function (result) {
+                    if (result != "Bad") {
+                        window.open(result, "_self");
+                    } else {
+                        alert("مشکلی رخ داده است لطفا بعدا تلاش کنید");
+                    }
+                },
+                error: function (e) {
+                    alert("error => " + e.responseText);
+                }
+            });
+            //}
+        }
+    </script>
+
+    <script>
+
+        function shopShopCard(e) {
+            const clientId = document.cookie
+                .split("; ")
+                .find((row) => row.startsWith("guid"))
+                ?.split("=")[1];
+            //var clientId = getCookie("guid");
+            var productId = e;
+            var buyCount = 0;
+            //var authenticated = '@User.Identity.IsAuthenticated';
+            //if (authenticated == true) {
+            //    //window.open(`/ShopCard/AddOrRemove?ProductId=${productId}&Count=${buyCount}&AddOrRemove=true`, "_self");
+            //    $.ajax({
+            //        type: "GET",
+            //        url: "/ShopCard/AddOrRemove",
+            //        data: {
+            //            ProductId: productId,
+            //            Count: buyCount,
+            //            AddOrRemove: true,
+
+            //        },
+            //        success: function (result) {
+            //            //location.reload() ;
+            //            if (result != "Bad") {
+            //                window.open(result, "_self");
+            //            } else {
+            //                alert("مشکلی رخ داده است لطفا بعدا تلاش کنید");
+            //            }
+            //        },
+            //        error: function (e) {
+            //            alert("error => " + e.responseText);
+            //        }
+            //    });
+            //} else {
+            //window.open(`/ShopCard/AddOrRemove?ClientId=${clientId}&ProductId=${productId}&Count=${buyCount}&AddOrRemove=true`, "_self");
+            $.ajax({
+                type: "GET",
+                url: "/ShopCard/AddOrRemove",
+                data: {
+                    ClientId: clientId,
+                    ProductId: productId,
+                    Count: buyCount,
+                    AddOrRemove: true,
+
+                },
+                success: function (result) {
+                    if (result != "Bad") {
+                        window.open(result, "_self");
+                    } else {
+                        alert("مشکلی رخ داده است لطفا بعدا تلاش کنید");
+                    }
+                },
+                error: function (e) {
+                    alert("error => " + e.responseText);
+                }
+            });
+
+            //}
+        }
+    </script>
+    <!-- Slick slide -->
+    <script src="/assets/js/examples/slick.js"></script>
+    @await Component.InvokeAsync("NToastNotify")
+    @await RenderSectionAsync("Scripts",false)
+</body>
+</html>

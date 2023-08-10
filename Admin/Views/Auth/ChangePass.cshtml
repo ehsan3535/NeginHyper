@@ -1,0 +1,82 @@
+﻿@using Client.Models.Dtos;
+@model SignUpDto
+@section Styles{
+    <style>
+        body {
+            background: #fff;
+        }
+    </style>
+}
+<div class="row justify-content-center w-100">
+    <div class="col-12">
+        <div class="site-login">
+            <h1 class="centered-header">تغییر رمز عبور</h1>
+
+            <div class="clearfix">
+                <div class="row justify-content-center">
+                    <div class="col-lg-6 col-sm-8 col-lg-push-3 col-sm-push-2 m-t-30">
+                        <div class="row">
+                            <form id="login-form" method="post" asp-action="ChangePass" asp-controller="auth">
+
+                                <input asp-for="PhoneNumber" value="@TempData["PhoneNumber"].ToString()" hidden />
+
+
+                                <div class="form-group field-loginform-password required">
+                                    <label class="control-label" for="loginform-password">رمز عبور</label>
+                                    <input type="password"
+                                           id="loginform-password"
+                                           class="form-control"
+                                           asp-for="Password"
+                                           aria-required="true" />
+                                    <span asp-validation-for="Password" style="color:red"></span>
+                                </div>
+
+                                <div class="form-group field-loginform-password required">
+                                    <label class="control-label" for="loginform-password">تکرار رمز عبور</label>
+                                    <input type="password"
+                                           class="form-control"
+                                           asp-for="PassWordConfirmation"
+                                           aria-required="true" />
+                                    <span asp-validation-for="PassWordConfirmation" style="color:red"></span>
+
+
+                                    <p class="help-block help-block-error"></p>
+                                </div>
+                                <div class="form-group field-loginform-rememberme">
+                                    <div class="checkbox">
+                                        <label for="loginform-rememberme">
+                                            <input type="hidden"
+                                                   name="LoginForm[rememberMe]"
+                                                   value="0" /><input type="checkbox"
+                                                                      id="loginform-rememberme"
+                                                                      name="LoginForm[rememberMe]"
+                                                                      value="1"
+                                                                      checked />
+                                            مرا به خاطر بسپار
+                                        </label>
+                                        <p class="help-block help-block-error"></p>
+                                    </div>
+                                </div>
+
+
+                                <div class="form-group text-center">
+                                    <button type="submit"
+                                            class="btn bg-success "
+                                            name="login-button">
+                                        ثبت رمز جدید
+                                    </button>
+                                   @* <br />
+                                    <a class=" mt-3 btn bg-success "
+                                       href="/home/index">
+                                        ورود به سایت بدون تغییر رمز
+                                    </a>*@
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

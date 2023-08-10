@@ -1,0 +1,150 @@
+﻿@using Client.Models.Dtos;
+@model LoginOtpDto
+
+
+
+
+<div class="row justify-content-center w-100">
+    <div class="col-12">
+        <div class="site-login">
+            <h1 class="centered-header">ورود به سایت</h1>
+            <p class="text-center">لطفا برای ورود به سایت شماره تماس خود را وارد کنید </p>
+            <div class="clearfix">
+                <div class="row justify-content-center">
+                    <div class="col-lg-6 col-sm-8 col-lg-push-3 col-sm-push-2 m-t-30">
+                        <div class="row">
+                           <form id="login-form" asp-action="LogInOtpshopcard" asp-controller="Auth" method="get" role="form">
+
+          
+
+                <div class="form-group ltr field-loginform-mobile required">
+                                    <label class="control-label w-50" for="loginform-mobile">شماره موبایل</label>
+                                    <input type="text"
+                                    autocomplete="off"
+                                    style="border:1px solid grey"
+                                           id="loginform-mobile"
+                                           class="form-control py-4 mt-5"
+                                           placeholder="- - - - - -"
+                                            asp-for="PhoneNumber"
+                                           autofocus
+                                           required
+                                           aria-required="true" />
+
+                                           <input type="text"
+                                           autocomplete="off"
+                                            asp-for="ClientId"
+                                            value="@TempData["ClientId"].ToString()"
+                                           hidden
+                                            />
+
+                                </div>
+
+                <button type="submit" class="mt-5 default__button button--medium">ارسال کد </button>
+                <br />
+                <button class="text-black vazir" style="text-align:center; width:100%" data-bs-toggle="modal" data-bs-target="#modal-group"> می خواهم با رمز عبور وارد شوم </button>
+                <br />
+
+        </form>
+							<br />
+							<br />
+                          
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@*
+<div class="row justify-content-center w-100">
+    <div class="col-12">
+        <div class="site-login">
+                  <h2> ورود/ثبت نام </h2>
+                <span>برای ثبت سفارش شماره موبایل خود را وارد کنید، کد تایید برای شما ارسال خواهد شد</span>
+          
+                <div class="clearfix">
+                <div class="row justify-content-center">
+                    <div class="col-lg-6 col-sm-8 col-lg-push-3 col-sm-push-2 m-t-30">
+                        <div class="row">
+        <form asp-action="LogInOtpshopcard" asp-controller="Auth" method="get" role="form">
+
+          
+
+                <div class="form-group ltr field-loginform-mobile required">
+                                    <label class="control-label w-50" for="loginform-mobile">شماره موبایل</label>
+                                    <input type="text"
+                                    style="border:1px solid grey"
+                                           id="loginform-mobile"
+                                           class="form-control py-4 mt-5"
+                                           placeholder="- - - - - -"
+                                            asp-for="PhoneNumber"
+                                           autofocus
+                                           required
+                                           aria-required="true" />
+
+                                           <input type="text"
+                                            asp-for="ClientId"
+                                            value="@TempData["ClientId"].ToString()"
+                                           hidden
+                                            />
+
+                                    <p class="help-block help-block-error"></p>
+                                </div>
+
+                <button type="submit" class="btn btn-success">ارسال کد </button>
+                <button class="text-black" data-bs-toggle="modal" data-bs-target="#modal-group"> می خواهم با رمز عبور وارد شوم </button>
+
+
+        </form>
+           </div>
+    </div>
+    </div>
+    </div>
+
+    </div>
+    </div>
+    </div>
+*@
+
+
+<!-- Modal -->
+<div class="modal" id="modal-group" tabindex="-1" aria-labelledby="modal-groupLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-scrollable modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+
+
+
+            <div class="modal-body w-100 justify-content-center" style="height:350px">
+                <div class="row justify-content-between w-100 h-100">
+                    <div class="col-12 col-lg-6 col-md-6 col-sm-12 justify-content-center my-auto">
+                        <div class="d-flex flex-column my-auto">
+
+                        <a href="/auth/login" class="mx-auto">
+                            <img src="/assets/images/login.png" />
+                        </a>
+                        <a href="/auth/login" class="mx-auto">
+                            <span>ورود</span>
+                        </a>
+                        </div>
+                    </div>
+                    <div class="col-12 col-lg-6 col-md-6 col-sm-12 justify-content-center my-auto">
+                        <div class="d-flex flex-column my-auto">
+                        <a href="/auth/signup" class="mx-auto">
+                            <img src="/assets/images/signup.png" />
+                        </a>
+                        <a href="/auth/signup" class="mx-auto">
+                            <span>عضویت</span>
+
+                        </a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+
+
+        </div>
+    </div>
+</div>

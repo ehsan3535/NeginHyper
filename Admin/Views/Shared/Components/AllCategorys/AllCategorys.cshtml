@@ -1,0 +1,122 @@
+﻿@using Client.Models;
+@model List<ProductCategoryDto>
+
+
+<section class="nav__section_bottom" style="background:#0F9347">
+    <div class="section_bottom_right">
+        <ul class="nav_bottom_ul">
+            <div class="div_mega--container">
+                <a class="nav_bottom_a a_mega ">
+                    <div class="a_mega--hamburger">
+                        <div class="div_mega--hamburger"></div>
+                        <div class="div_mega--hamburger"></div>
+                        <div class="div_mega--hamburger"></div>
+                    </div>
+                    <!-- <img class="a_mega--hamburger" src="/images/template/menu.png" /> -->
+                    خرید محصولات
+                </a>
+                <section class="section__mega">
+                    <div class="d-flex">
+                        <div class="section__mega_a--container">
+                            
+                                    @{
+                                        var i = 0;
+                                    }
+                                    @if (Model.Any())
+                                    {
+
+                                        @foreach (var item in Model)
+                                        {
+                                            <a class="section__mega_a a--mega default"
+                                               data-index="@i">
+                                                @item.Name
+                                            </a>
+                                            i++;
+                                        }
+                                    }
+                              
+                            <br />
+                        </div>
+
+                        @{
+                            var j = 0;
+                        }
+                        @if (Model.Any())
+                        {
+
+                            @foreach (var item in Model)
+                            {
+                                <div class="section__mega_sub--container"
+                                     data-index-div="@j">
+
+                                    <a class="section__mega_a a--sub-header"
+                                       href="list/saffron.html">
+                                        @item.Name
+                                    </a>
+
+                                    @await Component.InvokeAsync("SelectedProducts",new{CategoryId = item.Id})
+
+                                </div>
+                                j++;
+                            }
+                        }
+                    </div>
+                    <div class="section__mega_img--container">
+                        <div class="lds-ring">
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                        </div>
+                        <img class="section__mega_img" />
+                    </div>
+                </section>
+            </div>
+            <li class="nav_bottom_li">
+                <a class="nav_bottom_a" href="/home/index">خانه</a>
+            </li>
+            <li class="nav_bottom_li">
+                <a class="nav_bottom_a" href="/product/Shop">فروشگاه</a>
+            </li>
+           @* <li class="nav_bottom_li">
+                <a class="nav_bottom_a" href="/Blog/BlogList">وبلاگ</a>
+            </li>*@
+            @if (User.Identity.IsAuthenticated)
+            {
+                <li class="nav_bottom_li">
+                    <a class="nav_bottom_a" href="/Order/OrderList">سفارشات من</a>
+                </li>
+                <li class="nav_bottom_li">
+                    <a class="nav_bottom_a" href="/Home/AddressProfile">آدرس من</a>
+                </li>
+            }
+         @*   <li class="nav_bottom_li">
+                <a class="nav_bottom_a" href="/Contact/ContactUs">تماس با ما</a>
+            </li>
+            <li class="nav_bottom_li">
+                <a class="nav_bottom_a" href="#">درباره ما</a>
+            </li>*@
+        </ul>
+    </div>
+    <div class="section_bottom_left">
+        <ul class="nav_bottom_ul">
+           
+           @* <li class="nav_bottom_li">
+                <a class="nav_bottom_a" href="#">خرید سازمانی و عمده</a>
+            </li>*@
+            <li class="nav_bottom_li">
+                <a class="nav_bottom_a" href="/Contact/ContactUs">تماس با ما</a>
+            </li> 
+            <li class="nav_bottom_li">
+                <a class="nav_bottom_a" href="/Contact/Partnership">همکاری با ما</a>
+            </li>
+             <li class="nav_bottom_li">
+                <a class="nav_bottom_a" href="/Contact/BuyBulk"> خرید سازمانی </a>
+            </li>
+            <li class="nav_bottom_li">
+                <a class="nav_bottom_a" href="/Blog/BlogList">مجله گیل هایپر</a>
+            </li>
+        </ul>
+    </div>
+
+</section>

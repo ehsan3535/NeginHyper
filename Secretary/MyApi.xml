@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Secretary</name>
+    </assembly>
+    <members>
+        <member name="M:Secretary.Controllers.ProductController.ProductDetail(System.Guid)">
+            <summary>
+            this is just for Admin
+            </summary>
+            <param name="id"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Secretary.Controllers.ProductController.DeleteProduct(System.Guid,System.Threading.CancellationToken)">
+            <summary>
+            to inactive the product 
+            </summary>
+            <param name="id"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

@@ -1,0 +1,107 @@
+﻿@using Secretary.Models;
+@model NotificationDto
+
+
+<!-- BEGIN PAGE CONTENT -->
+
+        <!-- BEGIN BREADCRUMB -->
+        <div class="col-md-12">
+            <div class="breadcrumb-box border shadow">
+                <ul class="breadcrumb">
+                    <li><a href="ShowWorker"> اعلانات</a></li>
+                    <li><a href="ShowWorker"> اضافه کردن/مشاهده/ویرایش </a></li>
+                </ul>
+                <div class="breadcrumb-left">
+                                                @DNTPersianUtils.Core.FriendlyPersianDateUtils.ToPersianDateTextify(DateTime.Now)
+                    <i class="icon-calendar"></i>
+                </div><!-- /.breadcrumb-left -->
+            </div><!-- /.breadcrumb-box -->
+        </div><!-- /.col-md-12 -->
+        <!-- END BREADCRUMB -->
+        <!-- START ADDWORKER -->
+        <div class="col-lg-12">
+            <div class="portlet box border shadow">
+                <div class="portlet-heading">
+                    <div class="portlet-title">
+
+
+                        <h3 class="title">
+                            <i class="icon-shield"></i>
+                            افزودن اعلان
+                        </h3>
+
+                    </div><!-- /.portlet-title -->
+                    <div class="buttons-box">
+                        <!-- <a class="btn btn-sm btn-default btn-round btn-code" rel="tooltip" title="کدها" href="#">
+                            <i class="icon-arrow-left"></i><span>/</span><i class="icon-arrow-right"></i>
+                        </a> -->
+                        <div class="code-modal hide">
+                        </div>
+                        <a class="btn btn-sm btn-default btn-round btn-fullscreen" rel="tooltip" title="تمام صفحه" href="#">
+                            <i class="icon-size-fullscreen"></i>
+                        </a>
+                        <a class="btn btn-sm btn-default btn-round btn-collapse" rel="tooltip" title="کوچک کردن" href="#">
+                            <i class="icon-arrow-up"></i>
+                        </a>
+                    </div><!-- /.buttons-box -->
+                </div><!-- /.portlet-heading -->
+                <div class="portlet-body">
+                    <form method="post" asp-action="Add_Edit_Notification" asp-controller="Notification">
+                        
+                                <input type="text" asp-for="@Model.Id" class="form-control" hidden>
+                        <div class="form-body">
+                            <div class="form-group">
+                                <label> انتخاب کاربر</label>
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <i class="icon-options"></i>
+                                    </span>
+                                    @if (Model.Users.Any())
+                                    {
+
+                                        <select asp-for="UserId" class="form-select">
+
+                                            @foreach (var item in Model.Users)
+                                            {
+                                                <option value="@item.Id">@item.Fname @item.Lname </option>
+                                            }
+
+                                        </select>
+                                    }
+                                    else
+                                    {
+                                        <p>هنوز کاربری موجود نیست</p>
+                                    }
+                                </div><!-- /.input-group -->
+                            </div><!-- /.form-group -->
+                            <div class="form-group round">
+                                <label>عنوان  </label>
+                                <input type="text" asp-for="@Model.Topic" class="form-control" placeholder="عنوان">
+                            </div><!-- /.form-group -->
+
+                            <div class="form-group">
+                                <label>متن اعلان</label>
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <i class="icon-speech"></i>
+                                    </span>
+                                    <textarea asp-for="Text" class="form-control" rows="5" placeholder="متن اعلان"></textarea>
+                                </div><!-- /.input-group -->
+                            </div><!-- /.form-group -->
+
+                        </div><!-- /.form-body -->
+                        <div class="form-actions">
+                            <button type="submit" class="btn btn-info btn-round">
+                                <i class="icon-check"></i>
+                                ارسال
+                            </button>
+                        </div><!-- /.form-actions -->
+                    </form>
+                </div><!-- /.portlet-body -->
+            </div><!-- /.portlet -->
+            <!-- END ADDWORKER -->
+        </div><!-- /.row -->
+    </div>
+</div>
+<!-- /#page-content -->
+<!-- END PAGE CONTENT -->

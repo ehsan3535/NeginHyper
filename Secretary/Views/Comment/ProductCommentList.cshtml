@@ -1,0 +1,126 @@
+﻿@using Secretary.Models.CommentsDto
+@model List<ProductCommentDto>
+<div class="row">
+    <div class="col-md-12 col-xs-12">
+        <div class="portlet box border shadow min-height-600">
+            <div class="portlet-heading">
+                <div class="portlet-title">
+                    <h3 class="title">
+                        <i class="icon-speech"></i>
+                        نظرات محصولات
+                    </h3>
+                    <div class="buttons-box">
+                    </div>
+                    <a class="btn btn-sm btn-default btn-round btn-fullscreen" rel="tooltip" title="تمام صفحه" href="#">
+                        <i class="icon-size-fullscreen"></i>
+                    </a>
+                    <a class="btn btn-sm btn-default btn-round btn-close" rel="tooltip" title="بستن" href="#">
+                        <i class="icon-trash"></i>
+                    </a>
+                </div><!-- /.buttons-box -->
+            </div><!-- /.portlet-heading -->
+            <div class="portlet-body">
+                <ul class="nav nav-tabs border">
+
+                    <li class="nav-item">
+                        <a class="nav-link active" data-bs-toggle="tab" href="#tab2">تائید شده</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-bs-toggle="tab" href="#tab3">رد شده</a>
+                    </li>
+                    <li class="pull-left">
+                        <a class="pull-left p-b-0" href="#">همه دیدگاه ها</a>
+                    </li>
+                </ul>
+
+                <div id="tab2" class="tab-pane fade active show">
+                    <div class="comments-box">
+                        <div class="comment-box">
+                            @foreach (var item in Model)
+                            {
+                                if (item.CommentStatus == CommentStatus.Accepted)
+                                {
+
+                                    <div class="comment-box">
+                                        <div class="comment">
+                                            <a href="#">
+                                                <span class="user">
+                                                    @item.Name
+                                                </span>
+                                            </a>
+                                            <span class="pull-left text-muted">
+                                                @item.CreationDateTime.FormatDateToLongPersianDate()
+                                                <i class="icon-clock"></i>
+                                            </span>
+
+                                            <p>@item.Rate امتیاز</p>
+                                            <p>نام محصول: @item.ProductName </p>
+
+                                            <p>@item.Text</p>
+                                        </div><!-- /.comment -->
+                                        <div class="actions">
+                                            <a href="/Comment/Accept_Reject_Comment?ProductCommentId=@item.Id&Accept=false" class="btn btn-round btn-icon btn-sm btn-warning" rel="tooltip" title="رد">
+                                                <i class="icon-close"></i>
+                                            </a>
+                                            <a href="/Comment/DeleteComment?ProductCommentId=@item.Id" class="btn btn-round btn-icon btn-sm btn-danger" rel="tooltip" title="حذف">
+                                                <i class="icon-trash"></i>
+                                            </a>
+                                        </div><!-- /.actions -->
+                                    </div>
+
+                                    <!-- /.comment-box -->
+                                }
+                            }
+                        </div><!-- /.comment-box -->
+                    </div><!-- /.comments-box -->
+                </div><!-- /.tab-pane -->
+                <div id="tab3" class="tab-pane  fade">
+                    <div class="comments-box">
+                        <div class="comment-box">
+
+                            @foreach (var item in Model)
+                            {
+                                if (item.CommentStatus == CommentStatus.InAccepted)
+                                {
+                                    <div class="comment-box">
+
+                                        <div class="comment">
+                                            <a href="#">
+                                                <span class="user">
+                                                    @item.Name
+                                                </span>
+                                            </a>
+
+                                            <span class="pull-left text-muted">
+                                                @item.CreationDateTime.FormatDateToLongPersianDate()
+                                                <i class="icon-clock"></i>
+                                            </span>
+                                            <p>@item.Rate امتیاز</p>
+
+                                            <p>نام محصول: @item.ProductName </p>
+                                            <p>@item.Text </p>
+                                        </div>
+
+                                        <!-- /.comment -->
+                                        <div class="actions">
+                                            <a href="/Comment/Accept_Reject_Comment?ProductCommentId=@item.Id&Accept=true" class="btn btn-round btn-icon btn-sm btn-info" rel="tooltip" title="تایید">
+                                                <i class="icon-check"></i>
+                                            </a>
+                                            <a href="/Comment/DeleteComment?ProductCommentId=@item.Id" class="btn btn-round btn-icon btn-sm btn-danger" rel="tooltip" title="حذف">
+                                                <i class="icon-trash"></i>
+                                            </a>
+                                        </div>
+
+                                        <!-- /.actions -->
+                                    </div>
+                                    <!-- /.comments-box -->
+                                }
+                            }
+                        </div>
+                    </div><!-- /.portlet-title -->
+                </div><!-- /.tab-pane -->
+            </div><!-- /.tab-content -->
+
+        </div><!-- /.portlet-body -->
+    </div><!-- /.portlet -->
+</div><!-- /.col-md-6 -->

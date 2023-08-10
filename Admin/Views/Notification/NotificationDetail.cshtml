@@ -1,0 +1,31 @@
+﻿@using Client.Models.NotificationDto;
+@model NotificationDto
+
+<div class="col-lg-8 col-sm-8 col-md-8">
+    <div class="portlet box border shadow">
+        <div class="portlet-heading">
+            <div class="portlet-title">
+                <h3 class="title">
+
+                    اعلانات
+                </h3>
+            </div><!-- /.portlet-title -->
+        </div><!-- /.portlet-heading -->
+        <div class="portlet-body">
+            <div class="form-body">
+
+                <ul class="woo_info">
+                </ul>
+                <div class="form-group col-lg-12">
+                    <label>عنوان: @Model.Topic  </label>
+                    <textarea class="form-control">@Model.Text</textarea>
+                </div>
+            </div>
+        </div><!-- /.form-body -->
+
+        <div class="form-actions">
+
+          
+        </div><!-- /.form-actions -->
+    </div><!-- /.portlet-body -->
+</div><!-- /.portlet -->

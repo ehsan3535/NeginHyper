@@ -1,0 +1,83 @@
+﻿@using Client.Models;
+@model List<ProductCategoryDto>
+
+<header class="mc_mobile_header">
+    <div class="mc_menu_btn">
+        <a href="#mega-menu" class="mobilemenu_a">
+            <img class="menu-icon_img" src="/assets/images/values/menu.svg" alt="" />
+            @*<i class="fa fa-menu"></i>*@
+        </a>
+    </div>
+    <nav id="mega-menu">
+        <ul>
+            @if (!User.Identity.IsAuthenticated)
+            {
+                <li class="mobilemenu__li--top">
+                    <a href="/Auth/login">ورود</a>
+                    <a href="/Auth/signUp">عضویت</a>
+                </li>
+            }
+            else
+            {
+                <li class="mobilemenu__li--top">
+                    <a href="/Auth/LogOut">خروج</a>
+                </li>
+            }
+            <li class="mobilemenu__li li--main">
+                <span>خرید محصولات</span>
+                <ul>
+                    @{
+                        var i = 0;
+                    }
+                    @if (Model.Any())
+                    {
+                        @foreach (var item in Model)
+                        {
+                            <li class="mobilemenu__li">
+                                <span>  @item.Name</span>
+
+                                <ul>
+
+                                    @await Component.InvokeAsync("SelectedMobile",new{CategoryId = item.Id})
+
+                                </ul>
+                            </li>
+                            i++;
+                        }
+                    }
+                </ul>
+            </li>
+            <li class="mobilemenu__li">
+                <a href="/product/Shop">فروشگاه</a>
+            </li>
+            @if (User.Identity.IsAuthenticated)
+            {
+                <li class="mobilemenu__li">
+                    <a href="/Order/OrderList">‌سفارشات من</a>
+                </li>
+                <li class="mobilemenu__li">
+                    <a href="/Home/AddressProfile"> آدرس من</a>
+                </li>
+            }
+            <li class="mobilemenu__li">
+                <a href="/Contact/Partnership">همکاری با ما</a>
+            </li>
+            <li class="mobilemenu__li">
+                <a href="/Contact/ContactUs">تماس با ما</a>
+            </li>
+            <li class="mobilemenu__li">
+                <a href="/Blog/BlogList">مجله گیل هایپر</a>
+            </li>
+        </ul>
+    </nav>
+    <a href="/home/index">
+        <img src="/assets/media/logo/logo.png" alt="" class="nav__logo_img" />
+    </a>
+    <figure class="panel__figure">
+        <button class="panel__a" onclick="openBasket()">
+            <img src="/assets/images/values/basket.svg"
+                 class="panel__figure_img img--basket" />
+        </button>
+    </figure>
+
+</header>

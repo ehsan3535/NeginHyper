@@ -1,0 +1,401 @@
+﻿@using Client.Models;
+@model AddressDto
+
+    <div class="container my-3">
+        <div class="row my-4">
+            <ul class="nav nav-pills nav-fill">
+                <li class="nav-item">
+                    <a class="nav-link" href="/order/orderlist">سفارشات پیشین</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link " href="/Notification/NotificationList">اعلانات </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="#">آدرس ها</a>
+                </li>
+
+            </ul>
+        </div>
+        <div class="row">
+            <div class="col-12 col-lg-9 col-md-12 col-sm-12">
+                <section class="card br-20 px-5" style="max-height: 100px">
+                    <div class="card-body">
+                        <button type="button" class="text-success" data-bs-toggle="modal" data-bs-target="#modal-group"><h2 class="text-success">افزودن آدرس جدید +</h2></button>
+                    </div>
+                </section>
+
+                <div class="card mx-3 br-20">
+                    <div class="card-body">
+                        <div class="row w-100">
+                            <div class="col-6 col-lg-4 col-sm-6">
+                                <h6 class="card-title bg-info-gradient br-20 text-center">
+                                    آدرس های پیشین
+                                </h6>
+                            </div>
+                        </div>
+                    @if (Model.Addresses != null && Model.Addresses.Any())
+                        {
+                              <div class="row justify-content-start">
+                            @foreach (var item in Model.Addresses)
+                            {
+                                <div class="col-12 col-lg-6 col-md-6 col-sm-12 p-3">
+                                    <input type="radio" class="btn-check" name="AddressId" id="@item.Id" value="@item.Id" autocomplete="off">
+                                    <label class="btn btn-outline-success w-100 my-3" for="@item.Id">
+                                        <div class="card-body">
+                                            <p class="card-text" style="text-align:start">
+                                                <span class="weight-bold" style="font-weight:bold; font-size:24px;text-align:start;">
+                                                    @item.Name
+                                                </span>
+                                                <br>
+                                                <label class="form-check-label">
+                                                    @item.CityName <br />@item.Location <br /> کدپستی: @item.PostalCode <br />واحد: @item.vahed <br /> پلاک : @item.pelak
+                                                </label>
+                                                <br>
+                                                <a href="/shopCard/DeleteAddress?Id=@item.Id">
+                                                    حذف
+                                                </a>
+                                            </p>
+                                        </div>
+                                    </label>
+                                </div>
+                                @*
+                            <div class="card">
+                            <div class="card-header">
+                            @item.Name
+                            </div>
+                            <div class="card-body">
+                            <p class="card-text">
+                            <input class="form-check-input" type="radio" name="AddressId" value="@item.Id" id="flexRadioDefault1">
+
+                            <label class="form-check-label" for="flexRadioDefault1">
+                            @item.Location
+                            </label>
+                            </p>
+                            </div>
+                            </div>*@
+                                @*<div class="form-check my-2" dir="rtl">*@
+                                @*<input class="form-check-input" type="radio" name="AddressId" value="@item.Id" id="flexRadioDefault1">*@
+                                @*	<label class="form-check-label" for="flexRadioDefault1">
+                            @item.Location
+                            </label>*@
+                                @*</div>*@
+                            }
+                        </div>
+                        }
+                        else
+                        {
+                            <h3>هنوز آدرسی ثبت نشده است</h3>
+                        }
+                    </div>
+                </div>
+            </div>
+            @if (TempData["Name"] != null)
+            {
+                <div class="col-12 col-lg-3 col-md-12 col-sm-12">
+                    <div class="card br-20">
+                        <div class="card-body">
+                            <div class="row justify-content-center">
+                                <h2 style="text-align: center">@TempData["Name"]</h2>
+                            </div>
+                            <hr />
+                            <div class="row">
+                                <div class="col-6">
+                                    <span class="card-title"
+                                          style="font-weight: bold; font-size: large">شماره تلفن</span>
+                                </div>
+                                <div class="col-6">
+                                    <span class="text-success"
+                                          style="font-weight: bold; font-size: medium">
+                                        @TempData["PhoneNumber"]
+                                    </span>
+                                </div>
+                            </div>
+                            <br />
+
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+
+
+    <!-- ****************** moodal ****************-->
+   @* <!-- Modal -->
+    <div class="modal fade" id="modal-group" tabindex="-1" aria-labelledby="modal-groupLabel" aria-hidden="true">
+        <div class="modal-dialog  modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <!--
+                              <h1 class="modal-title fs-5" id="modal-groupLabel">  سبد خرید شما تاکنون
+                              </h1> -->
+                </div>
+
+                <form method="post" asp-action="AddAddress" asp-controller="ShopCard">
+
+                    <div class="modal-body">
+                        <div class="column align-items-center justify-content-center">
+                            <h2 class="centered-header">
+                                با ثبت شماره خود ما با شما تماس می گیریم
+                            </h2>
+                            <br>
+                            <div class="form-group field-loginform-password required">
+
+                                <input type="text"
+                                       name="ReturnUrl"
+                                       value="AddressProfile"
+                                       class="form-control"
+                                       aria-required="true"
+                                       hidden />
+
+
+                            <div class="form-group field-loginform-password required">
+
+                                <label class="control-label" for="loginform-password">استان </label>
+                                <input type="text"
+                                       name="Province"
+                                       id="Name"
+                                       class="form-control py-4 w-100"
+                                       aria-required="true" />
+                            </div>
+                            <div class="form-group field-loginform-password required">
+
+                                <label class="control-label" for="loginform-password">شهر </label>
+                                <input type="text"
+                                       name="City"
+                                       id="Name"
+                                       class="form-control py-4 w-100"
+                                       aria-required="true" />
+                            </div>
+                            <div class="form-group field-loginform-password required">
+
+                                <label class="control-label" for="loginform-password">کد پستی </label>
+                                <input type="text"
+                                       name="PostalCode"
+                                       id="Name"
+                                       class="form-control py-4 w-100"
+                                       aria-required="true" />
+                            </div>
+
+                                <label class="control-label" for="loginform-password"> آدرس</label>
+                                <input type="text"
+                                       name="Location"
+                                       id="Location"
+                                       class="form-control"
+                                       aria-required="true" />
+
+                                <p class="help-block help-block-error"></p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn bg-danger-bright" data-bs-dismiss="modal"> لغو</button>
+                        <button type="submit" class="btn bg-success-gradient">ثبت  </button>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+*@
+
+<!-- Modal -->
+<div class="modal" id="modal-group" tabindex="-1" aria-labelledby="modal-groupLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-scrollable modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <!--
+                          <h1 class="modal-title fs-5" id="modal-groupLabel">  سبد خرید شما تاکنون
+                          </h1> -->
+                <h1 class=" modal-title">
+                    ثبت آدرس جدید
+                </h1>
+            </div>
+
+            <form method="post" asp-action="AddAddress" asp-controller="ShopCard">
+
+                <div class="modal-body w-100">
+                    <div class="flex-column align-items-center justify-content-center w-100">
+                        @*	<h2 class="centered-header">
+                        ثبت آدرس جدید
+                        </h2>
+                        <br>*@
+                        <div class="row w-100">
+                            <div class="col-6 mb-4">
+                                <div class="">
+                                    <div class="mb-0">
+                                        <label>استان :</label>
+                                        <select dir="ltr" onchange="submitWithAjaxForm2()" name="ProvinceId" id="carTypeDropDown" style="height:50px" class="form-select form-control " aria-label="Default select example">
+                                            <option value="0">انتخاب کنید</option>
+                                            @foreach (var item in Model.provinces)
+                                            {
+                                                <option value="@item.Id">@item.Name</option>
+
+                                            }
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-6 mb-4">
+
+
+                                <div class="" id="carModel" hidden>
+                                    <div class="mb-0">
+                                        <label>شهر :</label>
+                                        <select dir="ltr" name="CityId" class="form-select form-control " style="height:50px" id="carModelDropDown" aria-label="Default select example">
+                                            <option selected>انتخاب کنید </option>
+
+
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-6 ">
+                                <div class="form-group field-loginform-password required">
+
+
+                                    <label class="control-label" for="loginform-password"> آدرس</label>
+                                    <input type="text"
+                                           name="Location"
+                                           id="Location"
+                                           class="form-control py-4 w-100"
+                                           aria-required="true" />
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="form-group field-loginform-password required">
+
+                                    <label class="control-label" for="loginform-password">کد پستی </label>
+                                    <input type="text"
+                                           name="PostalCode"
+                                           id="Name"
+                                           maxlength="10"
+                                           class="form-control py-4 w-100"
+                                           aria-required="true" 
+                                           required/>
+                                </div>
+                            </div>
+
+
+                            <div class="col-6 pe-4">
+                                <div class="row w-100 pe-1">
+                                    <div class="col-6">
+                                        <div class="form-group field-loginform-password required">
+
+                                            <label class="control-label" for="">پلاک </label>
+                                            <input type="text"
+                                                   name="Pelak"
+                                                   id=""
+                                                   class="form-control py-4 w-100"
+                                                   aria-required="true" />
+                                        </div>
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="form-group field-loginform-password ">
+
+                                            <label class="control-label" for="">واحد </label>
+                                            <input type="text"
+                                                   name="vahed"
+                                                   id=""
+                                                   class="form-control py-4 w-100"
+                                                   aria-required="true" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                            </div>
+
+                            <div class="col-6">
+                                <div class="form-group field-loginform-password ">
+
+
+                                    <label class="control-label" for="loginform-password"> نام و نام خانوادگی گیرنده</label>
+                                    <input type="text"
+                                           name="Name"
+                                           id=""
+                                           class="form-control py-4 w-100"
+                                           aria-required="true" />
+                                </div>
+                            </div>  <div class="col-6">
+                            </div>
+
+
+                        </div>
+
+                        @*<div class="form-group field-loginform-password required">
+
+
+                        <label class="control-label" for="loginform-password">شماره تماس </label>
+                        <input type="text"
+                        name="PhoneNumber"
+                        id="PhoneNumber"
+                        class="form-control py-4 w-100"
+                        aria-required="true" />
+                        </div>*@
+
+
+                        <p class="help-block help-block-error"></p>
+                    </div>
+                </div>
+
+                <div class="modal-footer w-100">
+                    <div class="row w-100">
+                        <div class="col-6">
+                            <button type="button" class="btn bg-danger-bright w-100 br-20 p-2 py-3" data-bs-dismiss="modal"> لغو</button>
+                        </div>
+                        <div class="col-6">
+                            <button type="submit" class="btn bg-success w-100 br-20 p-2 py-3">ثبت  </button>
+
+                        </div>
+                        <br />
+                    </div>
+
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>
+
+    <!-- modals -->
+    <!-- ****************** modal ****************-->
+
+@section Scripts{
+    <script>
+        function submitForm2() {
+            //document.getElementsByName("Shop").submit();
+            document.getElementById("g").click();
+        }
+
+        function submitWithAjaxForm2() {
+            var carTypeValue = $('#carTypeDropDown').find(":selected").val();
+
+            $.ajax({
+                type: "GET",
+                url: "/ShopCard/Send_Cities",
+                data: {
+                    ProvinceId: carTypeValue,
+                },
+                success: function (result) {
+                    $('#carModelDropDown').html("");
+                    console.log(result);
+                    for (var i = 0; i < result.length; i++) {
+                        console.log(result[i]);
+
+                        $('#carModelDropDown').append(`<option dir="ltr" value="${result[i].Id}"><span> ${result[i].Name} </span> </option>`);
+                    }
+
+                    $("#carModel").attr("hidden", false);
+                },
+                error: function (e) {
+                    alert("error => " + e.responseText);
+                }
+            });
+        }
+    </script>
+}

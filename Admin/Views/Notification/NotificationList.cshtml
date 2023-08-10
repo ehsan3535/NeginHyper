@@ -1,0 +1,83 @@
+﻿@using Client.Models.NotificationDto;
+@model List<NotificationDto>
+
+    <div class="container my-3">
+        <div class="row my-4">
+            <ul class="nav nav-pills nav-fill">
+                <li class="nav-item">
+                    <a class="nav-link" href="/order/orderlist">سفارشات پیشین</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="#">اعلانات </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/home/addressprofile">آدرس ها</a>
+                </li> 
+               
+            </ul>
+        </div>
+        <div class="row">
+            <div class="col-12 col-lg-9 col-md-12 col-sm-12">
+                <div class="card mx-3 br-20">
+                    <div class="card-body">
+                        <div class="row w-100">
+                            <div class="col-6 col-lg-4 col-sm-6">
+                                <h6 class="card-title bg-info-gradient br-20 text-center">
+                                    اعلانات
+                                </h6>
+                            </div>
+                        </div>
+                        @if (Model != null && Model.Any())
+                        {
+                            @foreach (var item in Model)
+                            {
+                                <div class="form-check my-2">
+                                    <label class="form-check-label" for="flexRadioDefault1">
+                                        <h3>@item.Topic </h3>
+                                    </label> 
+                                    <label class="form-check-label" for="flexRadioDefault1">
+                                        @item.Text
+                                    </label>
+                                </div>
+
+                            }
+                        }
+                        else
+                        {
+                            <h3>هنوز اعلانی ثبت نشده است</h3>
+                        }
+                    </div>
+                </div>
+            </div>
+            @if (TempData["Name"]!=null)
+            {
+
+                <div class="col-12 col-lg-3 col-md-12 col-sm-12">
+                    <div class="card br-20">
+                        <div class="card-body">
+                            <div class="row justify-content-center">
+                                <h2 style="text-align: center">@TempData["Name"]</h2>
+                            </div>
+                            <hr />
+                            <div class="row">
+                                <div class="col-6">
+                                    <span class="card-title"
+                                          style="font-weight: bold; font-size: large">شماره تلفن</span>
+                                </div>
+                                <div class="col-6">
+                                    <span class="text-success"
+                                          style="font-weight: bold; font-size: medium">
+                                        @TempData["PhoneNumber"]
+                                    </span>
+                                </div>
+                            </div>
+                            <br />
+
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+
+    

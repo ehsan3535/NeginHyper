@@ -1,0 +1,1116 @@
+﻿@using Client.Models.ProductDto;
+@model ProductDto
+@section Styles{
+    <link rel="stylesheet" href="/vendors/lightbox/magnific-popup.css" type="text/css">
+    <style>
+        .hover-none:hover {
+            color: #fff !important;
+        }
+    </style>
+}
+
+<!-- main -->
+
+<main id="product" class="product product-page mt-5">
+    <div class="container">
+        <nav dir="rtl" style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='%236c757d'/%3E%3C/svg%3E&#34;);" aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="/home/index">خانه</a></li>
+                <li class="breadcrumb-item active" aria-current="page">محصولات</li>
+            </ol>
+        </nav>
+    </div>
+    <div class="wrapper">
+        <h2 class="name only-mobile">محصول</h2>
+        <div class="gallery">
+            @if (Model.ProductImages != null && Model.ProductImages.Any())
+            {
+                <div class="gallery-active">
+
+                    @foreach (var item in Model.ProductImages)
+                    {
+                        <a class="image-popup" href="@item.ImageLink">
+                            <img src="@item.ImageLink" class="img-fluid w-100" alt="image">
+                        </a>
+                        @*	<img src="@item.ImageLink" class="image-popup"
+                alt="img" />*@
+
+                    }
+                </div>
+
+            }
+
+            <div class="gallery-thumbnails-container">
+                <a class="prev-custom-arrow">
+
+                </a>
+                <div class="gallery-thumbnails">
+                    @if (Model.ProductImages != null && Model.ProductImages.Any())
+                    {
+
+                        @foreach (var item in Model.ProductImages)
+                        {
+                            <div>
+                                <img src="@item.ImageLink" style="width: 100px; height: 100px;"
+                                     alt="img" />
+                            </div>
+                        }
+                    }
+                </div>
+                <a class="next-custom-arrow">
+
+                </a>
+            </div>
+        </div>
+        @*galery*@
+        @*<div class="container">
+        <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+
+        <div id="aniimated-thumbnials" class="slider-for">
+        @foreach (var item in Model.ProductImages)
+        {
+        <a href="@item.ImageLink">
+        <img src="@item.ImageLink" />
+        </a>
+        }
+
+        </div>
+        <div class="slider-nav">
+        @foreach (var item in Model.ProductImages)
+        {
+        <div class="item-slick">
+        <img src="@item.ImageLink" alt="Alt">
+        </div>
+        }
+        </div>
+
+        </div>
+
+
+        </div>
+        </div>*@
+        @*galery*@
+
+        <div class="info">
+            <h2 class="name w-100">@Model.Name</h2>
+            <div class="rate">
+
+                <div class="wrapper-rate">
+                    @*<i class="fa fa-star"></i>
+                    <span class="m-2" style="top:10px; position: relative;"> @Model.Rate/5</span>
+                    *@
+
+                    <p>
+                        <label>
+                            5 / @Model.Rate
+                        </label>
+                    </p>
+                </div>
+                <div class="me-5">
+
+
+                    @if (Model.KeepWay != null)
+                    {
+                        <p>
+                            <label>
+                                شیوه نگهداری  :@Model.KeepWay
+                            </label>
+                        </p>
+                    }
+                    @if (Model.KeepTime != null)
+                    {
+                        <p>
+                            <label>
+                                زمان ماندگاری :@Model.KeepTime
+                            </label>
+                        </p>
+                    }
+                    @if (Model.Matterial != null)
+                    {
+                        <p>
+                            <label>
+                                مواد اولیه :@Model.Matterial
+                            </label>
+                        </p>
+                    }
+                    @if (Model.Pureweight != null)
+                    {
+                        <p>
+                            <label>
+                                وزن خالص :@Model.Pureweight
+                            </label>
+                        </p>
+                    }
+                    @if (Model.Allweight != null)
+                    {
+                        <p>
+                            <label>
+                                وزن با بسته بندی :@Model.Allweight
+                            </label>
+                        </p>
+                    }
+                    @if (Model.GoodForWhat != null)
+                    {
+                        <p>
+                            <label>
+                                مناسب برای :@Model.GoodForWhat
+                            </label>
+                        </p>
+                    }
+                    @*<input name="Rate" type="radio" id="st1" value="1" selected />
+                    <label for="st1"></label>*@
+
+                </div>
+            </div>
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+
+            <ul class="features p-0">
+            </ul>
+            <div class="form-price">
+                <div class="form-count">
+                    <button class="addCount form-count__button" data-action="addCount">
+                        <img src="/assets/media/icons/plus.png"
+                             alt="زیاد کردن تعداد" />
+                    </button>
+                    @{
+                        if (Model.ShopCartDeailCount < 1)
+                        {
+                            Model.ShopCartDeailCount = 1;
+                        }
+                        Model.Discount *= Model.ShopCartDeailCount;
+                    }
+                    <label>
+                        <input class="buy-num"
+                               type="number"
+                               min="1"
+                               max="@Model.Count"
+                               name="cart[num]"
+                               data-type="1"
+                               value="@Model.ShopCartDeailCount"
+                               data-value="buy-count" />
+                        <span class="title">عدد</span>
+                    </label>
+                    <button class="subtractCount form-count__button" data-action="subtractCount">
+                        <img src="/assets/media/icons/minus.png"
+                             alt="کم کردن تعداد" />
+                    </button>
+                </div>
+                <div class="form-price-value">
+                    @if (Model.Count > 0)
+                    {
+                           @if(Model.Discount != Model.Price)
+                                    {
+                                    <span class="price_format" style="text-decoration:line-through">@Model.Price.ToNumeric() تومان</span> 
+                                        
+                                    }
+                        <span data-display="%price% تومان" data-fee="@Model.Discount">
+                            @Model.Discount.ToNumeric() تومان
+                        </span>
+                    }
+                    else
+                    {
+                        <span data-display="%price% تومان" data-fee="@Model.Discount">
+                            ناموجود
+                        </span>
+                    }
+
+                </div>
+            </div>
+            <div class="form-action">
+                @if (Model.Count > 0)
+                {
+                    <div class="km-add-to-cart">
+                        <a type="submit"
+                           name=""
+                           class="default__button button--xl add-to-cart hover-none"
+                           data-count="1"
+                           data-price=" @Model.Discount"
+                           data-product="189"
+                           data-type="1"
+                           onClick="removeFromShopCard()"
+                           value="افزودن به سبد خرید">افزودن به سبد خرید</a>
+                    </div>
+                }
+                else
+                {
+                    <div class="km-add-to-cart disabled">
+                        <a type="submit"
+                           name=""
+                           class="default__button button--xl add-to-cart hover-none"
+                           data-count="1"
+                           data-price=" @Model.Discount"
+                           data-product="189"
+                           data-type="1"
+                           disabled
+                           value="افزودن به سبد خرید">اتمام</a>
+                    </div>
+                }
+
+                <!-- end km-add-to-cart -->
+            </div>
+        </div>
+    </div>
+    <br />
+
+    <div class="container">
+
+        <div class="row ">
+            <div class="container">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-sm-12 col-lg-6 col-md-6 col-sm-12">
+                                <div class="row w-100">
+                                    <div class="col-6 col-lg-4 col-md-4 col-sm-6">
+                                        <h6 class="card-title bg-danger-gradient br-20 text-center">
+                                            ویژگی محصول
+                                        </h6>
+                                    </div>
+                                </div>
+                                @if (Model.KeepWay != null)
+                                {
+                                    <p>
+                                        <label>
+                                            شیوه نگهداری :@Model.KeepWay
+                                        </label>
+                                    </p>
+                                }
+                                @if (Model.KeepTime != null)
+                                {
+                                    <p>
+                                        <label>
+                                            زمان ماندگاری :@Model.KeepTime
+                                        </label>
+                                    </p>
+                                }
+                                @if (Model.Matterial != null)
+                                {
+                                    <p>
+                                        <label>
+                                            مواد اولیه :@Model.Matterial
+                                        </label>
+                                    </p>
+                                }
+                                @if (Model.Pureweight != null)
+                                {
+                                    <p>
+                                        <label>
+                                            وزن خالص :@Model.Pureweight
+                                        </label>
+                                    </p>
+                                }
+                                @if (Model.Allweight != null)
+                                {
+                                    <p>
+                                        <label>
+                                            وزن با بسته بندی :@Model.Allweight
+                                        </label>
+                                    </p>
+                                }
+                                @if (Model.GoodForWhat != null)
+                                {
+                                    <p>
+                                        <label>
+                                            مناسب برای :@Model.GoodForWhat
+                                        </label>
+                                    </p>
+                                }
+                            </div>
+                            <div class="col-sm-12 col-lg-6 col-md-6 col-sm-12">
+                                <div class="row w-100">
+                                    <div class="col-6 col-lg-4 col-md-4 col-sm-6">
+                                        <h6 class="card-title bg-danger-gradient br-20 text-center">
+                                            درباره محصول
+                                        </h6>
+                                    </div>
+                                </div>
+                                <p>@Model.Detail</p>
+
+                            </div>
+                        </div>
+
+
+
+
+                        <br>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br />
+
+
+
+        <div class="card">
+            <div class="card-body">
+                <h4>تجربه های خریداران</h4>
+                <hr />
+
+                <div class="row my-3">
+                    @if (Model.Comments.Any())
+                    {
+                        @foreach (var item in Model.Comments)
+                        {
+                            @if (item.CommentStatus == CommentStatus.Accepted)
+                            {
+                                <div class="col">
+                                    <div class="row w-100">
+                                        <!-- <span>نظری ثبت نشده است</span> -->
+                                        <!-- Contenedor Principal -->
+                                        <div class="comments-container">
+                                            <ul id="comments-list" class="comments-list">
+                                                <li>
+                                                    <div class="comment-main-level">
+                                                        <!-- Avatar -->
+                                                        <!-- Contenedor del Comentario -->
+                                                        <div class="comment-box">
+                                                            <div class="comment-head">
+                                                                <div class="comment-avatar m-2"><img src="http://i9.photobucket.com/albums/a88/creaticode/avatar_1_zps8e1c80cd.jpg" alt=""></div>
+                                                                <h4 class="comment-name m-2"><a href="http://creaticode.com/blog">@item.Name </a></h4>
+                                                                @for (int i = 0; i < Model.Rate; i++)
+                                                                {
+                                                                    <i class="fa fa-heart m-2"></i>
+                                                                }
+                                                            </div>
+                                                            <div class="comment-content">
+                                                                @item.CreationDateTime.ToLongPersianDateString()
+                                                            </div>
+                                                            <div class="comment-content">
+                                                                @item.Text
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        }
+                    }
+                    else
+                    {
+                        <p> هنوز کامنتی ثبت نشده است</p>
+                    }
+
+                    <div class="col">
+
+                        <div class="row my-3 justify-content-center">
+                            <form class="ms-lg-4" method="post" asp-action="AddComment" asp-controller="Comment">
+                                <input id="name" name="ProductId" value="@Model.Id" type="text" class="form-control ps-5" hidden>
+
+                                <div class="rate">
+
+                                    <div class="wrapper-rate" style="width: fit-content;">
+                                        <span class="m-2" style="top:10px; position: relative;">امتیاز شما</span>
+
+                                        <input name="Rate" type="radio" id="st1" value="5" />
+                                        <label for="st1"></label>
+                                        <input name="Rate" type="radio" id="st2" value="4" />
+                                        <label for="st2"></label>
+                                        <input name="Rate" type="radio" id="st3" value="3" />
+                                        <label for="st3"></label>
+                                        <input name="Rate" type="radio" id="st4" value="2" />
+                                        <label for="st4"></label>
+                                        <input name="Rate" type="radio" id="st5" value="1" />
+                                        <label for="st5"></label>
+                                    </div>
+                                </div>
+                                <input class="searchbox__input fuse__input my-2 w-50 mx-auto"
+                                       type="text"
+                                       placeholder="نام" />
+                                <input class="searchbox__input fuse__input w-50 mx-auto"
+                                       type="text"
+                                       name="email"
+                                       placeholder="ایمیل شما" />
+
+                                <textarea placeholder="نظر خود را بنویسید" name="Text" class="my-3 w-50 mx-auto searchbox__input fuse__input"></textarea>
+                                <button type="submit" class="default__button button--medium add-to-cart">ثبت نظر</button>
+                            </form><!--end form-->
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Modal -->
+    <div class="modal" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">
+                        سبد خرید شما تاکنون
+                    </h1>
+                </div>
+                @if (Model.ShopCard != null)
+                {
+                    <div class="modal-body">
+                        <div class="column">
+                            <hr>
+
+                            @if (Model.ShopCard.ShopCardDetails != null && Model.ShopCard.ShopCardDetails.Any())
+                            {
+
+                                @foreach (var item in Model.ShopCard.ShopCardDetails)
+                                {
+
+                                    <div class="row">
+                                        <div class="col-12 col-lg-3 col-md-3 col-sm-12">
+                                            <img src="@item.ProductsImageLink" alt="" width="100px">
+                                        </div>
+                                        <div class="col-6">
+                                            <span style="font-weight: bold; font-size: 18px;">@item.ProductsName</span>
+                                            <br>
+                                        </div>
+                                        <div class="col-6 col-lg-3 col-md-3 col-sm-6">
+                                            <span class="text-black" style="font-size:11px"> @item.ProductsDiscount.ToNumeric() تومان</span>
+
+                                            @*<span class="text-grey mx-2 p-2" style="border: 1px solid grey; border-radius: 20px;"> @item.Count عدد</span>*@
+                                            <div class="btn-group">
+                                                @*<button class="btn  btn-sm dropdown-toggle" style="border: 1px solid grey; border-radius: 20px;" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    @item.Count عدد
+                                    </button>*@
+                                                <select class="btn  btn-sm dropdown-toggle" style="border: 1px solid grey; border-radius: 20px;" onchange="removeFromModal(this,'@item.ProductsId')">
+                                                    <option selected hidden>@item.Count عدد</option>
+                                                    <option value="1">1 عدد</option>
+                                                    <option value="2">2 عدد</option>
+                                                    <option value="3">3 عدد</option>
+                                                    <option value="4">4 عدد</option>
+                                                    <option value="5">5 عدد</option>
+                                                    <option value="6">6 عدد</option>
+                                                    <option value="7">7 عدد</option>
+                                                    <option value="8">8 عدد</option>
+                                                    <option value="9"> 9 عدد</option>
+                                                </select>
+                                            </div>
+                                            <br>
+                                            <div class="row justify-content-start">
+                                                <button type="button" style="margin-right:auto; text-align:left;" onclick="DeleteShopCarditem('@item.ProductsId')"><span style="margin-right:auto;text-align:left;" class="text-hover-danger"> حذف</span></button>
+
+                                            </div>
+
+                                            @*                                        <a href="/ShopCard/DeleteShopCardDetail?ShopCardDetailId=@item.Id&&ProductId=@item.ProductsId&&modal=true"><span class="text-danger"> حذف</span></a>
+                                *@
+
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <hr>
+                                }
+
+                            }
+                            else
+                            {
+                                <div class="row">
+                                    <div class="col-12">
+                                        <span style="font-weight: bold; font-size: 18px;">سبد خرید شما خالی میباشد</span>
+                                        <br>
+                                    </div>
+                                </div>
+                                <hr>
+                            }
+                            <div class="row justify-content-start">
+                                @*<span class="text-black" style="font-size: 18px; text-align: end; font-weight: bold;">مجموع کل  @Model.ShopCard.TotalPrice.ToNumeric() تومان</span>*@
+                                <span class="text-black" style="font-size: 13px; text-align: end; font-weight: 100;">هزینه قابل پرداخت <span class="mx-4">@Model.ShopCard.FinalTotalPrice.ToNumeric() تومان </span> </span>
+
+                            </div>
+                            <div class="row">
+
+                                <div class="col-12 col-lg-6 col-md-6 col-sm-12">
+                                    @if (Model.ShopCard.TotalPrice >= 500000)
+                                    {
+                                        <span class="text-black" style="font-size: 15px;">هزینه ارسال برای شما رایگان شد</span>
+                                    }
+                                    else
+                                    {
+                                        int UntilFreePost = 500000 - Model.ShopCard.TotalPrice;
+                                        <span class="text-black" style="font-size: 15px;">هزینه ارسال @Model.ShopCard.PostPrice.ToNumeric() تومان</span>
+                                        <span class=" mx-3"> @UntilFreePost.ToNumeric() تومان تا ارسال رایگان</span>
+                                    }
+                                    <br>
+                                    <div class="progress m-b-20">
+                                        <div class="progress-bar" role="progressbar" aria-valuenow="10%" aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                    <span class="" style="font-size: 20px; font-weight: bold;">کد تخفیف در مرحله آخر دریافت میشود</span>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                }
+
+                <div class="modal-footer">
+                    <div class="row w-100">
+
+                        <div class="col-6">
+                            <a href="/product/shop" type="button" class="default__button button--medium button--outlined" style="border-radius: 50px;text-align:center;">فروشگاه </a>
+                        </div>
+
+                        @if (Model.ShopCard.TotalPrice != 0)
+                        {
+                            @if (User.Identity.IsAuthenticated)
+                            {
+                                <div class="col-6">
+                                    <button type="button" class="default__button button--medium add-to-cart" style="border-radius: 50px; text-align:center;" onclick="openBasketInModal()">ثبت سفارش</button>
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="col-6">
+                                    <button type="button" class="default__button button--medium add-to-cart" style="border-radius: 50px; text-align:center;" onclick="openBasketInModal2()">ثبت سفارش</button>
+                                </div>
+                            }
+                        }
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</main>
+
+
+<!-- main -->
+@section Scripts{
+    <script src="/vendors/lightbox/jquery.magnific-popup.min.js"></script>
+
+    <script src="/assets/js/examples/lightbox.js"></script>
+
+
+    @*<script>
+
+	const container = document.querySelector(".gallery-active");
+	const img = document.querySelector(".gallery-active");
+
+	container.addEventListener("mousemove", (e) => {
+	const x = e.clientX - e.target.offsetLeft ;
+	const y = e.clientY - e.target.offsetTop;
+	img.style.transformOrigin = `${x}px ${y}px`;
+	img.style.transform = "scale(1.3)";
+	});
+
+	container.addEventListener("mouseleave", () => {
+	img.style.transformOrigin = "center center";
+	img.style.transform = "scale(1)";
+	});
+
+	</script>
+*@
+    <script>
+        function DeleteShopCarditem(p) {
+            const clientId = document.cookie
+                .split("; ")
+                .find((row) => row.startsWith("guid"))
+                ?.split("=")[1];
+
+            window.open(`/ShopCard/DeleteShopCardDetail?ProductId=${p}&ClientId=${clientId}`, "_self");
+
+        }
+    </script>
+
+    <script>
+        function openBasketInModal() {
+            var authenticated = '@User.Identity.IsAuthenticated';
+            const clientId = document.cookie
+                .split("; ")
+                .find((row) => row.startsWith("guid"))
+                ?.split("=")[1];
+
+            if (authenticated) {
+                window.open(`/ShopCard/ShopCard_Detail2?ClientId=${clientId}`, "_self");
+            }
+            else {
+                window.open(`/auth/loginShopcard?ClientId=${clientId}`, "_self");
+            }
+        }
+    </script>
+
+    <script>
+        function openBasketInModal2() {
+            var authenticated = '@User.Identity.IsAuthenticated';
+            const clientId = document.cookie
+                .split("; ")
+                .find((row) => row.startsWith("guid"))
+                ?.split("=")[1];
+
+            if (authenticated == true) {
+                window.open(`/ShopCard/ShopCard_Detail2?ClientId=${clientId}`, "_self");
+            } else {
+                window.open(`/auth/loginShopcard?ClientId=${clientId}`, "_self");
+            }
+        }
+    </script>
+    <script>
+
+        function removeFromShopCard() {
+            const clientId = document.cookie
+                .split("; ")
+                .find((row) => row.startsWith("guid"))
+                ?.split("=")[1];
+            //var clientId = getCookie("guid");
+            var productId = '@Model.Id';
+            var buyCount = $('[data-value="buy-count"]').val();
+            console.log(buyCount);
+            //	var authenticated='@User.Identity.IsAuthenticated';
+            //	  if(authenticated == true){
+            ////window.open(`/ShopCard/AddOrRemove?ProductId=${productId}&Count=${buyCount}&AddOrRemove=true`, "_self");
+            //   	$.ajax({
+            //		type: "GET",
+            //		url: "/ShopCard/AddOrRemove",
+            //		data: {
+            //			ProductId: productId,
+            //			Count: buyCount,
+            //			AddOrRemove: true,
+
+            //		},
+            //		success: function (result) {
+            //			//location.reload() ;
+            //			if(result != "Bad"){
+            //			window.open(result, "_self");
+            //			}
+            //		},
+            //		error: function (e) {
+            //			alert("error => " + e.responseText);
+            //		}
+            //	});
+            //   }else{
+            //window.open(`/ShopCard/AddOrRemove?ClientId=${clientId}&ProductId=${productId}&Count=${buyCount}&AddOrRemove=true`, "_self");
+            $.ajax({
+                type: "GET",
+                url: "/ShopCard/AddOrRemove",
+                data: {
+                    ClientId: clientId,
+                    ProductId: productId,
+                    Count: buyCount,
+                    AddOrRemove: true,
+
+                },
+                success: function (result) {
+                    if (result != "Bad") {
+                        window.open(result, "_self");
+                    }
+                },
+                error: function (e) {
+                    alert("error => " + e.responseText);
+                }
+            });
+
+            //}
+        }
+        function removeFromModal(e, p) {
+            const clientId = document.cookie
+                .split("; ")
+                .find((row) => row.startsWith("guid"))
+                ?.split("=")[1];
+            //var clientId = getCookie("guid");
+            var productId = p;
+            //var buyCount = parseInt(e) +1;
+            //console.log(buyCount);
+            var conceptName = $(e).find(":selected").val();
+            console.log(conceptName);
+            debugger;
+
+            $.ajax({
+                type: "GET",
+                url: "/ShopCard/AddOrRemove",
+                data: {
+                    ClientId: clientId,
+                    ProductId: productId,
+                    Count: conceptName,
+                    AddOrRemove: true,
+
+                },
+                success: function (result) {
+                    if (result != "Bad") {
+                        window.open(result, "_self");
+                    }
+                },
+                error: function (e) {
+                    alert("error => " + e.responseText);
+                }
+            });
+
+
+            //}
+        }
+    </script>
+
+
+
+    @* <script>
+	function addToCookie(){
+	document.cookie = `products=@Model.Id,${1}; Secure`;
+	console.log(getCookie("products"));
+	}
+	</script>*@
+
+
+    @if (TempData["Added"] != null)
+    {
+        TempData["Added"] = null;
+
+        <script>
+            $(document).ready(function () {
+                $("#exampleModal").modal("show");
+            });
+        </script>
+    }
+    <script>
+
+        function callActionAddShopCard() {
+            var buyCount = $('[data-value="buy-count"]').val();
+            //window.open(`/shopcard/AddToShopCard?ProductId=@Model.Id&Count=${buyCount}`, "_self");
+        }
+
+        $(document).ready(function () {
+            $('.image-popup').magnificPopup({
+                type: 'image',
+                zoom: {
+                    enabled: true,
+                    duration: 300,
+                    easing: 'ease-in-out',
+                    opener: function (openerElement) {
+                        return openerElement.is('img') ? openerElement : openerElement.find('img');
+                    }
+                }
+            });
+            //// START PRODUCT PAGE
+            if ($(".product-page").length) {
+                $(".product_related .product_related_select").change(function () {
+                    var id = $(this).children("option:selected").data("id");
+                    var max = $(this).children("option:selected").data("max");
+                    var price = $(this).children("option:selected").data("price");
+                    $(".product_related .select").removeClass("select");
+                    $(this).children("option:selected").addClass("select");
+                    $(".add-to-cart").data("product", id);
+                    $(".form-count input").val(1).attr("max", max);
+                    $(".form-price-value span")
+                        .text(formatPrice(price) + " تومان")
+                        .data("fee", price);
+                });
+
+                var formatPrice = function formatPrice() {
+                    var text =
+                        arguments.length > 0 && arguments[0] !== undefined
+                            ? arguments[0]
+                            : "";
+                    return (text + "")
+                        .split("")
+                        .reverse()
+                        .reduce(function (tmp, char, i) {
+                            tmp.push(i > 1 && i % 3 === 0 ? char + "," : char);
+                            return tmp;
+                        }, [])
+                        .reverse()
+                        .join("");
+                };
+
+                //make progress bar green by percent
+                $.each($(".score_range--child"), function () {
+                    var rangeWidth = parseInt($(this).data("range")) + "%";
+                    $(this).css({ width: rangeWidth });
+                });
+
+                // $(".buy-num").change(function() {
+                var changeFormCount = function changeFormCount(step) {
+                    return function (e) {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        var buyCount = $('[data-value="buy-count"]');
+                        var priceDisplay = $("[data-fee]");
+                        var count = parseInt(buyCount.val(), 10) + step;
+
+                        if (count === 0) {
+                            count = 1;
+                        }
+
+                        priceDisplay.text(
+                            priceDisplay
+                                .data("display")
+                                .replace(
+                                    /%price%/g,
+                                    formatPrice(priceDisplay.data("fee") * count)
+                                )
+                        );
+                        // buyCount.css({
+                        //     width: count < 20 ? '16px' : '24px'
+                        // });
+                        buyCount.val(count);
+                    };
+                };
+                // });
+
+                var highlightActiveRadio = function highlightActiveRadio() {
+                    var options = $(".form-option");
+                    options.removeClass("checked");
+                    options.each(function () {
+                        if ($(this).find("input").prop("checked")) {
+                            $(this).addClass("checked");
+                        }
+                    });
+                };
+
+                var changeTab = function changeTab(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    $(".tabs-trail [data-tab-action]").removeClass("active");
+                    $(this).addClass("active");
+                    $(".tab[data-tab]").removeClass("active");
+                    $('[data-tab="'.concat($(this).data("tab-action"), '"]')).addClass(
+                        "active"
+                    );
+                };
+
+                $('[data-action="addCount"]').on("click", changeFormCount(1));
+                $(".buy-num").on("change", changeFormCount(0));
+                $('[data-action="subtractCount"]').on("click", changeFormCount(-1));
+                $('.form-option input[type="radio"]').on(
+                    "change",
+                    highlightActiveRadio
+                );
+                $(".tabs .tabs-trail [data-tab-action]").on("click", changeTab);
+                $(".gallery-active").slick({
+                    focusOnSelect: false,
+                    slidesToShow: 1,
+                    slidesToScroll: 1,
+                    initialSlide: 0,
+                    autoplay: false,
+                    autoplaySpeed: 2000,
+                    pauseOnFocus: false,
+                    centerMode: false,
+                    arrows: true,
+                    asNavFor: ".gallery-thumbnails",
+                    draggable: false,
+                    swipe: false,
+
+                    responsive: [
+                        {
+                            breakpoint: 768,
+                            settings: {
+                                prevArrow: "<img class='a-left control-c prev slick-prev my-pr' src='/assets/images/values/arrow_forward.svg'>",
+                                nextArrow: "<img class='a-right control-c next slick-next my-nx' src='/assets/images/values/arrow_back.svg'>",
+                            }
+                        },
+                    ]
+                });
+                $(".gallery-thumbnails").slick({
+                    infinite: true,
+                    slidesToShow: 3,
+                    slidesToScroll: 1,
+                    pauseOnFocus: true,
+                    focusOnSelect: true,
+                    asNavFor: ".gallery-active",
+                    //prevArrow: $(".prev-custom-arrow"),
+                    //nextArrow: $(".next-custom-arrow"),
+                    prevArrow: "<img class='a-left control-c prev slick-prev my-pr' src='/assets/images/values/arrow_forward.svg'>",
+                    nextArrow: "<img class='a-right control-c next slick-next my-nx' src='/assets/images/values/arrow_back.svg'>",
+                });
+                $(".farmer-selector").click(function (e) {
+                    e.preventDefault();
+                    var commodity = $(this).data("type");
+                    var id_product = $(this).data("id");
+                    var url = $("head base").attr("href");
+                    $.post(
+                        url + "farmer/cart-farmers",
+                        {
+                            commodity: commodity,
+                            id_product: id_product,
+                        },
+                        function (data, status) {
+                            $(".alert-modal .modal-inner").html(data);
+                            $(".alert-modal").modal("show");
+                        }
+                    );
+                });
+                $(".addCount").click(function (e) {
+                    var $input = $(this).siblings("label").find("input");
+                    var val = parseInt($input.val());
+                    var max = $input.attr("max");
+                    if (val > max) {
+                        val = max;
+                        alert(
+                            "موجودی این محصول تنها " +
+                            max +
+                            " بسته می باشد.\nامکان خرید بیشتر نمی باشد."
+                        );
+                    }
+                    $input.val(val);
+                    var priceDisplay = $("[data-fee]");
+                    priceDisplay.text(
+                        priceDisplay
+                            .data("display")
+                            .replace(
+                                /%price%/g,
+                                formatPrice(priceDisplay.data("fee") * val)
+                            )
+                    );
+                });
+                $(".form-count input").change(function (e) {
+                    // var type = $(this).data('type');
+                    var max = $(this).attr("max");
+                    var min = $(this).attr("min");
+                    var val = parseInt($(this).val());
+                    if (val > max) {
+                        val = max;
+                        alert(
+                            "موجودی این محصول تنها " +
+                            max +
+                            " بسته می باشد.\nامکان خرید بیشتر نمی باشد."
+                        );
+                    }
+                    if (val < min) val = min;
+                    $(this).val(val);
+                });
+                $(".lab-reference").click(function (e) {
+                    if ($('li[data-tab-action = "laboratory-result"]').length !== 0) {
+                        e.preventDefault();
+                        $('li[data-tab-action = "laboratory-result"]').addClass("active");
+                        $('div[data-tab = "laboratory-result"]').addClass("active");
+                        $('li[data-tab-action = "attributes-product"]').removeClass(
+                            "active"
+                        );
+                        $('div[data-tab = "attributes-product"]').removeClass("active");
+                        $('li[data-tab-action = "seller"]').removeClass("active");
+                        $('div[data-tab = "seller"]').removeClass("active");
+                        $("html, body").animate(
+                            {
+                                scrollTop:
+                                    $('div[data-tab = "laboratory-result"] img').offset().top -
+                                    250,
+                            },
+                            500
+                        );
+                    }
+                });
+                $(".identity-reference").click(function (e) {
+                    $('li[data-tab-action = "attributes-product"]').addClass("active");
+                    $('div[data-tab = "attributes-product"]').addClass("active");
+                    $('li[data-tab-action = "seller"]').removeClass("active");
+                    $('div[data-tab = "seller"]').removeClass("active");
+                    $('li[data-tab-action = "laboratory-result"]').removeClass(
+                        "active"
+                    );
+                    $('div[data-tab = "laboratory-result"]').removeClass("active");
+                    $("html, body").animate(
+                        {
+                            scrollTop:
+                                $('div[data-tab = "attributes-product"]').offset().top - 250,
+                        },
+                        500
+                    );
+                });
+                // $('.pricing-transparency').click(function (e) {
+                //     $('li[data-tab-action = "attributes-product"]').addClass('active');
+                //     $('div[data-tab = "attributes-product"]').addClass('active');
+                //     $('li[data-tab-action = "seller"]').removeClass('active');
+                //     $('div[data-tab = "seller"]').removeClass('active');
+                //     $('li[data-tab-action = "laboratory-result"]').removeClass('active');
+                //     $('div[data-tab = "laboratory-result"]').removeClass('active');
+                //     $('html, body').animate({
+                //         scrollTop: $('div[data-tab = "attributes-product"] canvas').offset().top-250
+                //     }, 500);
+                // });
+
+                //change like-image based on data-status(liked or not liked)
+                var homeUrl = $("head base").attr("href");
+                $('.comment_thumb_img[data-status="true"]').attr(
+                    "src",
+                    homeUrl + "images/template/thumbs-up@2xactive.png"
+                );
+                $('.comment_thumb_img[data-status="true"]').addClass("is-liked");
+                $('.comment_thumb_img[data-status="false"]').attr(
+                    "src",
+                    homeUrl + "images/template/thumbs-up@2x.png"
+                );
+                $('.comment_thumb_img[data-status="false"]').removeClass("is-liked");
+
+                $(".comment_thumb_img").on("click", function () {
+                    if ($(".comment_thumb_a").data("link") === null) {
+                        alert("لطفا برای ثبت نظر ابتدا وارد حساب کاربری شوید.");
+                    } else {
+                        var homeUrl = $("head base").attr("href");
+                        var likes_count = $(this).parent().siblings(".comment_thumb_p");
+                        var id_answer = $(this).parents(".review__comment").attr("id");
+                        // change action based on data-status
+                        var action = $(this).data("status") === false ? "like" : "clear";
+                        if ($(this).data("status") === false) {
+                            $(this).data("status", true);
+                        } else {
+                            $(this).data("status", false);
+                        }
+                        //showing some UI for liking a comment
+                        $(this).toggleClass("is-liked");
+                        if ($(this).hasClass("is-liked")) {
+                            likes_count.html(parseInt(likes_count.html()) + 1);
+                            $(this).attr(
+                                "src",
+                                homeUrl + "images/template/thumbs-up@2xactive.png"
+                            );
+                        } else {
+                            likes_count.html(parseInt(likes_count.html()) - 1);
+                            $(this).attr(
+                                "src",
+                                homeUrl + "images/template/thumbs-up@2x.png"
+                            );
+                        }
+                        // ajax to send action type and id_answer
+                        $.post(
+                            homeUrl + "review/like",
+                            {
+                                id_answer: id_answer,
+                                action: action,
+                            },
+                            function (data, status) {
+                                $(this).data("status", data);
+                            }
+                        );
+                    }
+                });
+            }
+            //// END PRODUCT PAGE
+        });
+    </script>
+
+    <script>
+
+        $(document).ready(function () {
+            $('.bar span').hide();
+            $('#bar-five').animate({
+                width: '75%'
+            }, 1000);
+            $('#bar-four').animate({
+                width: '35%'
+            }, 1000);
+            $('#bar-three').animate({
+                width: '20%'
+            }, 1000);
+            $('#bar-two').animate({
+                width: '15%'
+            }, 1000);
+            $('#bar-one').animate({
+                width: '30%'
+            }, 1000);
+
+            setTimeout(function () {
+                $('.bar span').fadeIn('slow');
+            }, 1000);
+
+        });
+    </script>
+
+    }
+

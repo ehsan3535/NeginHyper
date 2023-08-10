@@ -1,0 +1,15 @@
+﻿@using Client.Models.ProductDto;
+@model List<ProductDto>
+
+@if (Model.Any())
+{
+    @foreach (var item in Model)
+    {
+        @if (item.ProductImages != null && item.ProductImages.Any())
+        {
+            <a class="section__mega_a a--sub ellipsis__line"
+               href="/Product/ProductDetail_User?id=@item.Id"
+               data-img="@item.CategorysMenuImageUrl">@item.Name</a>
+        }
+    }
+}

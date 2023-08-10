@@ -1,0 +1,284 @@
+﻿@using Secretary.Models.ProductDto;
+@model List<ProductDto>
+
+@section Style{
+    <link href="~/assets_Admin/plugins/noty/css/flat.css" rel="stylesheet">
+    <link rel="stylesheet" href="~/assets/select2/css/select2.min.css" type="text/css">
+
+    <style>
+        .validationspan {
+            color: red;
+        }
+    </style>
+
+}
+<div class="row">
+
+    <div class="col-lg-12">
+        <div class="portlet box border shadow">
+            <div class="portlet-heading">
+                <div class="portlet-title">
+                    <h3 class="title">
+                        <i class="icon-basket-loaded fa-flip-horizontal"></i>
+                        فهرست  محصولات
+                    </h3>
+                </div><!-- /.portlet-title -->
+                <div class="buttons-box">
+                    <a class="btn btn-sm btn-default btn-round btn-code" rel="tooltip" title="کدها" href="#">
+                        <i class="icon-arrow-left"></i><span>/</span><i class="icon-arrow-right"></i>
+                    </a>
+                    <div class="code-modal hide">
+                    </div>
+                    <a class="btn btn-sm btn-default btn-round btn-fullscreen" rel="tooltip" title="تمام صفحه" href="#">
+                        <i class="icon-size-fullscreen"></i>
+                    </a>
+                    <a class="btn btn-sm btn-default btn-round btn-collapse" rel="tooltip" title="کوچک کردن" href="#">
+                        <i class="icon-arrow-up"></i>
+                    </a>
+                </div><!-- /.buttons-box -->
+            </div><!-- /.portlet-heading -->
+            <div class="portlet-body">
+                <div class="row">
+                    @{
+                        int pageCounttt = (int)TempData["PageCount"];
+                    }
+                    <div class="col-md-4 col-12 m-b-20">
+                        <a class="btn btn-success btn-round" href="/Product/Add_Edit_Product?page=@pageCounttt">
+                            <i class="icon-plus"></i>
+                            افزودن
+                        </a>
+                    </div><!-- /.col-md-4 -->
+                    <div class="col-md-4 col-12 m-b-20">
+                        <form role="form" method="get" asp-action="ListProduct" asp-controller="Product">
+                            <div class="input-group round">
+                                <input type="text" class="form-control" name="Searched" placeholder="جستجو نام محصول...">
+                                <span class="input-group-btn">
+                                    <button class="btn btn-default" type="submit">
+                                        <i class="icon-magnifier"></i>
+                                        <div class="paper-ripple">
+                                    </button>
+                                </span>
+                            </div><!-- ./input-group -->
+                        </form>
+                    </div><!-- /.col-md-4 -->
+                  @*  <div class="col-md-4 col-12 m-b-20">
+                        <div class="portlet-body">
+                            <div class="form-group">
+                                <select class="form-control select2 round">
+                                    <option value="101" placeholder="دسته بندی">ایسلندی(Icelandic)</option>
+                                </select>
+                            </div><!-- /.form-group -->
+                        </div><!-- /.portlet-body -->
+                    </div><!-- /.portlet-body -->*@
+                    @*  <div class="col-lg-6">
+                    <div class="portlet box border shadow">
+                    <div class="portlet-heading">
+                    <div class="portlet-title">
+                    <h3 class="title">
+                    <i class="icon-options-vertical"></i>
+                    پلاگین select2 با گوشه round
+                    </h3>
+                    </div><!-- /.portlet-title -->
+                    <div class="buttons-box toggle toggle-mobile">
+                    <a class="btn btn-sm btn-default btn-round btn-toggle" href="#">
+                    <i class="icon-options"></i>
+                    </a>
+                    <a class="btn btn-sm btn-default btn-round btn-code" rel="tooltip" title="کدها" href="#">
+                    <i class="icon-arrow-left"></i><span>/</span><i class="icon-arrow-right"></i>
+                    </a>
+                    <div class="code-modal hide">
+                    <!-- <select class="form-control select2 round">...</select> -->
+                    </div>
+                    <a class="btn btn-sm btn-default btn-round btn-fullscreen" rel="tooltip" title="تمام صفحه" href="#">
+                    <i class="icon-size-fullscreen"></i>
+                    </a>
+                    <a class="btn btn-sm btn-default btn-round btn-collapse" rel="tooltip" title="کوچک کردن" href="#">
+                    <i class="icon-arrow-up"></i>
+                    </a>
+                    </div><!-- /.buttons-box -->
+                    </div><!-- /.portlet-heading -->
+                    <div class="portlet-body">
+                    <div class="form-group">
+                    <label>انتخاب ملیت</label>
+                    <select class="form-control select2 round">
+
+                    <option value="101">ایسلندی(Icelandic)</option>
+                    </select>
+                    </div><!-- /.form-group -->
+                    </div><!-- /.portlet-body -->
+                    </div><!-- /.portlet -->
+                    </div><!-- /.col-lg-6 -->*@
+
+                </div><!-- /.row -->
+                <div class="table-responsive">
+                    <table class="table table-bordered table-striped table-hover">
+                        <thead>
+                            <tr>
+                                <th>ردیف</th>
+                                <th>عنوان</th>
+                                <th> دسته بندی</th>
+                                <th>قیمت</th>
+                                 <th>قیمت با تخفیف</th>
+                                <th> درصد تخفیف</th>
+                                <th>تعداد</th>
+                                <th>امتیاز</th>
+                                <th>عملیات</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @{
+                                var j = 0;
+                            }
+                            @if (!Model.Any())
+                            {
+                                <tr>
+                                    <td>لیست شما خالی میباشد.</td>
+                                </tr>
+                            }
+                            else
+                            {
+                                @foreach (var item in Model)
+                                {
+                                    j++;
+                                    <tr>
+                                        <td>@item.Number</td>
+                                        <td>@item.Name</td>
+                                        <td>@item.CategorysName</td>
+                                        <td>@item.Price.ToNumeric()</td>
+                                         <td>@item.Discount.ToNumeric()</td>
+                                <td>@item.Percent %</td>
+                                        <td>@item.Count</td>
+                                        <td>@item.Rate</td>
+                                        <td>
+                                            <a href="/Product/ProductDetail?id=@item.Id" class="btn btn-success btn-round">
+                                                <i class="icon-eyeglass"></i>
+                                                مشاهده
+                                            </a>
+                                            <a href="/Product/Add_Edit_Product?id=@item.Id&&Page=@TempData["Page"]" class="btn btn-info btn-round">
+                                                <i class="icon-note"></i>
+                                                ویرایش
+                                            </a>
+                                            <a href="/Product/DeleteProduct?id=@item.Id" class="btn btn-danger btn-round">
+                                                <i class="icon-trash"></i>
+                                                حذف
+                                            </a>
+                                        </td>
+                                    </tr>
+                                }
+                            }
+                        </tbody>
+                    </table>
+                </div><!-- /.table-responsive -->
+                @{
+                    int pageNumber = (int)TempData["Page"];
+                    int pageCount = (int)TempData["PageCount"];
+                }
+                <div class="text-center">
+                    <ul class="pagination round">
+                       
+
+                        @if ((pageNumber) > 1)
+                        {
+                            <li class="page-item">
+                                <a href="ListProduct?Page=@(pageNumber - 1)">
+                                    <i class="icon-arrow-right"></i>
+                                </a>
+                            </li>
+                        }
+                        @if ((pageNumber) > 6)
+                        {
+                            <li>
+                                <a href="ListProduct?Page=@(pageNumber - 6)">@(pageNumber - 6)</a>
+                            </li>
+                        }
+                         @if ((pageNumber) > 5)
+                        {
+                            <li>
+                                <a href="ListProduct?Page=@(pageNumber - 5)">@(pageNumber - 5)</a>
+                            </li>
+                        }
+                         @if ((pageNumber) > 4)
+                        {
+                            <li>
+                                <a href="ListProduct?Page=@(pageNumber - 4)">@(pageNumber - 4)</a>
+                            </li>
+                        }
+                         @if ((pageNumber) > 3)
+                        {
+                            <li>
+                                <a href="ListProduct?Page=@(pageNumber - 3)">@(pageNumber - 3)</a>
+                            </li>
+                        }
+
+                        @if ((pageNumber) > 2)
+                        {
+                            <li>
+                                <a href="ListProduct?Page=@(pageNumber - 2)">@(pageNumber - 2)</a>
+                            </li>
+                        }
+                        @if ((pageNumber) > 1)
+                        {
+                            <li>
+                                <a href="ListProduct?Page=@(pageNumber - 1)">@(pageNumber - 1)</a>
+                            </li>
+                        }
+                        <li class="page-item disabled"><a class="page-link" href="#">@pageNumber</a></li>
+                        @if ((pageNumber) < pageCount)
+                        {
+                            <li>
+                                <a href="ListProduct?Page=@(pageNumber + 1)">@(pageNumber + 1)</a>
+                            </li>
+                        }
+                        @if ((pageNumber) < pageCount - 1)
+                        {
+                            <li>
+                                <a href="ListProduct?Page=@(pageNumber + 2)">@(pageNumber + 2)</a>
+                            </li>
+                        }
+                        @if ((pageNumber) < pageCount - 2)
+                        {
+                            <li>
+                                <a href="ListProduct?Page=@(pageNumber + 3)">@(pageNumber + 3)</a>
+                            </li>
+                        }
+                         @if ((pageNumber) < pageCount - 3)
+                        {
+                            <li>
+                                <a href="ListProduct?Page=@(pageNumber + 4)">@(pageNumber + 4)</a>
+                            </li>
+                        }
+                         @if ((pageNumber) < pageCount - 4)
+                        {
+                            <li>
+                                <a href="ListProduct?Page=@(pageNumber + 5)">@(pageNumber + 5)</a>
+                            </li>
+                        }
+                         @if ((pageNumber) < pageCount - 5)
+                        {
+                            <li>
+                                <a href="ListProduct?Page=@(pageNumber + 6)">@(pageNumber + 6)</a>
+                            </li>
+                        }
+
+                        @if ((pageNumber) < pageCount)
+                        {
+                            <a href="ListProduct?Page=@(pageNumber + 1)">
+                                <i class="icon-arrow-left"></i>
+                            </a>
+                        }
+
+                       
+                    </ul>
+                </div><!-- /.text-center -->
+            </div><!-- /.portlet-body -->
+        </div><!-- /.portlet -->
+    </div><!-- /.col-lg-12 -->
+
+
+</div><!-- /.row -->
+@section Scripts{
+    <script src="~/assets_Admin/plugins/noty/js/noty/packaged/jquery.noty.packaged.min.js"></script>
+    <script src="~/assets_Admin/js/pages/noty.js"></script>
+    <script src="~/assets/select2/js/select2.min.js"></script>
+    <script src="~/assets/js/select2.js"></script>
+   }

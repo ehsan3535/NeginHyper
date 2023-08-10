@@ -1,0 +1,260 @@
+﻿@using Client.Models;
+@model partnershipDto
+
+<div class="py-5">
+    <div class="site-login w-100">
+
+        <div class="clearfix w-100">
+
+            <form id="login-form" style="max-width:724px" method="post" asp-action="Partnership" asp-asp-controller="Contact">
+                <input type="hidden"
+                       name="_csrf"
+                       value="XLn5XsEpGmlEwynzDMSVeaEablXj8IJ62rAf6XRN-tU_jIMuhW54ADyXHco8nsA4yTcZH6eJtDStwC-QTCDOjQ==" hidden />
+                <p style="text-align:center">
+                    سلام خوش آمدید
+                </p>
+                <p style="text-align:center">
+                    لطفا موارد زیر را وارد کنید تا با شما تماس بگیریم
+                </p>
+                <h1 class="centered-header">مشخصات فردی  </h1>
+
+                <div class="row">
+                    <div class="col-6">
+                        <div class="form-group rtl field-loginform-mobile required">
+                            <label class="control-label" for="loginform-mobile">نام و نام خانوادگی</label>
+                            <input type="text"
+                                   id="loginform-mobile"
+                                   class="form-control py-4"
+                                   asp-for="FullName"
+                                   autofocus
+                                   aria-required="true" />
+
+                            <p class="help-block help-block-error"></p>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="form-group rtl field-loginform-mobile required">
+                            <label class="control-label" for="loginform-mobile">شماره تماس</label>
+                            <input type="text"
+                                   id="loginform-mobile"
+                                   class="form-control py-4"
+                                   asp-for="PhoneNumber"
+                                   autofocus
+                                   aria-required="true" />
+
+                            <p class="help-block help-block-error"></p>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="row">
+
+                    <div class="col-6">
+                        <div class="form-group rtl field-loginform-mobile required">
+                            <label class="control-label" for="loginform-mobile">استان </label>
+                            <select dir="ltr" onchange="submitWithAjaxForm2()" name="ProvinceId" id="carTypeDropDown" style="height:52px" class="form-select form-control" aria-label="Default select example">
+                                    <option value="" >انتخاب کنید</option>
+                                @foreach (var item in Model.Provinces)
+                                {
+                                    <option value="@item.Id">@item.Name</option>
+
+                                }
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="col-6" id="carModel" >
+                        <div class="form-group rtl field-loginform-mobile required">
+                            <label class="control-label" for="loginform-mobile"> شهر یا روستا  </label>
+                            <select dir="ltr" name="CityId" class="form-select form-control " style="height:52px" id="carModelDropDown" aria-label="Default select example">
+                                <option selected>انتخاب کنید </option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="form-group rtl field-loginform-mobile ">
+                            <label class="control-label" for="loginform-mobile"> سن  </label>
+                            <input type="text"
+                                   id="loginform-mobile"
+                                   class="form-control py-4"
+                                   asp-for="Age"
+                                   autofocus
+                                   aria-required="true" />
+
+                            <p class="help-block help-block-error"></p>
+                        </div>
+                    </div>
+                </div>
+
+
+                <h1 class="centered-header">مشخصات محصول  </h1>
+                <div>
+                    <div class="row" id="insert-product">
+                        <div class="col-6">
+                            <div class="form-group field-loginform-password required">
+                                <label class="control-label" for="loginform-password">نام محصول</label>
+                                <input type="text"
+                                       class="form-control py-4 the-names"
+                                       aria-required="true" />
+
+                                <p class="help-block help-block-error"></p>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-group field-loginform-password required">
+                                <label class="control-label" for="loginform-password">میزان تولیدی</label>
+                                <input type="text"
+                                       class="form-control py-4 the-counts"
+                                       aria-required="true" />
+
+                                <p class="help-block help-block-error"></p>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <h1 style="font-size:28px;color:grey;cursor:pointer;" class="hover-green" onclick="insert()">اضافه کردن محصول +  </h1>
+
+
+                <div class="row">
+                    <div class="col-6">
+                        <div class="form-group rtl field-loginform-mobile ">
+                            <label class="control-label" for="loginform-mobile">چگونه با گیل هایپر آشنا شدید؟ </label>
+                            <select dir="ltr" asp-for="HowToMeetGilHyper" style="height:52px" class="form-select form-control" aria-label="Default select example" required>
+                                <option >یک گزینه را انتخاب کنید</option>
+
+                                <option value="دوستان و آشنایان">دوستان و آشنایان</option>
+                                <option value="جستجوی اینترنتی">جستجوی اینترنتی</option>
+                                <option value="شبکه های اجتماعی">شبکه های اجتماعی</option>
+                                <option value="سایر">سایر</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                    </div>
+
+                </div>
+                <input type="text" asp-for="ProductList"
+                       class="form-control py-4 the-count"
+                       id="productionList"
+                       aria-required="true" hidden />
+                <input type="text" asp-for="CountList"
+                       id="countList"
+                       class="form-control py-4 the-count"
+                       aria-required="true" hidden />
+
+                                 @*          <div class="form-group field-loginform-rememberme">
+                                    <div class="checkbox">
+                                        <label for="loginform-rememberme">
+                                            <input type="hidden"
+                                                   name="LoginForm[rememberMe]"
+                                                   value="0" /><input type="checkbox"
+                                                                      id="loginform-rememberme"
+                                                                      name="LoginForm[rememberMe]"
+                                                                      value="1"
+                                                                      checked />
+                                            قوانین همکاری را خوانده و آن را میپذیرم
+                                        </label>
+                                        <p class="help-block help-block-error"></p>
+                                    </div>
+                                </div>*@
+
+                <div class="form-group text-center">
+                    <button type="submit"
+                            onclick="calculate()"
+                            class="btn bg-success "
+                            name="login-button">
+                        ثبت
+                    </button>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>
+<br />
+<br />
+<br />
+
+<div class="row" id="should-append" hidden>
+    <div class="col-6">
+        <div class="form-group field-loginform-password required">
+            <label class="control-label" for="loginform-password">نام محصول</label>
+            <input type="text"
+                   class="form-control py-4 the-names"
+                   aria-required="true" />
+
+            <p class="help-block help-block-error"></p>
+        </div>
+    </div>
+    <div class="col-6">
+        <div class="form-group field-loginform-password required">
+            <label class="control-label" for="loginform-password">میزان تولیدی</label>
+            <input type="text"
+                   class="form-control py-4 the-counts"
+                   aria-required="true" />
+
+            <p class="help-block help-block-error"></p>
+        </div>
+    </div>
+</div>
+@section Scripts{
+    <script>
+        function submitForm2() {
+            //document.getElementsByName("Shop").submit();
+            document.getElementById("g").click();
+        }
+
+        function submitWithAjaxForm2() {
+            var carTypeValue = $('#carTypeDropDown').find(":selected").val();
+
+            $.ajax({
+                type: "GET",
+                url: "/ShopCard/Send_Cities",
+                data: {
+                    ProvinceId: carTypeValue,
+                },
+                success: function (result) {
+                    $('#carModelDropDown').html("");
+                    console.log(result);
+                    for (var i = 0; i < result.length; i++) {
+                        console.log(result[i]);
+
+                        $('#carModelDropDown').append(`<option dir="ltr" value="${result[i].Id}"><span> ${result[i].Name} </span> </option>`);
+                    }
+
+                    $("#carModel").attr("hidden", false);
+                },
+                error: function (e) {
+                    alert("error => " + e.responseText);
+                }
+            });
+        }
+    </script>
+    <script>
+
+        function insert() {
+            var should = $("#should-append").html();
+            $("#insert-product").append(should);
+        }
+
+
+    </script>
+
+    <script>
+        function calculate() {
+            var thenames = document.getElementsByClassName("the-names");
+            var thecounts = document.getElementsByClassName("the-counts");
+            var joinNames = "";
+            var joinCounts = "";
+            for (var i = 0; i < thenames.length; i++) {
+                joinNames = joinNames + thenames[i].value + ",";
+                joinCounts = joinCounts + thecounts[i].value + ",";
+            }
+            $("#productionList").val(joinNames);
+            $("#countList").val(joinCounts);
+            console.log($("#productionList").val());
+            console.log($("#countList").val());
+        }
+    </script>
+    }

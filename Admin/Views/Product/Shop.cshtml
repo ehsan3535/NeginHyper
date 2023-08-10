@@ -1,0 +1,364 @@
+﻿@using Client.Models.ProductDto;
+@model List<ProductDto>
+
+<!-- mobile -->
+<div class="container">
+	<nav dir="rtl" style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='%236c757d'/%3E%3C/svg%3E&#34;);" aria-label="breadcrumb">
+		<ol class="breadcrumb">
+			<li class="breadcrumb-item"><a href="/home/index">خانه</a></li>
+			<li class="breadcrumb-item active" aria-current="page">محصولات</li>
+		</ol>
+	</nav>
+	<div class="product-list__div">
+		<div class="product-list__side">
+			<div class="product-list__side--child child--daste display-none">
+				<p class="product-list__h4">دسته ‌بندی</p>
+				<ul class="product-list__side_ul mx-3">
+					@foreach (var item in Model.First().Categories)
+					{
+							<a class="product-list__filter-text" href="/Product/Shop?CategoryId=@item.Id"> @item.Name</a>
+					}
+				</ul>
+				<div class="product-list__side--more">
+					<a class="product-list__filter-text" href="/Product/Shop">مشاهده همه</a>
+				</div>
+			</div>
+			@*            <div id="mySidenav">
+				<div id="mySidenav--white">
+				<div class="km-filter-header"></div>
+				<div class="product-list__side--child">
+
+            <div class="km-checkbox">
+            <label for="chemical_24">
+            <input id="chemical_24"
+            value="✓"
+            type="checkbox"
+            data-parent="24" /><span class="km-checkbox-material">
+            <span class="km-check"></span>
+            </span>
+            عدم استفاده از سم شیمیایی
+            </label>
+            </div>
+            <div class="km-checkbox">
+            <label for="chemical_25">
+            <input id="chemical_25"
+            value="✓"
+            type="checkbox"
+            data-parent="25" /><span class="km-checkbox-material">
+            <span class="km-check"></span>
+            </span>
+            استفاده از کود حیوانی
+            </label>
+            </div>
+            </div>
+            <div class="km-filter-footer">
+            <a class="km-submit-filter" href="javascript:void(0)">اعمال نتایج</a>
+            </div>
+            </div>
+            </div>
+            *@
+        </div>
+        <div class="product-list__main">
+            <div class="product-list__filter--container">
+                <p class="product-list__filter-text">
+                    <!-- <img src="../images/template/Icon-sort.svg" alt="sort-icon" /> -->
+                    مرتب‌سازی براساس:
+                </p>
+                <a class="product-list__filter-text  mx-2 default__button" href="/Product/Shop?Type=1" style="cursor:pointer; text-align:center; align-items:center; justify-content:center; display:flex;">
+                    آخرین محصولات
+                </a>
+                <a class="product-list__filter-text  mx-2 default__button" href="/Product/Shop?Type=2" style="cursor:pointer; text-align:center; align-items:center; justify-content:center;  display:flex;">
+                    بیشترین امتیاز
+                </a>
+                <a class="product-list__filter-text mx-2 default__button" href="/Product/Shop?Type=4" style="cursor:pointer; text-align:center; align-items:center; justify-content:center;  display:flex;">
+                    مناسب‌ترین قیمت
+                </a>
+            </div>
+            <div class="product-list__filter--container d--mobile">
+                <form method="get" asp-action="Shop" asp-controller="Product">
+                    <select onchange="submitForm()" name="Type" class="product-list__sorting--mobile dropdown-sort">
+                        <option disabled selected>مرتب‌سازی براساس</option>
+                        <option value="1">آخرین محصولات</option>
+                        <option value="2">بیشترین امتیاز</option>
+                        <option value="4">مناسبترین قیمت</option>
+                    </select>
+                    <button id="gg" type="submit" hidden></button>
+                </form>
+                <div class="position-relative">
+                    <!-- <img
+                      class="product-list__filter_icon icon--filter"
+                      src="../images/template/Icon-filter.svg"
+                      alt="filter-icon"
+                    /> -->
+                    <form method="get" asp-action="Shop" asp-controller="Product">
+                        <select onchange="submitForm2()" name="CategoryId" class="product-list__sorting--mobile dropdown-sort">
+                            <option disabled selected>دسته بندی</option>
+                            @foreach (var item in Model.First().Categories)
+                            {
+                                <option value="@item.Id">@item.Name</option>
+                            }
+                        </select>
+                        <button id="g" type="submit" hidden></button>
+                    </form>
+                </div>
+            </div>
+            <div class="filters--container">
+                <div id="filter_selected--container"></div>
+                <p class="filter_remove">حذف فیلتر ها</p>
+            </div>
+            <div class="product-list__card--container">
+                @foreach (var item in Model)
+                {
+                    <div class="product-list__card">
+
+                            <a href="/Product/ProductDetail_User?id=@item.Id"
+                               class="product-list__card_a">
+                                <img class="product-list__card_img"
+                                     src="@item.ImageCoverUrl" />
+                            </a>
+                        <div class="product-list__card--content">
+                            <a class="p-1 d-block"
+                               href="/Product/ProductDetail_User?id=@item.Id">
+                                <h3 class="product-list__card_h3">@item.Name</h3>
+                            </a>
+                            <div class="product-list__card--detail justify-content-center">
+                                <span class="text-ceenter bg-primary-gradient px-2 py-1 br-20">
+                                    <i class="fa fa-star m-2"> @item.Rate / 5</i>
+                                </span>
+                            </div>
+                            @*<div class="product-list__badge--container"></div>*@
+                            <div class="product-list__button-container">
+                                @*href="/shopcard/AddOrRemove?ProductId=@item.Id&&AddOrRemove=true&&returnUrl=/Product/Shop"*@
+                                <button type="button"
+                                        onclick="shopShopCard('@item.Id')"
+                                        class="product-list__card_button bg-success add-to-cart"
+                                        data-name="برنج دورهمی  از محمد هادی غلامی"
+                                        data-price="1180000"
+                                        data-product="1283"
+                                        data-type="1"
+                                        name="">
+                                    <i class="fa fa-plus " style="font-size: large;"></i>
+                                </button>
+                                @if (item.Count == 0)
+                                {
+                                    <p class="product-list__card_h3 h3--price h3--desktop">
+                                        <span class="price_format"> نا موجود</span>
+                                    </p>
+                                }
+                                else
+                                {
+                                          <p class="product-list__card_h3 h3--price h3--desktop">
+                                    @if(item.Discount != item.Price)
+                                    {
+                                    <span class="price_format" style="text-decoration:line-through">@item.Price.ToNumeric() تومان</span> 
+                                        
+                                    }
+                                                                           <span class="price_format">@item.Discount.ToNumeric()</span> تومان
+
+                            </p>
+                                    
+                                }
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+            @{
+                int pageNumber = (int)TempData["Page"];
+                int pageCount = (int)TempData["PageCount"];
+            }
+            <div class="row justify-content-center">
+                <nav aria-label="Page navigation example">
+                    <ul class="pagination justify-content-center">
+                        @if ((pageNumber) > 1)
+                        {
+                            <li class="page-item">
+                                <a class="page-link" href="Shop?Page=@(pageNumber-1)">قبلی</a>
+                            </li>
+                        }
+                        @if ((pageNumber) > 3)
+                        {
+                            <li class="page-item"><a class="page-link" href="Shop?Page=@(pageNumber - 3)">@(pageNumber - 3)</a></li>
+                        }
+                        @if ((pageNumber) > 2)
+                        {
+                            <li class="page-item"><a class="page-link" href="Shop?Page=@(pageNumber - 2)">@(pageNumber - 2)</a></li>
+                        }
+                        @if ((pageNumber) > 1)
+                        {
+                            <li class="page-item"><a class="page-link" href="Shop?Page=@(pageNumber - 1)">@(pageNumber - 1)</a></li>
+                        }
+                        <li class="page-item disabled"><a class="page-link" href="#">@pageNumber</a></li>
+                        @if ((pageNumber) < pageCount)
+                        {
+                            <li class="page-item"><a class="page-link" href="Shop?Page=@(pageNumber + 1)">@(pageNumber + 1)</a></li>
+                        }
+                        @if ((pageNumber) < pageCount - 1)
+                        {
+                            <li class="page-item"><a class="page-link" href="Shop?Page=@(pageNumber + 2)">@(pageNumber + 2)</a></li>
+                        }
+                        @if ((pageNumber) < pageCount - 2)
+                        {
+                            <li class="page-item"><a class="page-link" href="Shop?Page=@(pageNumber + 3)">@(pageNumber + 3)</a></li>
+                        }
+
+                        @if ((pageNumber) < pageCount)
+                        {
+                            <li class="page-item">
+                                <a class="page-link" href="Shop?Page=@(pageNumber+1)" tabindex="-1">بعدی</a>
+                            </li>
+                        }
+                    </ul>
+                </nav>
+            </div>
+            @if (TempData["CategoryId"] != null)
+            {
+                <div class="card bg-success p-5 mb-3">
+                    <div class="row g-0">
+
+							<div class="col-md-12   ">
+								<div class="card-body">
+									<h5 class="card-title">توضیحات دسته بندی @Model.First().CategorysName</h5>
+									<p class="card-text">
+									@Model.First().CategorysDescription
+									</p>
+								</div>
+							</div>
+						</div>
+					</div>
+			}
+		</div>
+	</div>
+</div>
+
+<!-- speacial offers -->
+
+
+
+
+<!-- Modal -->
+@*<div class="modal" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+	<div class="modal-content">
+	<div class="modal-header">
+	<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+
+	<h1 class="modal-title fs-5" id="exampleModalLabel">
+	سبد خرید شما تاکنون
+	</h1>
+	</div>
+	@if (Model.First().ShopCard != null)
+	{
+	<div class="modal-body">
+	<div class="column">
+	<hr>
+	@if (Model.First().ShopCard.ShopCardDetails != null && Model.First().ShopCard.ShopCardDetails.Any())
+	{
+
+	@foreach (var item in Model.First().ShopCard.ShopCardDetails)
+	{
+
+	<div class="row">
+	<div class="col-3">
+	<img src="@Model.First().ProductImages.First().ImageLink" alt="" width="100px">
+	</div>
+	<div class="col-6">
+	<span style="font-weight: bold; font-size: 18px;">@item.ProductsName</span>
+	<br>
+	</div>
+	<div class="col-3">
+	<span class="text-black"> @item.ProductsDiscount.ToNumeric() تومان</span>
+
+	<div class="btn-group">
+	<button class="btn  btn-sm dropdown-toggle" style="border: 1px solid grey; border-radius: 20px;" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+	@item.Count عدد
+	</button>
+	<ul class="dropdown-menu">
+	...
+	</ul>
+	</div>
+	<br>
+	<a href="/ShopCard/DeleteShopCard?ShopCardDetailId=@item.Id&&modal=true"><span class="text-danger"> حذف</span></a>
+	</div>
+	</div>
+	<hr>
+	<hr>
+	}
+	}
+	else
+	{
+	<div class="row">
+	<div class="col-12">
+	<span style="font-weight: bold; font-size: 18px;">سبد خرید شما خالی میباشد</span>
+	<br>
+	</div>
+	</div>
+	<hr>
+	}
+	<div class="row justify-content-start">
+	<span class="text-black" style="font-size: 18px; text-align: end; font-weight: bold;">مجموع کل  @Model.First().ShopCard.TotalPrice.ToNumeric() تومان</span>
+	<span class="text-black" style="font-size: 18px; text-align: end; font-weight: bold;">هزینه قابل پرداخت  @Model.First().ShopCard.FinalTotalPrice.ToNumeric() تومان</span>
+
+	</div>
+	<div class="row">
+	<div class="col-6">
+	@if (Model.First().ShopCard.UntilFreePost == 0)
+	{
+	<span class="text-black" style="font-size: 18px;">هزینه ارسال برای شما رایگان شد</span>
+	}
+	else
+	{
+	<span class="text-black" style="font-size: 18px;">هزینه ارسال @Model.First().ShopCard.PostPrice.ToNumeric() تومان</span>
+	<span class=" mx-3">ت @Model.First().ShopCard.UntilFreePost.ToNumeric() تا ارسال رایگان</span>
+	}
+	<br>
+	<div class="progress m-b-20">
+	<div class="progress-bar" role="progressbar" aria-valuenow="10%" aria-valuemin="0" aria-valuemax="100"></div>
+	</div>
+	<span class="" style="font-size: 20px; font-weight: bold;">کد تخفیف در مرحله آخر فرایند اعمال میشود</span>
+	</div>
+	</div>
+	</div>
+	</div>
+	}
+
+	<div class="modal-footer">
+	<div class="row w-100 ">
+	<div class="col-6">
+	<a href="/product/shop" type="button" class="btn btn-outline-info w-100 p-3" style="border-radius: 50px;text-align:center;">فروشگاه </a>
+	</div>
+	<div class="col-6">
+	<button type="button" class="default__button button--xl bg-success add-to-cart" style="border-radius: 50px;text-align:center!important;" onclick="openBasket()">سبد خرید و پرداخت</button>
+	</div>
+	</div>
+	</div>
+	</div>
+	</div>
+		</div>
+*@
+
+@section Scripts{
+    @* @if (TempData["Added"] != null)
+    {
+        TempData["Added"] = null;
+
+	<script>
+	$(document).ready(function () {
+	$("#exampleModal").modal("show");
+	});
+	</script>
+	}*@
+<script>
+	function submitForm() {
+		//document.getElementsByName("Shop").submit();
+		document.getElementById("gg").click();
+	}
+</script>
+<script>
+	function submitForm2() {
+		//document.getElementsByName("Shop").submit();
+		document.getElementById("g").click();
+	}
+</script>
+}
+

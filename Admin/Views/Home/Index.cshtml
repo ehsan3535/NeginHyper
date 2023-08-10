@@ -1,0 +1,814 @@
+﻿@using Client.Models.ProductDto;
+@model List<ProductDto>
+
+@section Styles{
+
+    <style>
+        html, body {
+            overflow-x: hidden;
+            background: #fff;
+        }
+
+
+        :root {
+            --font-size: 1.1em;
+            /*--bg1: #f5f8f7;*/
+            --bg1: #fff;
+            --blue: #0F9347;
+            --green: #2ecc71;
+            --purple: #f1c40f;
+            --gold: orange;
+            --red: #e74c3c;
+            --orange: #e67e22;
+            --shadow1: 0 2px 4px #00000026, 0 3px 6px #0000001f;
+            --shadow2: 0 2px 6px #00000044, 0 4px 7px #00000022;
+        }
+
+        .info-graph {
+            padding: 2vw;
+        }
+
+            .info-graph ul.infoGraphic {
+                font-size: var(--font-size);
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+                .info-graph ul.infoGraphic li {
+                    position: relative;
+                    width: 100%;
+                    max-width: 25em;
+                    background: var(--bg1);
+                    border-radius: 0.5em;
+                    padding: 0.5em;
+                    z-index: 1;
+                    transition: all 0.2s;
+                    cursor: pointer;
+                }
+
+                    .info-graph ul.infoGraphic li .numberWrap {
+                        position: absolute;
+                    }
+
+                    .info-graph ul.infoGraphic li .number {
+                        font-family: "maven pro", sans-serif;
+                        font-size: 13em;
+                        font-weight: 900;
+                        width: 0.9em;
+                        text-align: center;
+                    }
+
+                        .info-graph ul.infoGraphic li .number.fontColor1 {
+                            color: var(--blue);
+                        }
+
+                        .info-graph ul.infoGraphic li .number.fontColor2 {
+                            color: var(--green);
+                        }
+
+                        .info-graph ul.infoGraphic li .number.fontColor3 {
+                            color: var(--purple);
+                        }
+
+                        .info-graph ul.infoGraphic li .number.fontColor4 {
+                            color: var(--gold);
+                        }
+
+                        .info-graph ul.infoGraphic li .number.fontColor5 {
+                            color: var(--red);
+                        }
+
+                        .info-graph ul.infoGraphic li .number.fontColor6 {
+                            color: var(--orange);
+                        }
+
+                    .info-graph ul.infoGraphic li .coverWrap {
+                        transform: rotate(130deg);
+                        position: absolute;
+                        width: 18em;
+                        height: 15em;
+                        left: -3em;
+                        top: -1em;
+                    }
+
+        ul.infoGraphic li .coverWrap .numberCover {
+            position: absolute;
+            background: var(--bg1);
+            width: 18em;
+            height: 6em;
+            border-radius: 50% 50% 0 0;
+            border-bottom: 3px solid #f5f8f7;
+            transition: all 0.4s;
+        }
+
+        .info-graph ul.infoGraphic li .coverWrap .numberCover::before {
+            position: absolute;
+            content: "";
+            bottom: 5px;
+            left: 4em;
+            right: 4em;
+            top: 5em;
+            box-shadow: 0 0 30px 17px #48668577;
+            border-radius: 100px/10px;
+            z-index: -1;
+        }
+
+        .info-graph ul.infoGraphic li .coverWrap .numberCover::after {
+            position: absolute;
+            bottom: 0;
+            content: "";
+            left: -10%;
+            width: 120%;
+            height: 150%;
+            background: radial-gradient(at bottom, #48668533, transparent, transparent);
+            z-index: 1;
+        }
+
+        .info-graph ul.infoGraphic li .content {
+            margin: 8em 3em 1em 7em;
+            position: relative;
+        }
+
+            .info-graph ul.infoGraphic li .content h2 {
+                font-size: 1.7em;
+                font-weight: 500;
+                text-align: center;
+                margin-bottom: 10px;
+                text-transform: uppercase;
+            }
+
+            .info-graph ul.infoGraphic li .content p {
+                line-height: 1.5em;
+            }
+
+        .info-graph ul.infoGraphic li:hover .coverWrap .numberCover {
+            border-radius: 100%;
+        }
+
+        .info-graph .icon {
+            position: absolute;
+            font-size: 2rem;
+            text-align: center;
+            top: -1.3em;
+            left: 50%;
+            transform: translatex(-50%);
+        }
+
+            .info-graph .icon:before {
+                color: #666;
+                font-family: FontAwesome;
+                font-style: normal;
+                font-weight: normal;
+                text-decoration: inherit;
+            }
+
+        .info-graph .iconCodepen:before {
+            content: "";
+        }
+
+        .info-graph .iconSocial:before {
+            content: "";
+        }
+
+        .info-graph .iconAirplane:before {
+            content: "";
+        }
+
+        .info-graph .iconMap:before {
+            content: "";
+        }
+
+        .info-graph .iconBulb:before {
+            content: "";
+        }
+
+        .info-graph .iconPeace:before {
+            content: "";
+        }
+
+        .content p {
+            text-align: right !important;
+        }
+
+    </style>
+
+}
+
+<div id="carouselExampleCaptions" class="carousel slide">
+    <div class="carousel-indicators">
+        <button type="button"
+                data-bs-target="#carouselExampleCaptions"
+                data-bs-slide-to="0"
+                class="active"
+                aria-current="true"
+                aria-label="Slide 1"></button>
+        <button type="button"
+                data-bs-target="#carouselExampleCaptions"
+                data-bs-slide-to="1"
+                aria-label="Slide 2"></button>
+        <button type="button"
+                data-bs-target="#carouselExampleCaptions"
+                data-bs-slide-to="2"
+                aria-label="Slide 3"></button>
+    </div>
+    <div class="carousel-inner">
+        <div class="carousel-item active">
+            <a href="@Model.First().SettingDto.TopImageLink1">
+                <img loading="lazy" src="@Model.First().SettingDto.TopImageLink1"
+                     class="d-block w-100"
+                     alt="..."
+                     style="max-height: 70vh" />
+            </a>
+        </div>
+        <div class="carousel-item">
+            <a href="@Model.First().SettingDto.TopImageLink2">
+                <img loading="lazy" src="@Model.First().SettingDto.TopImageLink2"
+                     class="d-block w-100"
+                     alt="..."
+                     style="max-height: 70vh" />
+            </a>
+        </div>
+        <div class="carousel-item">
+            <a href="@Model.First().SettingDto.TopImageLink3">
+                <img loading="lazy" src="@Model.First().SettingDto.TopImageLink3"
+                     class="d-block w-100"
+                     alt="..."
+                     style="max-height: 70vh" />
+            </a>
+        </div>
+    </div>
+    <button class="carousel-control-prev my-prev"
+            type="button"
+            data-bs-target="#carouselExampleCaptions"
+            data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" style="background:#fff; color:#000 !important; border-radius:200px;   width:50px; height:50px; padding:1vw; display:flex; align-content:center; justify-content:center; align-items:center" aria-hidden="true"><i class="fa fa-angle-left"></i></span>
+        <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next my-next"
+            type="button"
+            data-bs-target="#carouselExampleCaptions"
+            data-bs-slide="next">
+        <span class="carousel-control-next-icon" style="background:#fff; color:#000 !important;  border-radius:200px;   width:50px; height:50px; padding:1vw; display:flex; align-content:center; justify-content:center; align-items:center" aria-hidden="true"><i class="fa fa-angle-right"></i></span>
+        <span class="visually-hidden">Next</span>
+    </button>
+</div>
+
+<!-- end of carousel -->
+@await Component.InvokeAsync("Categorys")
+
+<div class="container">
+<div style="border-bottom:1px solid #d3d3d3; margin-bottom:35px;"></div>
+</div>
+
+<div class="info-graph" dir="ltr">
+    <ul class="infoGraphic">
+        <li>
+            <div class="numberWrap">
+                <div class="number fontColor1">1</div>
+                <div class="coverWrap">
+                    <div class="numberCover"></div>
+                </div>
+            </div>
+            <div class="content">
+                <div class="icon"><img src="/assets/images/icons/i/bucket.png" style="width:50px;" /> </div>
+                <h2>قیمت</h2>
+                <p dir="rtl">
+                    قیمت محصولات ما از قیمت تمام فروشگاه‌هایی که می‌شناسید کمتر است
+                </p>
+            </div>
+        </li>
+        <li>
+            <div class="numberWrap">
+                <div class="number fontColor2">2</div>
+                <div class="coverWrap">
+                    <div class="numberCover"></div>
+                </div>
+            </div>
+            <div class="content">
+                <div class="icon"><img src="/assets/images/icons/i/search-analysis.png" style="width:60px;" /> </div>
+                <h2>اصالت محصول</h2>
+                <p dir="rtl">
+                    اصالت یعنی اینکه
+
+                    میتونی خیلی کارها رو بکنی
+
+                    ولی « وجدانت » اجازه نده …
+
+                </p>
+            </div>
+        </li>
+        <li>
+            <div class="numberWrap">
+                <div class="number  fontColor3">3</div>
+                <div class="coverWrap">
+                    <div class="numberCover"></div>
+                </div>
+            </div>
+            <div class="content">
+                <div class="icon"><img src="/assets/images/icons/i/hand.png" style="width:60px;" /> </div>
+                <h2>بهترین قیمت</h2>
+                <p dir="rtl">
+                    محصولات گیلانی را در تهران همان روز که سفارش می دهید به سریع ترین حالت ممکن و طبق ساعت زمانبندی، تحویل خواهید گرفت
+                </p>
+            </div>
+        </li>
+        <li>
+            <div class="numberWrap">
+                <div class="number  fontColor4">4</div>
+                <div class="coverWrap">
+                    <div class="numberCover"></div>
+                </div>
+            </div>
+            <div class="content">
+                <div class="icon"><img src="/assets/images/icons/i/products.png" style="width:60px;" /> </div>
+                <h2>بهترین کیفیت</h2>
+                <p dir="rtl">
+                    تمامی محصولات گیل هایپر از بهترین کشاورزان استان گیلان تامین میشود و تلاش خواهد شد که بهترین کیفیت در کمترین زمان ممکن به دست هموطنان عزیز در سرار کشور برسد
+
+                </p>
+            </div>
+        </li>
+        <li>
+            <div class="numberWrap">
+                <div class="number  fontColor5">5</div>
+                <div class="coverWrap">
+                    <div class="numberCover"></div>
+                </div>
+            </div>
+            <div class="content">
+                <div class="icon"><img src="/assets/images/icons/i/van.png" style="width:60px;" /> </div>
+                <h2>تحویل درب منزل </h2>
+                <p dir="rtl">
+                    گیل هایپر، در کنار همه‌ی کسب و کارهای خرید آنلاین کمک می کند به کمترین هزینه ارسال محصول برای درب منزل در سریعترین حالت ممکن به دستتون برسد
+                </p>
+            </div>
+        </li>
+        <!--     <li>
+          <div class="numberWrap">
+          <div class="number  fontColor6">6</div>
+          <div class="coverWrap">
+            <div class="numberCover"></div>
+          </div>
+            </div>
+          <div class="content">
+            <div class="icon iconPeace"></div>
+            <h2>Succeed</h2>
+            <p>Sagittis, audantium sem eveniet lacus pede porttitor aenean.</p>
+          </div>
+        </li> -->
+    </ul>
+
+</div>
+
+<div class="home__section_values bg-success my-4" hidden>
+    <!-- <p class="home__values_p text-ceenter">
+       زنجیره تامین
+    </p> -->
+    <div class="home__values_div">
+        <div class="home__values_item--container item--1">
+            @*<img loading="lazy"class="home__values_icon" src="/assets/images/values/farmer.png" />*@
+            <div class="home__values_item  bg-white br-20">
+                @*<img loading="lazy"class="home__values_number" src="/assets/images/values/1.png" />*@
+                <div class="home__values_title--background">
+                    <p class="home__values_title">کشاورزی که قصه‌شو می‌دونیم</p>
+                </div>
+                <p class="home__values_item-p text-black">
+                    کشاورز و زنبورداری که قصه‌شو می‌دونیم و  هنوز درست کار کردن و کار درست کردن براش مهمه ،  با استفاده از روش های اصیل کشاورزی و زنبورداری، مراقب سلامتی ماست و سعی می کنه برای این تولید کمترین آسیب به طبیعت وارد بشه.
+                </p>
+            </div>
+        </div>
+        <div class="home__values_item--container item--2">
+            @*<img loading="lazy"class="home__values_icon" src="/assets/images/values/laboratory.png" />*@
+            <div class="home__values_item bg-white br-20">
+                @*<img loading="lazy"class="home__values_number" src="/assets/images/values/2.png" />*@
+                <div class="home__values_title--background">
+                    <p class="home__values_title">تایید اصالت محصول با آزمایش</p>
+                </div>
+                <p class="home__values_item-p text-black">
+                    گروه کنترل کیفی متخصص، محصولات رو نمونه‌برداری  و بررسی می‌کنه و در صورت لزوم به آزمایشگاه‌های تایید شده توسط سازمان استاندارد می‌فرسته. برای هر بار موجود شدن محصول هم آزمایش تکرار میشه.
+                </p>
+            </div>
+        </div>
+        <div class="home__values_item--container item--3">
+            @*<img loading="lazy"class="home__values_icon" src="/assets/images/values/price.png" />*@
+            <div class="home__values_item bg-white br-20">
+                @*<img loading="lazy"class="home__values_number" src="/assets/images/values/3.png" />*@
+                <div class="home__values_title--background">
+                    <p class="home__values_title">قیمت متناسب با کیفیت</p>
+                </div>
+                <p class="home__values_item-p text-black">
+                    قیمت گذاری بر اساس کیفیت انجام میشه تا کشاورزها و زنبوردارا تشویق به بهبود کیفیت بشن. مشتری، هم متناسب با نتیجه کنترل کیفی محصول، پول پرداخت می‌کنه و هم میدونه چقدر از این پول به کشاورز یا زنبوردار میرسه.
+                </p>
+            </div>
+        </div>
+        <div class="home__values_item--container item--4">
+            @*<img loading="lazy"class="home__values_icon" src="/assets/images/values/packing.png" />*@
+            <div class="home__values_item bg-white br-20">
+                @*<img loading="lazy"class="home__values_number" src="/assets/images/values/4.png" />*@
+                <div class="home__values_title--background">
+                    <p class="home__values_title">بسته‌بندی دوستدار طبیعت</p>
+                </div>
+                <p class="home__values_item-p text-black">
+                    برای بسته‌بندی سعی می‌کنیم تا حد ممکن از مواد قابل بازیافت و  رنگ کمتر استفاده کنیم. شما هم با سپردن این جعبه به بازیافت یا استفاده‌ی دوباره از اون می‌تونید در این تلاش همراه ما باشید.
+                </p>
+            </div>
+        </div>
+        <div class="home__values_item--container item--5">
+            @*<img loading="lazy"class="home__values_icon" src="/assets/images/values/shipping.png" />*@
+            <div class="home__values_item bg-white br-20 ">
+                @*<img loading="lazy"class="home__values_number" src="/assets/images/values/5.png" />*@
+                <div class="home__values_title--background">
+                    <p class="home__values_title">تحویل سفارش در محل</p>
+                </div>
+                <p class="home__values_item-p text-black">
+                    گیل هایپر، در کنار همه‌ی کسب و کارهای خرید آنلاین کمک می‌کنه به رفت و آمد و هزینه‌ی کمتر و نتیجه‌ش میشه آلودگی کمتری که از این طریق ایجاد میشه.
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<!-- icons -->
+@*<div class="container">
+	<div class="card bg-danger-gradient" style="max-height:600px">
+	<div class="card-body pb-3">
+	<h6 class="card-title"> </h6>
+	<div class="row">
+
+	<div class="slick-multiple">
+*@
+@*<h2 class="Text-white">پیشنهادات ویژه</h2>*@
+@*			<div class="slick-slide-item">
+	<div class="d-flex flex-column">
+	<div class="row">
+	<h2 class="Text-white centered-header">پیشنهادات ویژه</h2>
+	</div>
+	<div class="row ">
+	<img loading="lazy"src="/assets/media/src/spec.png" width="70px" style="width:75px">
+	</div>
+	<div class="row">
+	<span class="centered-header" style="font-size:56px">12:00</span>
+	</div>
+	</div>
+	</div>
+*@
+
+@*@await Component.InvokeAsync("TopSeggestion")*@
+
+@*			</div>
+
+	</div>
+
+	</div>
+	</div>
+	</div>*@
+<!-- speacial offers -->
+@if (@Model.First().SettingDto.SeggestActivation == true)
+{
+    <div class="container">
+        <div class="card bg-danger-gradient">
+            <div class="card-body">
+                <div class="row w-100">
+                    <div class="col-6 col-lg-2 col-md-2 col-sm-6">
+                        <h6 class="card-title bg-white br-20 text-center text-black">
+                            پیشنهادات ویژه
+                        </h6>
+                    </div>
+                    <div class="col-4">
+                        <a href="/Product/Shop" style="color:#fff">مشاهده همه</a>
+
+                    </div>
+
+                </div>
+                <div class="row">
+
+                    <div class="col-12 col-lg-2 col-md-3 col-sm-12 mobile-hidden">
+                        <div class="slick-slide-item m-1">
+                            <div class="product-list__card" style="background:transparent; -moz-box-shadow:none;height:310px;">
+                                <a href=""
+                                   class="product-list__card_a">
+                                    <img loading="lazy" class="product-list__card_img" style="height:165px;"
+                                         src="/assets/media/src/box.png" />
+                                </a>
+                                <div class="product-list__card--content">
+                                    <a class="p-1 d-block"
+                                       href="">
+                                        @*<h3 class="product-list__card_h3">پیشنهادات ویژه</h3>*@
+                                        <span>
+                                            <span>
+                                                <div class="app">
+                                                    <time id="countdown" style="font-size:28px;color:#fff">@Model.First().SettingDto.FinalTimer</time>
+                                                </div>
+                                            </span>
+                                            <span class="text-ceenter px-2 py-1 br-20 text-white">پیشنهاد ویژه</span>
+                                    </a>
+                                    <div class="product-list__card--detail justify-content-center tp-sg">
+                                        @*<span class="text-ceenter bg-primary-gradient px-5 py-1 br-20" style="font-size:14px "> ۲ روز</span>*@
+                                    </div>
+                                    @*     <div class="product-list__badge--container"></div>
+                                <div class="product-list__button-container">
+
+                                <p class="product-list__card_h3 h3--price h3--desktop">
+                                <span class="price_format">@item.Discount.ToNumeric()</span> تومان
+                                </p>
+                                </div>*@
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-12 col-lg-10 col-md-9 col-sm-12">
+                        <div class=" slick-multiple-special-7">
+
+
+                            @await Component.InvokeAsync("TopSeggestion")
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- products -->
+}
+<div class="container my-5 ">
+    <div class="card bg-warning-gradient p-5 mb-3">
+        <div class="row g-0">
+            <div class="col-md-4">
+                <div class="card-body" style="height:90%;">
+                    <div style="display:flex; flex-direction:column; justify-content:space-between;">
+                        <div>
+                            <h5 class="card-title text-black-50 title--bold">معرفی به سبک گیل هایپر</h5>
+                            <p class="card-text  text-black-50 barberry-weight">
+                                نام گیلان از کلمه گیل گرفته شده و به معنی سرزمین گیل است که از آن در اوستا به نام وارنا نام برده می شود
+                                زبان مردم گیلان زیبا و دلنشین گیلکی است و در بخشهایی از این سرزمین گویشهای تالشی و ترکی نیز رایج می باشد
+                                از ویژگیهای منحصر به فرد اصلی استان گیلان وجود تالاب انزلی است که از  نظر زیست محیطی، سیاحتی و اقتصادی دارای اهمیت ویژه ای می باشد
+                            </p>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <p class="card-text">
+                        <a href="/home/aboutgilhyper" class="text-body-secondary">مشاهده بیشتر </a>
+                    </p>
+                </div>
+            </div>
+            <div class="col-md-8">
+                @*<img loading="lazy"src="/assets/media/image/avatar.jpg"
+                class="img-fluid rounded-start w-100"
+                style="height: 350px"
+                alt="..." />*@
+                <div id="19405665801"><script type="text/JavaScript" src="https://www.aparat.com/embed/wGTBu?data[rnddiv]=19405665801&data[responsive]=yes"></script></div>
+                @*<style>.h_iframe-aparat_embed_frame{position:relative;}.h_iframe-aparat_embed_frame .ratio{display:block;width:100%;height:auto;}.h_iframe-aparat_embed_frame iframe{position:absolute;top:0;left:0;width:100%;height:100%;}</style><div class="h_iframe-aparat_embed_frame"><span style="display: block;padding-top: 57%"></span><iframe src="https://www.aparat.com/video/video/embed/videohash/ref47/vt/frame"  allowFullScreen="true" webkitallowfullscreen="true" mozallowfullscreen="true"></iframe></div>*@
+            </div>
+
+        </div>
+    </div>
+</div>
+<!-- introduction video -->
+
+<div class="container">
+    <div class="card">
+        <div class="card-body">
+            <div class="row w-100">
+                <div class="col-6 col-lg-2 col-md-2 col-sm-6">
+                    <h6 class="card-title bg-warning-gradient br-20 text-center">
+                        محصولات باصرفه تر
+                    </h6>
+                </div>
+                <div class="col-4">
+                    <a href="/Product/Shop">مشاهده همه</a>
+                </div>
+            </div>
+            <div class="responsive-slack slick-multiple">
+
+                @await Component.InvokeAsync("ChipestProduct")
+
+
+            </div>
+        </div>
+    </div>
+</div>
+<!-- products -->
+
+<div class="container">
+    <div class="card">
+        <div class="card-body">
+            <div class="row w-100">
+                <div class="col-6 col-lg-2 col-md-2 col-sm-6">
+                    <h6 class="card-title bg-warning-gradient br-20 text-center">
+                        جدیدترین محصولات
+                    </h6>
+                </div>
+                <div class="col-4">
+                    <a href="/Product/Shop">مشاهده همه</a>
+                </div>
+            </div>
+            <div class="responsive-slack slick-multiple">
+
+                @await Component.InvokeAsync("LatestProduct")
+
+
+            </div>
+        </div>
+    </div>
+</div>
+<!-- products -->
+
+<div class="container-fluid">
+    <div class="card">
+        <div class="card-body">
+            <div class="row w-100">
+                <div class="col-12 col-lg-6 col-md-12 col-sm--12">
+                    <a href="@Model.First().SettingDto.BottemRightImageUrl">
+                        <img loading="lazy" src="@Model.First().SettingDto.BottemRightImageLink" class="w-100" style="min-height:300px">
+                    </a>
+                </div>
+                <div class="col-12 col-lg-6 col-md-12 col-sm--12">
+                    <a href="@Model.First().SettingDto.BottemLeftImageUrl">
+                        <img loading="lazy" src="@Model.First().SettingDto.BottemLeftImageLink" class="w-100" style="min-height:300px">
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- products -->
+<div class="container my-5">
+    <div class="row mt-5">
+        <div class="col-12 col-lg col-md col-sm-12">
+            <h6 class="m-2 bg-white text-black br-20 text-center">
+                ضمانت اصالت کالا
+                <img loading="lazy" src="/assets/images/ic/orginal.png" style="height:100px">
+            </h6>
+        </div>
+        <div class="col-12 col-lg col-md col-sm-12">
+            <h6 class="m-2 bg-white text-black br-20 text-center">
+                تحویل اکسپرس
+                <img loading="lazy" src="/assets/images/ic//exress.png" style="height:100px">
+            </h6>
+        </div>
+        <div class="col-12 col-lg col-md col-sm-12">
+            <h6 class="m-2 bg-white text-black br-20 text-center">
+                پشتیبانی
+                <img loading="lazy" src="/assets/images/ic/Support.png" style="height:100px">
+            </h6>
+        </div>
+        <div class="col-12 col-lg col-md col-sm-12">
+            <h6 class="m-2 bg-white text-black br-20 text-center">
+                پرداخت امن
+                <img loading="lazy" src="/assets/images/ic/money.png" style="height:100px">
+            </h6>
+        </div>
+        <div class="col-12 col-lg col-md col-sm-12">
+            <h6 class="m-2 bg-white text-black br-20 text-center">
+                انتخاب زمان تحویل
+                <img loading="lazy" src="/assets/images/ic/time.png" style="height:100px">
+            </h6>
+        </div>
+    </div>
+</div>
+<!-- end of carousel -->
+@*<div class="container">
+	<div class="row justify-content-center text-center mt-5">
+	<h3 class="bg-info-gradient br-20">مشتریان ما</h3>
+	</div>
+	<div class="categories mb-5 p-5 bg-white br-20">
+	<div class="marquee mb-5" dir="ltr">
+	<ul class="marquee-content">
+	<li>
+	<a href="#">
+	<img loading="lazy"src="/assets/media/icons/bag-min-q2jrrojeaihmvl73irizu1y21it7ejeanmadobbn54.png"
+	alt="" />
+	<span>صنایع دستی </span>
+	</a>
+	</li>
+	<li>
+	<a href="#">
+	<img loading="lazy"src="/assets/media/icons/bag.png" alt="" />
+	<span>روغن </span>
+	</a>
+	</li>
+	<li>
+	<a href="#">
+	<img loading="lazy"src="/assets/media/icons/flour.png" alt="" />
+	<span>آرد برنج</span>
+	</a>
+	</li>
+	<li>
+	<a href="#">
+	<img loading="lazy"src="/assets/media/icons/rice.png" alt="" />
+	<span> برنج</span>
+	</a>
+	</li>
+	<li>
+	<a href="#">
+	<img loading="lazy"src="/assets/media/icons/tea.png" alt="" />
+	<span>چای</span>
+	</a>
+	</li>
+	</ul>
+	</div>
+	</div>
+	</div>*@
+
+<div class="container">
+    <div class="row justify-content-center text-center mt-5">
+        <h3 class="bg-info-gradient br-20">مشتریان ما</h3>
+    </div>
+    <div class="card" style="border:1px solid #d4d4d4">
+        <div class="card-body">
+            <div class="responsive-slack slick-multiple">
+
+                @if (Model.First().OurClient.Any())
+                {
+                    foreach (var item in Model.First().OurClient)
+                    {
+                        <div class="slick-slide-item m-1">
+                            <a href="#">
+                                <img loading="lazy" src="@item.ImageLink" alt="" style="width:100px; height:100px" />
+                                <span> @item.Name</span>
+                            </a>
+                        </div>
+                    }
+                }
+
+            </div>
+        </div>
+    </div>
+</div>
+<!-- blog -->
+<div class="container">
+    <div class="card bg-danger">
+        <div class="card-body ">
+            <div class="row w-100 justify-content-between">
+                <div class="col-4 col-lg-2 col-md-2 col-sm-6 justify-content-start">
+                    <h6 class="card-title bg-white br-20 text-center text-black " style="text-align:right">
+                        مقالات
+                    </h6>
+                </div>
+                <div class="col-3 justify-content-end text-align-left">
+                    <a class="text-white" style="text-align:left" href="/blog/blogList">مشاهده همه</a>
+                </div>
+            </div>
+            <div class="responsive-slack slick-multiple-special">
+                @await Component.InvokeAsync("Blogs")
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@*<div class="modal " id="modalPop" tabindex="-1" aria-labelledby="modalPopLabel" aria-hidden="false">
+	<div class="modal-dialog modal-dialog-centered">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h1 class="modal-title fs-5" id="exampleModalLabel">پیشنهاد ویژه</h1>
+				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			</div>
+			<div class="modal-body">
+				<img loading="lazy" src="~/assets/media/src/zeitoon.jpg" style="width:100%" />
+			</div>
+
+		</div>
+	</div>
+</div>*@
+@section Scripts{
+    <script>
+        var seconds = @Model.First().SettingDto.FinalTimer ;
+        debugger;
+        function secondPassed() {
+            debugger;
+            var minutes = Math.round((seconds - 30) / 60),
+                remainingSeconds = seconds % 60;
+
+            if (remainingSeconds < 10) {
+                remainingSeconds = "0" + remainingSeconds;
+            }
+
+            document.getElementById('countdown').innerHTML = minutes + ":" + remainingSeconds;
+            if (seconds == 0) {
+                clearInterval(countdownTimer);
+                document.getElementById('countdown').innerHTML = "00:00";
+            } else {
+                seconds--;
+            }
+        }
+        debugger;
+        var countdownTimer = setInterval('secondPassed()', 1000);
+    </script>
+    @*@if (TempData["FirstTime"] == null)
+{
+
+<script>
+	$(document).ready(function () {
+		$("#modalPop").modal("show");
+	});
+
+
+</script>
+}*@
+}

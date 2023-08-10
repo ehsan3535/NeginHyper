@@ -1,0 +1,157 @@
+﻿@using Secretary.Models;
+@model BlogDto
+
+<!-- BEGIN PAGE CONTENT -->
+<!-- BEGIN BREADCRUMB -->
+<div class="col-md-12">
+    <div class="breadcrumb-box border shadow">
+        <ul class="breadcrumb">
+            <li><a href="ShowWorker"> داشبورد</a></li>
+            <li><a href="ShowWorker">  افزودن مقاله</a></li>
+        </ul>
+        <div class="breadcrumb-left">
+                                        @DNTPersianUtils.Core.FriendlyPersianDateUtils.ToPersianDateTextify(DateTime.Now)
+            <i class="icon-calendar"></i>
+        </div><!-- /.breadcrumb-left -->
+    </div><!-- /.breadcrumb-box -->
+</div><!-- /.col-md-12 -->
+<!-- END BREADCRUMB -->
+<!-- START ADDWORKER -->
+<div class="col-lg-12">
+    <div class="portlet box border shadow">
+        <div class="portlet-heading">
+            <div class="portlet-title">
+
+
+                <h3 class="title">
+                    <i class="icon-shield"></i>
+                    افزودن مقاله
+                </h3>
+
+            </div><!-- /.portlet-title -->
+            <div class="buttons-box">
+                <!-- <a class="btn btn-sm btn-default btn-round btn-code" rel="tooltip" title="کدها" href="#">
+                    <i class="icon-arrow-left"></i><span>/</span><i class="icon-arrow-right"></i>
+                </a> -->
+                <div class="code-modal hide">
+                </div>
+                <a class="btn btn-sm btn-default btn-round btn-fullscreen" rel="tooltip" title="تمام صفحه" href="#">
+                    <i class="icon-size-fullscreen"></i>
+                </a>
+                <a class="btn btn-sm btn-default btn-round btn-collapse" rel="tooltip" title="کوچک کردن" href="#">
+                    <i class="icon-arrow-up"></i>
+                </a>
+            </div><!-- /.buttons-box -->
+        </div><!-- /.portlet-heading -->
+        <div class="portlet-body">
+
+            <form method="post" asp-action="Add_Edit_Blog" asp-controller="Blog" enctype="multipart/form-data">
+                @if (Model != null)
+                {
+                    @if (Model.Id != Guid.Empty)
+                    {
+                        <input type="text" value="@Model.Id" asp-for="Id" class="form-control" hidden>
+                    }
+                }
+                <div class="form-group">
+                    <label> عنوان :</label>
+                    <div class="input-group">
+                        <span class="input-group-addon">
+                            <i class="icon-user"></i>
+                        </span>
+                        <input type="text" asp-for="Title" class="form-control" placeholder="عنوان ">
+                    </div><!-- /.input-group -->
+                </div><!-- /.form-group -->
+                <div class="form-group">
+                    <label>دسته بندی</label>
+                    <div class="input-group">
+                        <span class="input-group-addon">
+                            <i class="icon-options"></i>
+                        </span>
+
+                        <select asp-for="CategoryId" class="form-select">
+                            @foreach (var item in Model.Categories)
+                            {
+                                <option value="@item.Id">@item.Code,@item.Name</option>
+                            }
+                        </select>
+                    </div><!-- /.input-group -->
+                </div><!-- /.form-group -->
+              
+                @if (Model != null)
+                {
+                    @if (Model.Id != null)
+                    {
+                    <div class="effect bottom-to-top-effect">
+                        <div class="info-hover">
+                        </div><!-- /.info-hover -->
+                        <img src="@Model.ImageLink" class="img-center img-responsive" alt="">
+                        <input type="text" asp-for="ImageLink" value="@Model.ImageLink" class="form-control file-input" hidden>
+                    </div>
+                    <!-- /.effect -->
+                    }
+                }
+                <div class="form-group relative">
+                    <input asp-for="Image" type="file" class="form-control">
+                    <label>آپلود فایل</label>
+                    <div class="input-group round">
+                        <input type="text" class="form-control file-input" placeholder="برای آپلود کلیک کنید" >
+                        <span class="input-group-btn">
+                            <button type="button" class="btn btn-info">
+                                <i class="icon-picture"></i>
+                                آپلود عکس
+                            </button>
+                        </span>
+                    </div><!-- /.input-group -->
+                    <div class="help-block"></div>
+                </div><!-- /.form-group -->
+                @if (Model.Description.HasValue())
+                {
+                    <textarea id="body" asp-for="Description">@Html.Raw(Model.Description)</textarea>
+                }
+                else
+                {
+                    <textarea id="body" asp-for="Description"></textarea>
+                }       
+                <div class="row">
+                    <button type="submit" class="btn btn-info btn-round btn-block">
+                        <i class="icon-check"></i>
+                        ثبت
+                    </button>
+                </div><!--end row-->
+            </form>
+        </div><!-- /.portlet-body -->
+    </div><!-- /.portlet -->
+    <!-- END ADDWORKER -->
+</div><!-- /.row -->
+    </div>
+</div>
+<!-- /#page-content -->
+<!-- END PAGE CONTENT -->
+<!-- BEGIN PAGE JAVASCRIPT -->
+@section Scripts{
+   
+<script src="/ckeditor5/build/ckeditor.js"></script>
+<script>
+    ClassicEditor
+        .create(document.querySelector('#body'),
+            {
+                ckfinder: {
+                    // Upload the images to the server using the CKFinder QuickUpload command.
+                    uploadUrl: '/Blog/SaveImage'
+                },
+                htmlSupport: {
+                    allow: [
+                        {
+                            name: /.*/,
+                            attributes: true,
+                            classes: true,
+                            styles: true
+                        }
+                    ]
+                }
+            })
+        .catch(error => { console.error(error); });
+</script>
+<!-- END PAGE JAVASCRIPT -->
+                }

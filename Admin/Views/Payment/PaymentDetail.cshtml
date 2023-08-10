@@ -1,0 +1,128 @@
+﻿@using Client.Models;
+
+@model UserDto
+<!-- Hero Start -->
+<section class="bg-half bg-light d-table w-100">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-12 text-center">
+                <div class="page-next-level">
+                    <h4 class="title"> جزئیات پرداخت  </h4>
+                    <div class="page-next">
+                        <nav aria-label="breadcrumb" class="d-inline-block">
+                            <ul class="breadcrumb bg-white rounded shadow mb-0">
+                                <li class="breadcrumb-item"><a href="/home/index"> فروشگاه</a></li>
+                                <li class="breadcrumb-item"><a href="/home/index">پرداخت </a></li>
+                                <li class="breadcrumb-item active" aria-current="page"> جزئیات پرداخت </li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div><!--end col-->
+        </div><!--end row-->
+    </div> <!--end container-->
+</section><!--end section-->
+<div class="position-relative">
+    <div class="shape overflow-hidden text-white">
+        <svg viewBox="0 0 2880 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M0 48H1437.5H2880V0H2160C1442.5 52 720 0 720 0H0V48Z" fill="currentColor"></path>
+        </svg>
+    </div>
+</div>
+<!-- Hero End -->
+<!-- Start -->
+<section class="section">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-7 col-md-6">
+                <div class="rounded shadow-lg p-4">
+                    <h5 class="mb-0"> آدرس و مشخصات :</h5>
+
+                    <form class="mt-4" method="Post" asp-action="EditUser" asp-controller="auth">
+                        <input asp-for="RuturnUrl" value="ProductPay" type="text" class="form-control" hidden>
+                        <input asp-for="ShopcardId" value="@Model.ShopcardId" type="text" class="form-control" hidden>
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="mb-3">
+                                    <label class="form-label">نام شما <span class="text-danger">*</span></label>
+                                    <input asp-for="Fname" id="firstname" type="text" class="form-control" placeholder="نام  :">
+                                </div>
+                            </div><!--end col-->
+                            <div class="col-12">
+                                <div class="mb-3">
+                                    <label class="form-label">نام خانوادگی  <span class="text-danger">*</span></label>
+                                    <input asp-for="Lname" id="lastname" type="text" class="form-control" placeholder="نام خانوادگی :">
+                                </div>
+                            </div><!--end col-->
+
+                            <div class="col-12">
+                                <div class="mb-3">
+                                    <label class="form-label">آدرس دقیق <span class="text-danger">*</span></label>
+                                    <input type="text" asp-for="Address" id="address1" class="form-control" placeholder="آدرس دقیق :">
+                                </div>
+                            </div><!--end col-->
+
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label class="form-label">کد پستی  <span class="text-danger">*</span></label>
+                                    <input type="text" asp-for="PostalCode" id="postcode" class="form-control" placeholder="کد پستی :">
+                                </div>
+                            </div><!--end col-->
+
+                            <div class="col-12">
+                                <div class="mb-3">
+                                    <label class="form-label">ایمیل شما <span class="text-danger">*</span></label>
+                                    <input asp-for="Email" id="email" type="email" class="form-control" placeholder="ایمیل شما :">
+                                </div>
+                            </div><!--end col-->
+                        </div><!--end row-->
+                        <div class="mt-4 pt-2">
+                            <div class="form-group">
+                                <button type="submit" style="background-color:#4e8f97;" class="btn btn_apply w-100">پرداخت </button>
+                            </div>
+                        </div>
+                    </form><!--end form-->
+                </div>
+
+            </div><!--end col-->
+
+            <div class="col-lg-5 col-md-6 mt-4 mt-sm-0 pt-2 pt-sm-0">
+                <div class="rounded shadow-lg p-4 sticky-bar">
+                    <div class="d-flex mb-4 justify-content-between">
+                        <h5>@Model.ShopCardDetailCount آیتم </h5>
+                        <a href="/shopcard/shopcard_detail" class="text-muted h6">نمایش جزئیات</a>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table table-center table-padding mb-0">
+                            <tbody>
+                                <tr>
+                                    <td class="h6 border-0">مجموع </td>
+                                    <td class="text-end fw-bold border-0">@Model.Price.ToNumeric() تومان</td>
+                                </tr>
+                                <tr>
+                                    <td class="h6">هزینه حمل و نقل</td>
+                                    @if (Model.Price >= 500000)
+                                    {
+                                        <td class="text-end fw-bold">رایگان</td>
+                                    }
+                                    else
+                                    {
+                                        <td class="text-end fw-bold">@Model.PostPrice.ToNumeric() تومان</td>
+                                    }
+                                </tr>
+                              
+                                <tr class="bg-light">
+                                    <td class="h5 fw-bold">مجموع </td>
+                                    <td class="text-end text-primary h4 fw-bold">@Model.TotalPrice.ToNumeric() تومان</td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+
+                    </div>
+                </div>
+            </div>
+        </div><!--end row-->
+    </div><!--end container-->
+</section><!--end section-->
+<!-- End -->

@@ -1,0 +1,41 @@
+﻿@using Client.Models;
+@model List<BlogDto>
+
+@if (Model.Any())
+{
+    @foreach (var item in Model)
+    {
+
+        <div class="slick-slide-item m-1" >
+            <div class="card" style="height:420px;border:1px solid #d4d4d4"  >
+                <div class="card-header ">@item.Title</div>
+                @*<div class="card-header ">@item.Title</div>*@
+                <div class="card-body" style="height:350px;">
+                    <figure>
+                        <img loading="lazy" src="@item.ImageLink" class="card-img-top" alt="image" style="height:150px;">
+                    </figure>
+                    @if (item.Description.Length > 100)
+                    {
+
+                        <span class="claimedRight">@item.Description.Substring(0,100)</span>
+                    }
+                    else
+                    {
+                        <span class="claimedRight" >@item.Description</span>
+
+                    }
+                
+                </div>
+                <div class="card-footer">
+                        <div class="row">
+                        <a href="/blog/blogDetail?BlogId=@item.Id" class="btn bg-danger-gradient">بیشتر بخوانید</a>
+                        <span class="btn bg-info-gradient mx-2 br-20 align-items-center" style="width: fit-content;">
+                            <i class="fa fa-eye m-1"></i>
+                            @item.SiteView
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+}

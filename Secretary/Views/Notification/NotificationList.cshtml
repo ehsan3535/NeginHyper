@@ -1,0 +1,152 @@
+﻿@using Secretary.Models;
+@model List<NotificationDto>
+
+@section Style{
+    <link href="~/assets_Admin/plugins/noty/css/flat.css" rel="stylesheet">
+}
+<div class="row">
+
+    <div class="col-lg-12">
+        <div class="portlet box border shadow">
+            <div class="portlet-heading">
+                <div class="portlet-title">
+                    <h3 class="title">
+                        <i class="icon-basket-loaded fa-flip-horizontal"></i>
+                        اعلانات
+                    </h3>
+                </div><!-- /.portlet-title -->
+                <div class="buttons-box">
+                    <a class="btn btn-sm btn-default btn-round btn-code" rel="tooltip" title="کدها" href="#">
+                        <i class="icon-arrow-left"></i><span>/</span><i class="icon-arrow-right"></i>
+                    </a>
+                    <div class="code-modal hide">
+                    </div>
+                    <a class="btn btn-sm btn-default btn-round btn-fullscreen" rel="tooltip" title="تمام صفحه" href="#">
+                        <i class="icon-size-fullscreen"></i>
+                    </a>
+                    <a class="btn btn-sm btn-default btn-round btn-collapse" rel="tooltip" title="کوچک کردن" href="#">
+                        <i class="icon-arrow-up"></i>
+                    </a>
+                </div><!-- /.buttons-box -->
+            </div><!-- /.portlet-heading -->
+            <div class="portlet-body">
+                <div class="row">
+                    <div class="col-md-4 col-12 m-b-20">
+                        <a class="btn btn-success btn-round" href="/Notification/Add_Edit_Notification">
+                            <i class="icon-plus"></i>
+                            افزودن
+                        </a>
+                      
+                    </div><!-- /.col-md-4 -->
+                   
+                    <div class="col-md-4 col-12 m-b-20">
+                        <select class="form-select round">
+                            <option value="0">مرتب سازی بر اساس تاریخ</option>
+                            <option value="1">مرتب سازی بر اساس محصول</option>
+                            <option value="2">مرتب سازی بر اساس مبلغ</option>
+                            <option value="3">مرتب سازی بر اساس وضعیت</option>
+                        </select>
+                    </div><!-- /.col-md-4 -->
+                </div><!-- /.row -->
+                <div class="table-responsive">
+                    <table class="table table-bordered table-striped table-hover">
+                        <thead>
+                            <tr>
+                                <th>شماره</th>
+                                <th>نام کاربر </th>
+                                <th>عنوان </th>
+                                <th>تاریخ</th>
+                                <th>مدیریت</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @{
+                                var i = 0;
+                            }
+                            @if (Model.Any())
+                            {
+                                
+                            @foreach (var item in Model)
+                            {
+                                i++;
+                                <tr>
+                                    <td>@i</td>
+                                    <td>@item.UserFname @item.UserLname</td>
+                                    <td>@item.Topic </td>
+                                    <td>@item.DateTimes.ToLongPersianDateTimeString()</td>
+                                    <td>
+
+                                            <a href="/Notification/Add_Edit_Notification?NotificationId=@item.Id" class="btn btn-success btn-round">
+                                            <i class="icon-eyeglass"></i>
+                                            مشاهده
+                                        </a>
+                                        <a href="/Notification/Add_Edit_Notification?NotificationId=@item.Id" class="btn btn-info btn-round">
+                                            <i class="icon-note"></i>
+                                            ویرایش
+                                        </a> <a href="/Notification/DeleteNotification?NotificationId=@item.Id" class="btn btn-danger btn-round btn-noty-with-buttons">
+                                            <i class="icon-trash"></i>
+                                            حذف
+                                        </a>
+                                    </td>
+                                </tr>
+                                }
+                            }
+                            else
+                            {
+                                <p>لیست خالی است</p>
+                            }
+                        </tbody>
+                    </table>
+                </div><!-- /.table-responsive -->
+                <div class="text-center">
+                    <ul class="pagination round">
+                        <li>
+                            <a href="#">
+                                <i class="icon-control-end"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <i class="icon-arrow-right"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">1</a>
+                        </li>
+                        <li>
+                            <span class="active" href="#">2</span>
+                        </li>
+                        <li>
+                            <a href="#">3</a>
+                        </li>
+                        <li>
+                            <a href="#">4</a>
+                        </li>
+                        <li>
+                            <a href="#">5</a>
+                        </li>
+                        <li>
+                            <a href="#">6</a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <i class="icon-arrow-left"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <i class="icon-control-start"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </div><!-- /.text-center -->
+            </div><!-- /.portlet-body -->
+        </div><!-- /.portlet -->
+    </div><!-- /.col-lg-12 -->
+
+
+</div><!-- /.row -->
+@section Scripts{
+    <script src="~/assets_Admin/plugins/noty/js/noty/packaged/jquery.noty.packaged.min.js"></script>
+    <script src="~/assets_Admin/js/pages/noty.js"></script>
+                }

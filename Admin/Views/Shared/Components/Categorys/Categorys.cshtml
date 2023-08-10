@@ -1,0 +1,61 @@
+﻿@using Client.Models;
+@model List<ProductCategoryDto>
+
+@if (Model.Any())
+{
+
+
+    <div class="categories my-5 p-5">
+        <div class="row w-100 justify-content-center flex__center-align flex-align">
+            @foreach (var item in Model)
+            {
+                <div class="col-5 col-lg-2 col-md-2 col-sm-5">
+                    <a href="/Product/Shop?CategoryID=@item.Id">
+                        <img src="@item.ImageUrl"
+                             alt="" />
+                        <span>@item.Name</span>
+                    </a>
+                </div>
+            }
+
+        </div>
+        <!-- <div class="marquee my-5" dir="ltr">
+          <ul class="marquee-content">
+            <li>
+              <a href="#">
+                <img
+                  src="/assets/media/icons/bag-min-q2jrrojeaihmvl73irizu1y21it7ejeanmadobbn54.png"
+                  alt=""
+                />
+                <span>صنایع دستی </span>
+              </a>
+            </li>
+            <li>
+              <a href="#">
+                <img src="/assets/media/icons/bag.png" alt="" />
+                <span>روغن </span>
+              </a>
+            </li>
+            <li>
+              <a href="#">
+                <img src="/assets/media/icons/flour.png" alt="" />
+                <span>آرد برنج</span>
+              </a>
+            </li>
+            <li>
+              <a href="#">
+                <img src="/assets/media/icons/rice.png" alt="" />
+                <span> برنج</span>
+              </a>
+            </li>
+            <li>
+              <a href="#">
+                <img src="/assets/media/icons/tea.png" alt="" />
+                <span>چای</span>
+              </a>
+            </li>
+          </ul>
+        </div> -->
+    </div>
+    <br />
+}

@@ -1,0 +1,70 @@
+﻿@using Client.Models.ProductDto;
+@model List<ProductDto>
+
+@if (Model.Any())
+{
+
+
+	@foreach (var item in Model)
+	{
+
+		<div class="slick-slide-item m-1">
+			<div class="product-list__card">
+
+				<a href="/product/ProductDetail_User?id=@item.Id" class="product-list__card_a"><img loading="lazy" class="product-list__card_img" src="@item.ImageCoverUrl" /></a>
+				<div class="product-list__card--content">
+					<a class="p-1 d-block" href="/product/ProductDetail_User?id=@item.Id">
+						<h3 class="product-list__card_h3">@item.Name</h3>
+					</a>
+					<div class="product-list__card--detail justify-content-center">
+						<span class="text-ceenter bg-primary-gradient px-2 py-1 br-20">درجه @item.darage</span>
+					</div>
+
+					<div class="product-list__button-container">
+						@if (item.Count > 0)
+						{
+							<button type="button"
+						class="product-list__card_button bg-success add-to-cart"
+						data-name="برنج دورهمی  از محمد هادی غلامی"
+						data-price="1180000"
+						data-product="1283"
+						data-type="1"
+						onclick="shopShopCard('@item.Id')"
+						name="">
+								<i class="fa fa-plus " style="font-size: large;"></i>
+							</button>
+							      <p class="product-list__card_h3 h3--price h3--desktop">
+                                    @if(item.Discount != item.Price)
+                                    {
+                                    <span class="price_format" style="text-decoration:line-through">@item.Price.ToNumeric() تومان</span> 
+                                        
+                                    }
+                                    <span class="price_format">@item.Discount.ToNumeric()</span>  تومان
+                            </p>
+						}else
+									{
+											<button type="button"
+									class="product-list__card_button bg-success add-to-cart disabled"
+									style="font-size:14px; background:grey !important; border:none!important"
+									data-name="برنج دورهمی  از محمد هادی غلامی"
+									data-price="1180000"
+									data-product="1283"
+									data-type="1"
+									disabled
+									name="">
+									اتمام
+										</button>
+											<p class="product-list__card_h3 h3--price h3--desktop">
+							<span class="price_format">ناموجود</span> 
+						</p>
+									}
+
+
+					
+					</div>
+				</div>
+			</div>
+		</div>
+
+	}
+}

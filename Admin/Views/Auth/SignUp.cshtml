@@ -1,0 +1,118 @@
+﻿@using Client.Models.Dtos;
+@model SignUpDto
+@section Styles{
+    <style>
+        body {
+            background: #fff;
+        }
+    </style>
+}
+     <nav dir="rtl" style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='%236c757d'/%3E%3C/svg%3E&#34;);" aria-label="breadcrumb">
+        <ol class="breadcrumb rtl">
+            <li class="breadcrumb-item"><a href="/home/index">خانه</a></li>
+            <li class="breadcrumb-item active" aria-current="page">عضویت</li>
+        </ol>
+    </nav>
+    <div class="row justify-content-center w-100">
+        <div class="col-12">
+            <div class="site-login">
+                <h1 class="centered-header">عضویت در سایت</h1>
+
+                <div class="clearfix">
+                    <div class="row justify-content-center">
+                        <div class="col-lg-6 col-sm-8 col-lg-push-3 col-sm-push-2 m-t-30">
+                            <div class="row">
+                                <form id="login-form" method="post" asp-action="SignUp" asp-controller="auth">
+                                    <div class="form-group rtl field-loginform-mobile required">
+                                        <label class="control-label" for="loginform-mobile">نام</label>
+                                        <input type="text"
+                                        autocomplete="off"
+                                               id="loginform-mobile"
+                                               class="form-control py-4"
+                                               asp-for="FName"
+                                               autofocus
+                                               aria-required="true" />
+
+                                        <p class="help-block help-block-error"></p>
+                                    </div>
+                                    <div class="form-group rtl field-loginform-mobile required">
+                                        <label class="control-label" for="loginform-mobile">نام خانوادگی</label>
+                                        <input type="text"
+                                        autocomplete="off"
+                                               id="loginform-mobile"
+                                               class="form-control py-4"
+                                               asp-for="LName"
+                                               autofocus
+                                               aria-required="true" />
+
+                                        <p class="help-block help-block-error"></p>
+                                    </div>
+                                    <div class="form-group rtl field-loginform-mobile required">
+                                        <label class="control-label" for="loginform-mobile">شماره موبایل</label>
+                                        <input type="text"
+                                        autocomplete="off"
+                                               id="loginform-mobile"
+                                               class="form-control py-4"
+                                               asp-for="PhoneNumber"
+                                               autofocus
+                                               aria-required="true" />
+                                        <span asp-validation-for="PhoneNumber" style="color:red"></span>
+
+                                        <p class="help-block help-block-error"></p>
+                                    </div>
+                                    <div class="form-group rtl field-loginform-password required">
+                                        <label class="control-label" for="loginform-password">رمز عبور</label>
+                                        <input type="password"
+                                        autocomplete="off"
+                                               id="loginform-password"
+                                               class="form-control py-4"
+                                               asp-for="Password"
+                                               aria-required="true" />
+                                        <span asp-validation-for="Password" style="color:red"></span>
+                                    </div>
+
+                                    <div class="form-group rtl field-loginform-password required">
+                                        <label class="control-label" for="loginform-password">تکرار رمز عبور</label>
+                                        <input type="password"
+                                        autocomplete="off"
+                                               class="form-control py-4"
+                                               asp-for="PassWordConfirmation"
+                                               aria-required="true" />
+                                        <span asp-validation-for="PassWordConfirmation" style="color:red"></span>
+
+
+                                        <p class="help-block help-block-error"></p>
+                                    </div>
+                                    <div class="form-group field-loginform-rememberme">
+                                        <div class="checkbox">
+                                            <label for="loginform-rememberme">
+                                                <input type="hidden"
+                                                       name="LoginForm[rememberMe]"
+                                                       value="0" /><input type="checkbox"
+                                                                          id="loginform-rememberme"
+                                                                          name="LoginForm[rememberMe]"
+                                                                          value="1"
+                                                                          checked />
+                                                مرا به خاطر بسپار
+                                            </label>
+                                            <p class="help-block help-block-error"></p>
+                                        </div>
+                                    </div>
+                                   
+
+                                    <div class="form-group text-center">
+                                        <button type="submit"
+                                                class="btn bg-success "
+                                                name="login-button">
+                                            ثبت نام
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    

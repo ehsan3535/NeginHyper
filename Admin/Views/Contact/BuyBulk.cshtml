@@ -1,0 +1,76 @@
+﻿@using Client.Models;
+@model BuyBulkDto
+
+<main>
+    <section class="whole__section section--one">
+        <div class="whole__div--text">
+            <h3 class="whole__h3">فروش عمده محصولات گیل هایپر</h3>
+            <p class="whole__p">اینجا می‌تونید درخواست سفارش عمده یا جعبه‌های هدیه با قابلیت شخصی‌سازی با لوگوی سازمانتون بدید.</p>
+            <button class="whole__a default__button button--xl" data-bs-toggle="modal" data-bs-target="#modal-group" style="cursor:pointer">ثبت سفارش</button>
+        </div>
+        <div class="background-image__div"></div>
+    </section>
+
+
+    <div class="modal" id="modal-group" tabindex="-1" aria-labelledby="modal-groupLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-scrollable modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content">
+
+
+
+                <form method="post" asp-action="BuyBulk">
+                    <div class="modal-body w-100">
+
+                        <div class="flex-column align-items-center justify-content-center w-100">
+                            <h2 class="centered-header">
+                                لطفا شماره‌ی تماس‌تون رو قرار بدید تا باهاتون تماس بگیریم
+                            </h2>
+                            <br>
+
+                            <div class="row w-100 justify-content-center">
+
+                                <div class="col-6">
+                                    <div class="form-group field-loginform-password required">
+                                        <label class="control-label required" for="loginform-password"> نام و نام خانوادگی گیرنده</label>
+                                        <input type="text"
+                                               asp-for="Name"
+                                               id=""
+                                               class="form-control py-4 w-100"
+                                               aria-required="true" />
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row w-100 justify-content-center">
+
+                                <div class="col-6">
+                                    <div class="form-group field-loginform-password required">
+                                        <label class="control-label required" for="loginform-password">شماره تماس</label>
+                                        <input type="text"
+                                               asp-for="PhoneNumber"
+                                               id=""
+                                               class="form-control py-4 w-100"
+                                               aria-required="true" />
+                                    </div>
+                                </div>
+                            </div>
+
+                            <p class="help-block help-block-error"></p>
+                        </div>
+                    </div>
+
+                    <div class="modal-footer w-100">
+                        <div class="row w-100 justify-content-center">
+                            <div class="col-6">
+                                <button type="submit" class="whole__a default__button button--xl" style="text-align:center">با من تماس بگیر  </button>
+                            </div>
+                        </div>
+
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+
+</main>

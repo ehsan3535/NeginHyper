@@ -1,0 +1,390 @@
+﻿@using Secretary.Models;
+@model SettingDto
+
+
+
+@section Style{
+    <link href="~/assets/plugins/persian-datepicker/css/persian-datepicker.min.css" rel="stylesheet">
+    <link href="~/assets/plugins/persian-datepicker/css/persian-datepicker.min.css" rel="stylesheet">
+    <link href="~/assets/plugins/select2/dist/css/select2.min.css" rel="stylesheet">
+    <link href="~/assets/plugins/kamadatepicker/kamadatepicker.min.css" rel="stylesheet">
+}
+
+
+
+<!-- BEGIN PAGE CONTENT -->
+<!-- BEGIN BREADCRUMB -->
+<div class="col-md-12">
+    <div class="breadcrumb-box border shadow">
+        <ul class="breadcrumb">
+            <li><a href="ShowWorker"> سفارشات</a></li>
+            <li><a href="ShowWorker">سفارشات جدید </a></li>
+        </ul>
+        <div class="breadcrumb-left">
+            @DNTPersianUtils.Core.FriendlyPersianDateUtils.ToPersianDateTextify(DateTime.Now)
+            <i class="icon-calendar"></i>
+        </div><!-- /.breadcrumb-left -->
+    </div><!-- /.breadcrumb-box -->
+</div><!-- /.col-md-12 -->
+<!-- END BREADCRUMB -->
+<!-- START ADDWORKER -->
+<div class="col-lg-12">
+    <div class="portlet box border shadow">
+        <div class="portlet-heading">
+            <div class="portlet-title">
+
+                @if (Model != null)
+                {
+                    @if (Model.Id != null)
+                    {
+                        <h3 class="title">
+                            <i class="icon-shield"></i>
+                            ویرایش تنظیمات
+                        </h3>
+                    }
+                }
+                else
+                {
+                    <h3 class="title">
+                        <i class="icon-shield"></i>
+                        افزودن تنظیمات
+                    </h3>
+                }
+            </div><!-- /.portlet-title -->
+            <div class="buttons-box">
+                <!-- <a class="btn btn-sm btn-default btn-round btn-code" rel="tooltip" title="کدها" href="#">
+                    <i class="icon-arrow-left"></i><span>/</span><i class="icon-arrow-right"></i>
+                </a> -->
+                <div class="code-modal hide">
+                </div>
+                <a class="btn btn-sm btn-default btn-round btn-fullscreen" rel="tooltip" title="تمام صفحه" href="#">
+                    <i class="icon-size-fullscreen"></i>
+                </a>
+                <a class="btn btn-sm btn-default btn-round btn-collapse" rel="tooltip" title="کوچک کردن" href="#">
+                    <i class="icon-arrow-up"></i>
+                </a>
+            </div><!-- /.buttons-box -->
+        </div><!-- /.portlet-heading -->
+        <div class="portlet-body">
+
+            <form method="Post" asp-action="Setting" asp-controller="Setting" enctype="multipart/form-data">
+                @if (Model != null)
+                {
+                    if (Model.Id != Guid.Empty)
+                    {
+                        <input type="text" value="@Model.Id" asp-for="Id" class="form-control" hidden>
+                    }
+                }
+                <div class="form-group">
+                    <label>MerchantId:</label>
+                    <div class="input-group">
+                        <span class="input-group-addon">
+                            <i class="icon-user"></i>
+                        </span>
+                        <input type="text" asp-for="MerchantId" class="form-control" placeholder="MerchantId">
+                    </div><!-- /.input-group -->
+                </div><!-- /.form-group -->
+                <div class="form-group">
+                    <label>هزینه ی اشتراک: </label>
+                    <div class="input-group">
+                        <span class="input-group-addon">
+                            <i class="icon-user"></i>
+                        </span>
+                        <input type="text" asp-for="JoinCost" class="form-control" placeholder="هزینه اشتراک ">
+                    </div><!-- /.input-group -->
+                </div><!-- /.form-group -->
+                <div class="form-group">
+                    <label>لینک تائیدیه: </label>
+                    <div class="input-group">
+                        <span class="input-group-addon">
+                            <i class="icon-key"></i>
+                        </span>
+                        <input type="text" asp-for="VerifyLink" class="form-control" placeholder="لینک تائیدیه">
+                    </div><!-- /.input-group -->
+                </div><!-- /.form-group -->
+                <div class="form-group">
+                    <label> هزینه حمل و نقل (تومان): </label>
+                    <div class="input-group">
+                        <span class="input-group-addon">
+                            <i class="icon-key"></i>
+                        </span>
+                        <input type="number" asp-for="PostPrice" class="form-control" placeholder="هزینه پست">
+                    </div><!-- /.input-group -->
+                </div><!-- /.form-group -->
+
+                <hr />
+                <h1> شماره های ادمین</h1>
+                <hr />
+                <div class="form-group">
+                    <label>شماره ادمین 1: </label>
+                    <div class="input-group">
+                        <span class="input-group-addon">
+                            <i class="icon-key"></i>
+                        </span>
+                        <input type="text" asp-for="PHoneNumber1" class="form-control" placeholder="تلفن همراه">
+                    </div><!-- /.input-group -->
+                </div><!-- /.form-group -->
+                <div class="form-group">
+                    <label> شماره ادمین 2: </label>
+                    <div class="input-group">
+                        <span class="input-group-addon">
+                            <i class="icon-key"></i>
+                        </span>
+                        <input type="text" asp-for="PHoneNumber2" class="form-control" placeholder="تلفن همراه">
+                    </div><!-- /.input-group -->
+                </div><!-- /.form-group -->
+
+                <hr />
+                <h1>عکس بنر ها</h1>
+                <hr />
+                @if (Model != null)
+                {
+                    <div class="effect bottom-to-top-effect">
+                        <div class="info-hover">
+                        </div><!-- /.info-hover -->
+                        <img src="@Model.TopImageLink1" class="img-center img-responsive" alt="">
+                    </div>
+                }
+                <div class="form-group relative">
+                    <input asp-for="TopImageFile1" type="file" class="form-control">
+                    <label> آپلود عکس بنر اول بالای صفحه </label>
+                    <div class="input-group round">
+                        <input type="text" class="form-control file-input" placeholder="برای آپلود کلیک کنید">
+                        <span class="input-group-btn">
+                            <button type="button" class="btn btn-info">
+                                <i class="icon-picture"></i>
+                                آپلود عکس  
+                            </button>
+                        </span>
+                    </div><!-- /.input-group -->
+                    <div class="help-block"></div>
+                </div><!-- /.form-group -->
+                <div class="form-group">
+                    <label> لینک کلیک بر عکس  : </label>
+                    <div class="input-group">
+                        <span class="input-group-addon">
+                            <i class="icon-user"></i>
+                        </span>
+                        <input type="text" asp-for="TopImageUrl1" class="form-control" placeholder="لینک کلیک بر عکس">
+                    </div><!-- /.input-group -->
+                </div><!-- /.form-group -->
+                <hr />
+                <br />
+
+                @if (Model != null)
+                {
+                    <div class="effect bottom-to-top-effect">
+                        <div class="info-hover">
+                        </div><!-- /.info-hover -->
+                        <img src="@Model.TopImageLink2" class="img-center img-responsive" alt="">
+                    </div>
+                }
+                <div class="form-group relative">
+                    <input asp-for="TopImageFile2" type="file" class="form-control">
+                    <label> آپلود عکس بنر دوم بالای صفحه </label>
+                    <div class="input-group round">
+                        <input type="text" class="form-control file-input" placeholder="برای آپلود کلیک کنید">
+                        <span class="input-group-btn">
+                            <button type="button" class="btn btn-info">
+                                <i class="icon-picture"></i>
+                                آپلود عکس
+                            </button>
+                        </span>
+                    </div><!-- /.input-group -->
+                    <div class="help-block"></div>
+                </div><!-- /.form-group -->
+                <div class="form-group">
+                    <label> لینک کلیک بر عکس  : </label>
+                    <div class="input-group">
+                        <span class="input-group-addon">
+                            <i class="icon-user"></i>
+                        </span>
+                        <input type="text" asp-for="TopImageUrl2" class="form-control" placeholder="لینک کلیک بر عکس">
+                    </div><!-- /.input-group -->
+                </div><!-- /.form-group -->
+                <hr />
+                <br />
+
+                @if (Model != null)
+                {
+                    <div class="effect bottom-to-top-effect">
+                        <div class="info-hover">
+                        </div><!-- /.info-hover -->
+                        <img src="@Model.TopImageLink3" class="img-center img-responsive" alt="">
+                    </div>
+                }
+                <div class="form-group relative">
+                    <input asp-for="TopImageFile3" type="file" class="form-control">
+                    <label> آپلود عکس بنر سوم بالای صفحه </label>
+                    <div class="input-group round">
+                        <input type="text" class="form-control file-input" placeholder="برای آپلود کلیک کنید">
+                        <span class="input-group-btn">
+                            <button type="button" class="btn btn-info">
+                                <i class="icon-picture"></i>
+                                آپلود عکس
+                            </button>
+                        </span>
+                    </div><!-- /.input-group -->
+                    <div class="help-block"></div>
+                </div><!-- /.form-group -->
+                <div class="form-group">
+                    <label> لینک کلیک بر عکس  : </label>
+                    <div class="input-group">
+                        <span class="input-group-addon">
+                            <i class="icon-user"></i>
+                        </span>
+                        <input type="text" asp-for="TopImageUrl3" class="form-control" placeholder="لینک کلیک بر عکس">
+                    </div><!-- /.input-group -->
+                </div><!-- /.form-group -->
+                <hr />
+                <br />
+
+                @if (Model != null)
+                {
+                    <div class="effect bottom-to-top-effect">
+                        <div class="info-hover">
+                        </div><!-- /.info-hover -->
+                        <img src="@Model.BottemRightImageLink" class="img-center img-responsive" alt="">
+                    </div>
+                }
+                <div class="form-group relative">
+                    <input asp-for="BottemRightImageFile" type="file" class="form-control">
+                    <label> آپلود عکس بنر پایین راست صفحه </label>
+                    <div class="input-group round">
+                        <input type="text" class="form-control file-input" placeholder="برای آپلود کلیک کنید">
+                        <span class="input-group-btn">
+                            <button type="button" class="btn btn-info">
+                                <i class="icon-picture"></i>
+                                آپلود عکس
+                            </button>
+                        </span>
+                    </div><!-- /.input-group -->
+                    <div class="help-block"></div>
+                </div><!-- /.form-group -->
+                <div class="form-group">
+                    <label> لینک کلیک بر عکس  : </label>
+                    <div class="input-group">
+                        <span class="input-group-addon">
+                            <i class="icon-user"></i>
+                        </span>
+                        <input type="text" asp-for="BottemRightImageUrl" class="form-control" placeholder="لینک کلیک بر عکس">
+                    </div><!-- /.input-group -->
+                </div><!-- /.form-group -->
+                <hr />
+                <br />
+
+                  @if (Model != null)
+                {
+                    <div class="effect bottom-to-top-effect">
+                        <div class="info-hover">
+                        </div><!-- /.info-hover -->
+                        <img src="@Model.BottemLeftImageLink" class="img-center img-responsive" alt="">
+                    </div>
+                }
+                <div class="form-group relative">
+                    <input asp-for="BottemLeftImageFile" type="file" class="form-control">
+                    <label> آپلود عکس بنر پایین چپ صفحه </label>
+                    <div class="input-group round">
+                        <input type="text" class="form-control file-input" placeholder="برای آپلود کلیک کنید">
+                        <span class="input-group-btn">
+                            <button type="button" class="btn btn-info">
+                                <i class="icon-picture"></i>
+                                آپلود عکس  
+                            </button>
+                        </span>
+                    </div><!-- /.input-group -->
+                    <div class="help-block"></div>
+                </div><!-- /.form-group -->
+                <div class="form-group">
+                    <label> لینک کلیک بر عکس  : </label>
+                    <div class="input-group">
+                        <span class="input-group-addon">
+                            <i class="icon-user"></i>
+                        </span>
+                        <input type="text" asp-for="BottemLeftImageUrl" class="form-control" placeholder="لینک کلیک بر عکس">
+                    </div><!-- /.input-group -->
+                </div><!-- /.form-group -->
+                <hr />
+                <h1>پیشنهاد ویژه</h1>
+                <hr />
+                <div class="form-group">
+                    <label> فعال/غیرفعال : </label>
+                    <div class="input-group">
+                        <span class="input-group-addon">
+                            <i class="icon-user"></i>
+                        </span>
+                        <select class="form-control" asp-for="SeggestActivation">
+                            <option value="@true">فعال</option>
+                            <option value="@false">غیر فعال</option>
+                        </select>
+                    </div><!-- /.input-group -->
+                </div><!-- /.form-group -->
+                <div class="form-group">
+                    <label> ساعت پایان پیشنهاد ویژه : </label>
+                    <div class="input-group">
+                        <span class="input-group-addon">
+                            <i class="icon-user"></i>
+                        </span>
+                        <select class="form-control" asp-for="SeggestHour">
+                            <option value="1">01</option>
+                            <option value="2">02</option>
+                            <option value="3">03</option>
+                            <option value="4">04</option>
+                            <option value="5">05</option>
+                            <option value="6">06</option>
+                            <option value="7">07</option>
+                            <option value="8">08</option>
+                            <option value="9">09</option>
+                            <option value="10">10</option>
+                            <option value="11">11</option>
+                            <option value="12">12</option>
+                            <option value="13">13</option>
+                            <option value="14">14</option>
+                            <option value="15">15</option>
+                            <option value="16">16</option>
+                            <option value="17">17</option>
+                            <option value="18">18</option>
+                            <option value="19">19</option>
+                            <option value="20">20</option>
+                            <option value="21">21</option>
+                            <option value="22">22</option>
+                            <option value="23">23</option>
+                            <option value="24">24</option>
+                        </select>
+                    </div><!-- /.input-group -->
+                </div><!-- /.form-group -->
+                <div class="form-group">
+                    <label> تاریخ پایان پیشنهاد ویژه </label>
+                    <div class="input-group">
+                        <span class="input-group-addon">
+                            <i class="icon-calendar"></i>
+                        </span>
+                        <input type="text" asp-for="SeggestDate2" value="@Model.SeggestDate.ToLongPersianDateString()" class="form-control" id="kama-datepicker" placeholder="">
+                    </div><!-- /.input-group -->
+                </div>
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-info btn-round btn-block">
+                        <i class="icon-check"></i>
+                        ثبت
+                    </button>
+                </div><!-- /.form-actions -->
+            </form>
+        </div><!-- /.portlet-body -->
+    </div><!-- /.portlet -->
+    <!-- END ADDWORKER -->
+</div><!-- /.row -->
+    </div>
+</div>
+<!-- /#page-content -->
+<!-- END PAGE CONTENT -->
+
+
+                @section Scripts{
+    <script src="~/assets/plugins/select2/dist/js/select2.full.min.js"></script>
+    <script src="~/assets/plugins/select2/dist/js/i18n/fa.js"></script>
+    <script src="~/assets/js/pages/select2.js"></script>
+    <!-- BEGIN PAGE JAVASCRIPT -->
+    <script src="~/assets/plugins/kamadatepicker/kamadatepicker.min.js"></script>
+    <script src="~/assets/js/pages/calendar-kama.js"></script>
+    <!-- END PAGE JAVASCRIPT -->
+}

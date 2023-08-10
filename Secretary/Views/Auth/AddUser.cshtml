@@ -1,0 +1,106 @@
+﻿@using Secretary.Models.Authentication;
+@model SignUpDto
+<!-- BEGIN PAGE CONTENT -->
+
+        <!-- BEGIN BREADCRUMB -->
+        <div class="col-md-12">
+            <div class="breadcrumb-box border shadow">
+                <ul class="breadcrumb">
+                    <li><a href="ShowWorker"> سفارشات</a></li>
+                    <li><a href="ShowWorker">سفارشات جدید </a></li>
+                </ul>
+                <div class="breadcrumb-left">
+                                                @DNTPersianUtils.Core.FriendlyPersianDateUtils.ToPersianDateTextify(DateTime.Now)
+                    <i class="icon-calendar"></i>
+                </div><!-- /.breadcrumb-left -->
+            </div><!-- /.breadcrumb-box -->
+        </div><!-- /.col-md-12 -->
+        <!-- END BREADCRUMB -->
+        <!-- START ADDWORKER -->
+        <div class="col-lg-12">
+            <div class="portlet box border shadow">
+                <div class="portlet-heading">
+                    <div class="portlet-title">
+                            <h3 class="title">
+                                <i class="icon-settings"></i>
+                                افزودن کاربر
+                            </h3>
+                        
+
+                    </div><!-- /.portlet-title -->
+                    <div class="buttons-box">
+                        <!-- <a class="btn btn-sm btn-default btn-round btn-code" rel="tooltip" title="کدها" href="#">
+                            <i class="icon-arrow-left"></i><span>/</span><i class="icon-arrow-right"></i>
+                        </a> -->
+                        <div class="code-modal hide">
+                        </div>
+                        <a class="btn btn-sm btn-default btn-round btn-fullscreen" rel="tooltip" title="تمام صفحه" href="#">
+                            <i class="icon-size-fullscreen"></i>
+                        </a>
+                        <a class="btn btn-sm btn-default btn-round btn-collapse" rel="tooltip" title="کوچک کردن" href="#">
+                            <i class="icon-arrow-up"></i>
+                        </a>
+                    </div><!-- /.buttons-box -->
+                </div><!-- /.portlet-heading -->
+                <div class="portlet-body">
+                    <form method="post" asp-action="AddUser" asp-controller="Auth">
+                        <div class="form-group round">
+                            <label>نام کاربری </label>
+                            <input asp-for="UserName" type="text" class="form-control" required>
+                            <span asp-validation-for="UserName" style="color:red"></span>
+                        </div><!-- /.form-group -->
+                        <div class="form-group">
+                            <label>شماره موبایل </label>
+                            <div class="input-group">
+                                <span class="input-group-addon">
+                                    <i class="icon-basket-loaded fa-flip-horizontal"></i>
+                                </span>
+                                <input asp-for="PhoneNumber" type="number" class="form-control" required>
+                                <span asp-validation-for="PhoneNumber" style="color:red"></span>
+                            </div><!-- /.input-group -->
+                        </div><!-- /.form-group -->
+                        <div class="form-group">
+                            <label>نام </label>
+                            <div class="input-group">
+                                <span class="input-group-addon">
+                                    <i class="fas fa-circle-notch"></i>
+                                </span>
+                                <input asp-for="Fname" type="text" class="form-control" required>
+                            </div><!-- /.input-group -->
+                        </div><!-- /.form-group -->
+                        <div class="form-group">
+                            <label>نام خانوادگی</label>
+                            <div class="input-group">
+                                <span class="input-group-addon">
+                                    <i class="fas fa-circle-notch"></i>
+                                </span>
+                                <input asp-for="Lname" type="text" class="form-control" required>
+                            </div><!-- /.input-group -->
+                        </div><!-- /.form-group -->
+                        <div class="form-group">
+                            <label>رمز عبور*</label>
+                            <input asp-for="PassWord" type="password" class="form-control" required>
+                            <span asp-validation-for="PassWord" style="color:red"></span>
+                        </div>
+                        <div class="form-group">
+                            <label>تکرار رمز عبور*</label>
+                            <input asp-for="PassWordConfirmation" type="password" class="form-control" required>
+                            <span asp-validation-for="PassWordConfirmation" style="color:red"></span>
+                        </div>
+                        <div class="row">
+                            <button type="submit" class="btn btn-info btn-round btn-block">
+                                <i class="icon-check"></i>
+                                ثبت
+                            </button>
+                        </div><!--end row-->
+                    </form>
+
+                </div><!-- /.portlet-body -->
+            </div><!-- /.portlet -->
+            <!-- END ADDWORKER -->
+        </div><!-- /.row -->
+    </div>
+</div>
+<!-- /#page-content -->
+<!-- END PAGE CONTENT -->
+

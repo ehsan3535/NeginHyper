@@ -1,0 +1,68 @@
+﻿@using Secretary.Models;
+@model NotificationDto
+<div id="page-content">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="portlet box border shadow">
+                <div class="portlet-heading">
+                    <div class="portlet-title">
+                        <h3 class="title">
+                            <i class="icon-magic-wand"></i>
+                            مشاهده فصل
+                        </h3>
+                    </div><!-- /.portlet-title -->
+                </div><!-- /.portlet-heading -->
+                <div class="portlet-body">
+                    <div class="row">
+
+                        <div class="col-lg-6">
+                            <div class="portlet box border shadow">
+                                <div class="portlet-heading">
+                                    <div class="portlet-title">
+                                        <h3 class="title">
+
+                                            مشاهده فصل
+                                        </h3>
+                                    </div><!-- /.portlet-title -->
+                                    <div class="buttons-box">
+                                        <a class="btn btn-sm btn-default btn-round btn-fullscreen" rel="tooltip" title="تمام صفحه" href="#">
+                                            <i class="icon-size-fullscreen"></i>
+                                        </a>
+                                        <a class="btn btn-sm btn-default btn-round btn-collapse" rel="tooltip" title="کوچک کردن" href="#">
+                                            <i class="icon-arrow-up"></i>
+                                        </a>
+                                    </div><!-- /.buttons-box -->
+                                </div><!-- /.portlet-heading -->
+                                <div class="portlet-body">
+                                    <div class="form-group">
+
+                                        <div class="input-group">
+                                            <p>
+                                                <label>
+                                                   عنوان  : @Model.Topic
+                                                </label>
+                                            </p>
+                                            <p>
+                                                <label>
+                                                     تاریخ  : @Model.DateTimes.ToLongPersianDateString()
+                                                </label>
+                                            </p>
+                                        </div><!-- /.input-group -->
+                                        <hr>
+                                        <div class="input-group">
+                                            <div class="form-group row">
+                                                <label class="col-sm-3">جزئیات</label>
+                                                <div class="col-lg-12">
+                                                    <textarea class="form-control" rows="5" placeholder="@Model.Text"></textarea>
+                                                </div>
+                                            </div><!-- /.input-group -->
+                                            <hr>
+                                        </div><!-- /.form-group -->
+
+                                    </div><!-- /.portlet-body -->
+                                </div><!-- /.portlet -->
+                            </div><!-- /.col-lg-6 -->
+                        </div><!-- /.row -->
+                    </div><!-- /.portlet-body -->
+                </div><!-- /.portlet -->
+            </div><!-- /.col-lg-12 -->
