@@ -172,7 +172,7 @@ namespace Client.Controllers
                     var UserAddress = addressrepo.TableNoTracking.Where(x => x.ClientId == User.Id).ProjectTo<AddressDto>(mapper.ConfigurationProvider).FirstOrDefault();
                     var SMS_Address = "آدرس: \n" + UserAddress.CityName + "/" + UserAddress.Location + "/" + "کد پستی:" + UserAddress.PostalCode + "/" + "واحد:" + UserAddress.vahed + "/" + "پلاک:" + UserAddress.pelak;
                     //MeliPayamak.Simple_Rest(User.PhoneNumber, "سفارش " + User.Fname + " " + User.Lname + "\n" + SMS_ProductList + "\n" + "در حال پردازش است");
-                    MeliPayamak.Simple_Rest(User.PhoneNumber,$"گیل هایپری عزیز \n سفارش شما به شماره فاکتور:{order.FactorNumber} به مبلغ {order.TotalPrice.ToNumeric()} تومان با شماره پیگیری {Verification.RefId} با موفقیت ثبت شد. \n" +
+                    MeliPayamak.Simple_Rest(User.PhoneNumber,$"نگین هایپری عزیز \n سفارش شما به شماره فاکتور:{order.FactorNumber} به مبلغ {order.TotalPrice.ToNumeric()} تومان با شماره پیگیری {Verification.RefId} با موفقیت ثبت شد. \n" +
                         $" مشاهده وضعیت سفارش: gilhyper.com/Order/OrderList \n پایدار,محلی و آگاهانه \n با عشق \n www.GilHyper.com  ");
                     MeliPayamak.Simple_Rest(setting.PHoneNumber1, "سفارش " + User.Fname + " " + User.Lname + "\n" + SMS_ProductList + "\n" + SMS_Address + "\n" + "در حال پردازش است");
                     MeliPayamak.Simple_Rest(setting.PHoneNumber2, "سفارش " + User.Fname + " " + User.Lname + "\n" + SMS_ProductList + "\n" + SMS_Address + "\n" + "در حال پردازش است");

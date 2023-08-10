@@ -46,7 +46,7 @@ namespace Client.Controllers
             {
                 TempData["OTP"] = message;
                 //notification.AddSuccessToastMessage(message);
-                MeliPayamak.Simple_Rest(PhoneNumber, "رمز موقت ورود شما به گیل هایپر: " + " " + message + "\n " + "Gilhyper.com");
+                MeliPayamak.Simple_Rest(PhoneNumber, "رمز موقت ورود شما به فروشگاه نگین: " + " " + message + "\n " + "Gilhyper.com");
             }
             TempData["UserName1"] = PhoneNumber;
             if (ClientId != null)
@@ -85,7 +85,7 @@ namespace Client.Controllers
             {
                 User = new User()
                 {
-                    Fname = "گیل هایپری",
+                    Fname = "فروشگاه نگینی",
                     PhoneNumber = dto.PhoneNumber,
                     UserName = dto.PhoneNumber,
                     Email = dto.PhoneNumber + "-user@Gilhyper.com"
@@ -201,7 +201,7 @@ namespace Client.Controllers
                 }
 
                 //send otp with sms
-                string Message = "رمز موقت ورود شما به گیل هایپر:" + $"\n {OTP}" + "\n " + "Gilhyper.Com";
+                string Message = "رمز موقت ورود شما به فروشگاه نگین:" + $"\n {OTP}" + "\n " + "Gilhyper.Com";
                 MeliPayamak.Simple_Rest(dto.PhoneNumber, Message);
 
                 TempData["UserName"] = dto.PhoneNumber;
