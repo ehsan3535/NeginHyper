@@ -60,7 +60,7 @@ namespace Client.Controllers
             if (User.Identity.IsAuthenticated)
             {
                 var FindUser = await userManager.FindByNameAsync(HttpContext.User.Identity.Name);
-                ShopCard = await shopcardrepo.TableNoTracking.Where(x => x.UserId == FindUser.Id).ProjectTo<ShopCardDto>(mapper.ConfigurationProvider).FirstOrDefaultAsync(cancellationToken);
+                ShopCard = await shopcardrepo.TableNoTracking.Where(x => x.CookieId == CookieId).ProjectTo<ShopCardDto>(mapper.ConfigurationProvider).FirstOrDefaultAsync(cancellationToken);
             }
             else
             {

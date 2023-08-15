@@ -561,7 +561,10 @@
 
                         @if (Model.ShopCard.TotalPrice != 0)
                         {
-                            @if (User.Identity.IsAuthenticated)
+                            <div class="col-6">
+                                <button type="button" class="default__button button--medium add-to-cart" style="border-radius: 50px; text-align:center;" onclick="openBasketInModal()">ثبت سفارش</button>
+                            </div>
+                           @* @if (User.Identity.IsAuthenticated)
                             {
                                 <div class="col-6">
                                     <button type="button" class="default__button button--medium add-to-cart" style="border-radius: 50px; text-align:center;" onclick="openBasketInModal()">ثبت سفارش</button>
@@ -572,7 +575,7 @@
                                 <div class="col-6">
                                     <button type="button" class="default__button button--medium add-to-cart" style="border-radius: 50px; text-align:center;" onclick="openBasketInModal2()">ثبت سفارش</button>
                                 </div>
-                            }
+                            }*@
                         }
 
                     </div>

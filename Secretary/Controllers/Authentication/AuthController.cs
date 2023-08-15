@@ -105,6 +105,7 @@ namespace Secretary.Controllers.Authentication
                 model.Pelak = Address.pelak;
                 model.PostalCode1 = Address.PostalCode;
                 model.WhoGetIt = Address.Name;
+                model.FromArian = Address.FromArian;
             }
             return View(model);
         }

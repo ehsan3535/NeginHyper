@@ -67,7 +67,13 @@
                                                 </span>
                                                 <br>
                                                 <label class="form-check-label" for="@item.Id">
-                                                    @item.CityName <br />@item.Location <br /> کدپستی: @item.PostalCode <br />واحد: @item.vahed <br /> پلاک : @item.pelak
+                                                    @item.CityName @if (@item.FromArian)
+                                                    {
+                                                        <br />
+
+                                                        <p> ساکن آرین</p>
+                                                    }
+                                                    <br />@item.Location <br /> کدپستی: @item.PostalCode <br />واحد: @item.vahed <br /> پلاک : @item.pelak
                                                 </label>
                                                 <br>
                                                 <div class="row justify-content-end">
@@ -207,8 +213,8 @@
                                 <div class="" id="carModel">
                                     <div class="mb-0">
                                         <label class="required" style="margin-right:25px">شهر *</label>
-                                        <select dir="ltr" name="CityId" class="form-select form-control " style="height:50px" id="carModelDropDown" aria-label="Default select example">
-                                            <option selected>انتخاب کنید </option>
+                                        <select onchange="arians()" dir="ltr" name="CityId" class="form-select form-control " style="height:50px" id="carModelDropDown" aria-label="Default select example">
+                                            <option selected>ابتدا استان را انتخاب کنید </option>
 
 
                                         </select>
@@ -220,12 +226,13 @@
                                 <div class="form-group field-loginform-password required">
 
 
-                                    <label class="control-label" for="loginform-password"> نشانی پستی</label>
+                                    <label class="control-label" for="loginform-password"> نشانی </label>
                                     <input type="text"
                                            name="Location"
                                            id="Location"
                                            class="form-control py-4 w-100"
-                                           aria-required="true" />
+                                           aria-required="true"
+                                           required />
                                 </div>
                             </div>
                             <div class="col-6">
@@ -237,12 +244,12 @@
                                            id="Name"
                                            maxlength="10"
                                            class="form-control py-4 w-100"
-                                           aria-required="true" 
+                                           aria-required="true"
                                            required />
                                 </div>
                             </div>
 
-
+                            <p>وارد کردن پلاک و واحد ضروری نیست</p>
                             <div class="col-lg-3 col-md-6 col-sm-6">
                                 <div class="form-group field-loginform-password ">
 
@@ -279,20 +286,25 @@
                             </div>
                         </div>
 
+                        <div id="arian" hidden>
 
-                        <div class="row justify-content-end">
-                            <div class="form-group field-loginform-rememberme">
-                                <div class="checkbox">
-                                    <label for="loginform-rememberme">
-                                        <input type="hidden"
-                                               name="LoginForm[rememberMe]"
-                                               value="0" /><input type="checkbox"
-                                                                  id="loginform-rememberme"
-                                                                  name="LoginForm[rememberMe]"
-                                                                  value="1" />
-                                        گیرند خودم نیستم
-                                    </label>
-                                    <p class="help-block help-block-error"></p>
+                            <h3 style="color:midnightblue">در صورتی که در شهرک آرین زندگی میکنید مربع زیر را تیک بزنید</h3>
+                            <div class="row justify-content-end">
+
+
+                                <div class="form-group ">
+                                    <div class="">
+                                        <input type="checkbox"
+                                               asp-for="FromArian" 
+                                               value="false"
+                                              
+                                               />
+                                        <label for="FromArian">
+
+                                            ساکن شهرک آرین هستم
+                                        </label>
+                                        <p class="help-block help-block-error"></p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -314,11 +326,11 @@
                 </div>
 
 
-                <div class="modal-footer w-100" >
+                <div class="modal-footer w-100">
                     <div class="row w-100 justify-content-center">
 
                         <div class="col-6">
-                            <button type="submit" class="mt-5 default__button button--medium ">ثبت و ادامه خرید  </button>
+                            <button type="submit" class="mt-5 default__button button--medium">ثبت و ادامه خرید  </button>
 
                         </div>
                         <br />
@@ -333,6 +345,35 @@
 </div>
 
 @section Scripts{
+
+    <script>
+
+        // function func2() {
+        //    console.log($("#FromArian").val());
+        //     if ($('#FromArian').is(':checked')) {
+
+        //         $("#FromArian").attr('value', true);
+        //    }
+        //    else {
+        //         $("#FromArian").attr('value', false);
+        //    }
+        // }
+
+        function arians() {
+            var cityid = $('#carModelDropDown').find(":selected").val();
+
+            if (cityid == "df5d4546-7137-ee11-81b3-f0761c623f70") {
+                $("#arian").attr('hidden', false);
+            }
+            else {
+                $("#arian").attr('hidden', true);
+                $("#FromArian").attr('value', false);
+                document.getElementById("FromArian").checked = false;
+                console.log($("#FromArian").val());
+            }
+        }
+    </script>
+
     <script>
         function submitForm2() {
             //document.getElementsByName("Shop").submit();
@@ -340,7 +381,9 @@
         }
 
         function submitWithAjaxForm2() {
+
             var carTypeValue = $('#carTypeDropDown').find(":selected").val();
+
 
             $.ajax({
                 type: "GET",

@@ -19,6 +19,8 @@ namespace Client.Models
         public string Location { get; set; }
         public string pelak { get; set; }
         public string vahed { get; set; }
+        public bool FromArian { get; set; }
+
         public List<ProvinceDto> provinces { get; set; }
         public List<AddressDto> Addresses { get; set; }
 

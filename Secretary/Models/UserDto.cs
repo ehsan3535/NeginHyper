@@ -9,6 +9,7 @@ namespace Secretary.Models
 {
     public class UserDto : BaseDto<UserDto, User, Guid>
     {
+        public bool FromArian { get; set; }
         public bool Student { get; set; }
         public string Name { get; set; }
         public string AddressLocation { get; set; }

@@ -41,6 +41,13 @@
                 </a>
             </div><!-- /.buttons-box -->
         </div><!-- /.portlet-heading -->
+        @if (Model.FromArian)
+        {
+            
+        <h2 style="color:midnightblue">
+            ساکن آرین 
+            </h2>
+        }
         <div class="portlet-body">
             <div class="form-group round">
                 <label>نام کاربری </label>
@@ -93,6 +100,12 @@
                     <input asp-for="City" type="text" class="form-control" required>
                 </div><!-- /.input-group -->
             </div><!-- /.form-group -->
+            @if (Model.FromArian)
+            {
+                <h2 style="color:midnightblue">
+                    ساکن آرین
+                </h2>
+            }
             <div class="form-group">
                 <label>آدرس </label>
                 <div class="input-group">

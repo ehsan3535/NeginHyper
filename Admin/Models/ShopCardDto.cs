@@ -38,7 +38,9 @@ namespace Client.Models.ShopCards
         public bool Out { get; set; }
         public string FreeTimeTitle { get; set; }
         public bool DiscountCheckBox { get; set; }
-        
+        public bool FromArian { get; set; }
+
+
     }
 
 

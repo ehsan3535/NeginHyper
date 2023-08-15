@@ -17,6 +17,7 @@ namespace Entities.Address
         public string Location { get; set; }
         public string pelak { get; set; }
         public string vahed { get; set; }
+        public bool FromArian { get; set; }
 		public ICollection<City> Cities { get; set; }
 	}
 }

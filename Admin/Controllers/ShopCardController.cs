@@ -77,7 +77,7 @@ namespace Client.Controllers
                 };
                 await shopcardrepo.AddAsync(ShopCard, cancellationToken);
             }
-            if (HttpContext.User.Identity.IsAuthenticated)
+        /*    if (HttpContext.User.Identity.IsAuthenticated)
             {
                 var FindUser = await userManager.FindByNameAsync(HttpContext.User.Identity.Name);
                 var OldShopCard = await shopcardrepo.TableNoTracking.Where(x => x.UserId == FindUser.Id && x.Id != ShopCard.Id).ToListAsync(cancellationToken);
@@ -92,7 +92,7 @@ namespace Client.Controllers
                 }
                 ShopCard.UserId = FindUser.Id;
                 await shopcardrepo.UpdateAsync(ShopCard, cancellationToken);
-            }
+            }*/
             model = mapper.Map<ShopCardDto>(ShopCard);
             model.ShopCardDetails = await shopcardDetailrepo.TableNoTracking.Where(x => x.ShopCardId == model.Id).ProjectTo<ShopCardDetailDto>(mapper.ConfigurationProvider).ToListAsync(cancellationToken);
             //this if is for full imagelink with first image of productimage entity.
@@ -187,7 +187,7 @@ namespace Client.Controllers
             var model = await shopcardrepo.TableNoTracking.Where(x => x.UserId == User.Id).ProjectTo<ShopCardDto>(mapper.ConfigurationProvider).FirstOrDefaultAsync(cancellationToken);
             model.PostPrice = setting.PostPrice;
             var AddressCity = await AddressRepo.TableNoTracking.Where(x => x.Id == AddressId).Select(x => x.City).FirstOrDefaultAsync();
-            if (AddressCity.ProvinceId == Guid.Parse("1D0048DC-0810-EE11-A9D7-8CA6B29B3F38"))
+            if (AddressCity.ProvinceId == Guid.Parse("d25d4546-7137-ee11-81b3-f0761c623f70"))
             {
                 model.FreeTimes = freeTimeRepo.TableNoTracking.Where(x => x.Out == false).ProjectTo<FreeTimeDto>(mapper.ConfigurationProvider).ToList();
                 //foreach (var item in model.FreeTimes.Where(x=>x.Day == DateTime.Now.Date.ToString() && x.ToHour.ToInt() <= DateTime.Now.Hour))

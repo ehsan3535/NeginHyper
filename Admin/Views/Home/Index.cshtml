@@ -548,11 +548,11 @@
 
                     </div>
                 </div>
-                <div class="card-footer">
+             @*   <div class="card-footer">
                     <p class="card-text">
                         <a href="/home/aboutgilhyper" class="text-body-secondary">مشاهده بیشتر </a>
                     </p>
-                </div>
+                </div>*@
             </div>
             <div class="col-md-8">
                 @*<img loading="lazy"src="/assets/media/image/avatar.jpg"
@@ -777,9 +777,7 @@
 @section Scripts{
     <script>
         var seconds = @Model.First().SettingDto.FinalTimer ;
-        debugger;
         function secondPassed() {
-            debugger;
             var minutes = Math.round((seconds - 30) / 60),
                 remainingSeconds = seconds % 60;
 
@@ -795,7 +793,6 @@
                 seconds--;
             }
         }
-        debugger;
         var countdownTimer = setInterval('secondPassed()', 1000);
     </script>
     @*@if (TempData["FirstTime"] == null)
