@@ -35,7 +35,7 @@
                         <div class="row w-100">
                             <div class="col-6 col-lg-4 col-md-4 col-sm-8">
                                 <h6 class="card-title bg-info-gradient br-20 text-center w-100">
-                                    انتخاب زمان ارسال
+                                    انتخاب روش ارسال
                                 </h6>
                             </div>
                         </div>
@@ -45,7 +45,7 @@
 
                             @if (Model.FreeTimes.Any())
                             {
-                                if (Model.FreeTimes.First().Out == false)
+                                @*  if (Model.FreeTimes.First().Out == false)
                                 {
                                     int i = 0;
                                     @foreach (var item in Model.FreeTimes.DistinctBy(x => x.Day).OrderBy(x => x.DateTime).Take(4))
@@ -86,20 +86,24 @@
                                     }
                                 }
                                 else
-                                {
-                                    <div class="col-12 col-lg-6 col-md-6 col-sm-12 my-2">
-                                        <ul class="list-group w-100">
-                                            <li class="list-group-item active"> ارسال شهرستان</li>
+                                { *@
+                                <div class="col-12 col-lg-6 col-md-6 col-sm-12 my-2">
+                                    <ul class="list-group w-100">
+                                        <li class="list-group-item active"> یک روش ارسال انتخاب کنید</li>
+                                        @{
+                                            var j = 0;
+                                        }
                                             @foreach (var item2 in Model.FreeTimes)
                                             {
-                                                <li class="list-group-item w-100">
-                                                    <input class="form-check-input me-1" type="radio" name="FreeTimeId" value="@item2.Id" id="firstRadio">
-                                                    <label class="form-check-label" for="firstRadio">@item2.Title</label>
+                                            j++;
+                                            <li class="list-group-item w-100">
+                                                    <input class="form-check-input me-1" type="radio" name="FreeTimeId" value="@item2.Id" id="firstRadio_@j" checked>
+                                                    <label class="form-check-label" for="firstRadio_@j">@item2.Title</label>
                                                 </li>
                                             }
                                         </ul>
                                     </div>
-                                }
+                                @* } *@
                                 @*  <div class="col-12 col-lg-6 col-md-6 col-sm-12 my-2">
                             <ul class="list-group w-100">
                             <li class="list-group-item active">@Model.FreeTimes.FirstOrDefault(x => x.Day == "2").DateTime.ToPersianDateTextify() </li>
@@ -237,7 +241,7 @@
 
                 <div class="card br-20 w-100">
                     <div class="card-body">
-                        <div class="row">
+                    @*     <div class="row">
                             <div class="col-6">
                                 <span class="card-title" style="font-weight: bold; font-size: large;">مبلغ کل</span>
                             </div>
@@ -266,7 +270,7 @@
                         <br>
 
                         <hr>
-                        <br>
+                        <br> *@
 
                         <div class="row">
                             <div class="col-6">

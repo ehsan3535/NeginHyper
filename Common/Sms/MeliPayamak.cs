@@ -58,9 +58,9 @@ namespace Common.Sms
 
         public static string Simple_Rest(string To, string Text)
         {
-            const string username = "9352001451";
-            const string password = "#4A1E";
-            const string from = "50004001001451";
+            const string username = "9387285366";
+            const string password = "LG0B7";
+            const string from = "50004001285366";
 
             const bool isFlash = false;
             RestClient restClient = new RestClient(username, password);

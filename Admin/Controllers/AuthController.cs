@@ -46,7 +46,7 @@ namespace Client.Controllers
             {
                 TempData["OTP"] = message;
                 //notification.AddSuccessToastMessage(message);
-                MeliPayamak.Simple_Rest(PhoneNumber, "رمز موقت ورود شما به فروشگاه نگین: " + " " + message + "\n " + "Gilhyper.com");
+                MeliPayamak.Simple_Rest(PhoneNumber, "رمز موقت ورود شما به فروشگاه نگین: " + " " + message + "\n " + "NeginHyper.Com");
             }
             TempData["UserName1"] = PhoneNumber;
             if (ClientId != null)
@@ -88,7 +88,7 @@ namespace Client.Controllers
                     Fname = "فروشگاه نگینی",
                     PhoneNumber = dto.PhoneNumber,
                     UserName = dto.PhoneNumber,
-                    Email = dto.PhoneNumber + "-user@Gilhyper.com"
+                    Email = dto.PhoneNumber + "-user@NeginHyper.Com"
                 };
                 var Status = await userManager.CreateAsync(User);
                 if (Status.Succeeded)
@@ -201,7 +201,7 @@ namespace Client.Controllers
                 }
 
                 //send otp with sms
-                string Message = "رمز موقت ورود شما به فروشگاه نگین:" + $"\n {OTP}" + "\n " + "Gilhyper.Com";
+                string Message = "رمز موقت ورود شما به فروشگاه نگین:" + $"\n {OTP}" + "\n " + "NeginHyper.Com";
                 MeliPayamak.Simple_Rest(dto.PhoneNumber, Message);
 
                 TempData["UserName"] = dto.PhoneNumber;
@@ -224,7 +224,7 @@ namespace Client.Controllers
             if (PhoneNumber != null)
             {
                 string Code = OtpGenerator.GenerateRandomToken(6);
-                string message = "کد اعتبار سنجی \n" + "Code:" + Code + "\n Gilhyper.com";
+                string message = "کد اعتبار سنجی \n" + "Code:" + Code + "\n NeginHyper.Com";
                 if (TempData["sms"] != null)
                 {
                     MeliPayamak.Simple_Rest(PhoneNumber, message);

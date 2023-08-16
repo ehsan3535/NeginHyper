@@ -5,6 +5,10 @@ namespace Client.Models.ShopCards
 {
     public class ShopCardDto : BaseDto<ShopCardDto, ShopCard, Guid>
     {
+        public ShopCardDto()
+        {
+            FreeTimes = new List<FreeTimeDto>();
+        }
         public Guid? AddressId { get; set; }
         //public string? Addressvahed { get; set; }
         //public string? AddressPostalCode { get; set; }
@@ -39,7 +43,7 @@ namespace Client.Models.ShopCards
         public string FreeTimeTitle { get; set; }
         public bool DiscountCheckBox { get; set; }
         public bool FromArian { get; set; }
-
+        public Guid CookieId { get; set; }
 
     }
 

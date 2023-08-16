@@ -3,562 +3,626 @@
 
 <div class="container my-3">
 
-	<section class="progress-bar__section">
+    <section class="progress-bar__section">
 
-		<div class="progress-bar__item--container" style=" backdrop-filter: blur(20px);">
-			<div class="progress-bar__item current">
-				<div class="progress-bar__number">1</div>
-				<a class="progress-bar__a">سبد خرید</span></a>
-			</div>
-			<div class="progress-bar__item current">
-				<div class="progress-bar__number">2</div>
-				<a class="progress-bar__a">مشخصات گیرنده</span></a>
-			</div>
-			<div class="progress-bar__item current">
-				<div class="progress-bar__number">3</div>
-				<a class="progress-bar__a">بررسی نهایی</span></a>
-			</div>
-			<div class="progress-bar__item current">
-				<div class="progress-bar__number">4</div>
-				<a class="progress-bar__a">پرداخت</span></a>
-			</div>
-		</div>
-	</section>
-	<div class="row w-100">
+        <div class="progress-bar__item--container" style=" backdrop-filter: blur(20px);">
+            <div class="progress-bar__item current">
+                <div class="progress-bar__number">1</div>
+                <a class="progress-bar__a">سبد خرید</span></a>
+            </div>
+            <div class="progress-bar__item current">
+                <div class="progress-bar__number">2</div>
+                <a class="progress-bar__a">مشخصات گیرنده</span></a>
+            </div>
+            <div class="progress-bar__item current">
+                <div class="progress-bar__number">3</div>
+                <a class="progress-bar__a">بررسی نهایی</span></a>
+            </div>
+            <div class="progress-bar__item current">
+                <div class="progress-bar__number">4</div>
+                <a class="progress-bar__a">پرداخت</span></a>
+            </div>
+        </div>
+    </section>
+    <div class="row w-100">
 
-		<div class="col-12 col-lg-9 col-md-12 col-sm-12">
-			<div class="card br-20">
-				<div class="card-body">
-					<div class="row">
-						<div class="col-3">
-							<span class="card-title" style="font-weight: bold; font-size: large;"> آدرس </span>
-						</div>
-						<div class="col-6">
-							<span style=" font-size: medium;">@Model.Address.CityName <br /> @Model.Address.Location <br /> کدپستی: @Model.Address.PostalCode <br />واحد: @Model.Address.pelak <br /> پلاک : @Model.Address.vahed </span>
-						</div>
-					</div>
-					<br>
-					@if (Model.Out == false)
-					{
-						<div class="row">
-							<div class="col-3">
-								<span class="card-title" style="font-weight: bold; font-size: large;">روز  </span>
-							</div>
-							<div class="col-6">
-								<span style=" font-size: medium;"> @Model.DateTime.ToPersianDateTextify() </span>
-							</div>
-						</div>
-						<br>
-						<div class="row">
-							<div class="col-3">
-								<span class="card-title" style="font-weight: bold; font-size: large;">ساعت  </span>
-							</div>
-							@{
-								string ToHour = (Model.FromHour.ToInt() + 2).ToString();
-							}
-							<div class="col-6">
-								<span style=" font-size: medium;"> @Model.FromHour تا @ToHour  </span>
-							</div>
-						</div>
-					}
-					else
-					{
-						<div class="row">
-							<div class="col-3">
-								<span class="card-title" style="font-weight: bold; font-size: large;">شیوه ارسال  </span>
-							</div>
-							<div class="col-6">
-								<span style=" font-size: medium;"> @Model.FreeTimeTitle پس کرایه</span>
-							</div>
-						</div>
-					}
-					<br>
-					<div class="row">
-						<div class="col-3">
-							<span class="card-title" style="font-weight: bold; font-size: large;"> محصولات سبد خرید</span>
-						</div>
-						<div class="col-6">
-							@foreach (var item in Model.ShopCardDetails)
-							{
-								<span style=" font-size: medium;">@item.ProductsName - @item.Count عدد </span>
-								<hr />
-							}
-						</div>
-					</div>
-					<br>
-					<div class="row">
-						<div class="col-3">
-							<span class="card-title" style="font-weight: bold; font-size: large;">مبلغ کل</span>
-						</div>
-						<div class="col-6">
-							<span style=" font-size: medium;"> @Model.TotalPrice.ToNumeric() تومان</span>
-						</div>
-					</div>
-					<br>
-					<div class="row">
-						<div class="col-3">
-							<span class="card-title" style="font-weight: bold; font-size: large;">هزینه ارسال</span>
-						</div>
-						@if (Model.TotalPrice >= 500000)
-						{
-							<div class="col-6">
-								<span style=" font-size: medium;">رایگان!</span>
-							</div>
-						}
-						else
-						{
-							<div class="col-6">
-								<span style=" font-size: medium;"> @Model.PostPrice.ToNumeric() تومان</span>
-							</div>
-						}
-					</div>
-					<br>
-					<hr>
-					<br>
-					<div class="form-group round">
-						<label>اعمال کد تخفیف </label>
-						<input onclick="func1()" type="checkbox" asp-for="DiscountCheckBox">
-					</div><!-- /.form-group -->
-					@*  دیو زیر هیدن هست*@
-					<div class="row" id="Discount2" hidden>
-						<form method="get" asp-action="CheckDiscount" asp-controller="shopcard">
+        <div class="col-12 col-lg-9 col-md-12 col-sm-12">
+            <div class="card br-20">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-3">
+                            <span class="card-title" style="font-weight: bold; font-size: large;"> آدرس </span>
+                        </div>
+                        <div class="col-6">
+                            <span style=" font-size: medium;">@Model.Address.CityName <br /> @Model.Address.Location <br /> کدپستی: @Model.Address.PostalCode <br />واحد: @Model.Address.pelak <br /> پلاک : @Model.Address.vahed </span>
+                        </div>
+                    </div>
+                    <br>
+                    @if (Model.Out == false)
+                    {
+                        <div class="row">
+                            <div class="col-3">
+                                <span class="card-title" style="font-weight: bold; font-size: large;">روز  </span>
+                            </div>
+                            <div class="col-6">
+                                <span style=" font-size: medium;"> @Model.DateTime.ToPersianDateTextify() </span>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-3">
+                                <span class="card-title" style="font-weight: bold; font-size: large;">ساعت  </span>
+                            </div>
+                            @{
+                                string ToHour = (Model.FromHour.ToInt() + 2).ToString();
+                            }
+                            <div class="col-6">
+                                <span style=" font-size: medium;"> @Model.FromHour تا @ToHour  </span>
+                            </div>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="row">
+                            <div class="col-3">
+                                <span class="card-title" style="font-weight: bold; font-size: large;">شیوه ارسال  </span>
+                            </div>
+                            <div class="col-6">
+                                <span style=" font-size: medium;"> @Model.FreeTimeTitle </span>
+                            </div>
+                        </div>
+                    }
+                    <br>
+                    <div class="row">
+                        <div class="col-3">
+                            <span class="card-title" style="font-weight: bold; font-size: large;"> محصولات سبد خرید</span>
+                        </div>
+                        <div class="col-6">
+                            @foreach (var item in Model.ShopCardDetails)
+                            {
+                                <span style=" font-size: medium;">@item.ProductsName - @item.Count عدد </span>
+                                <hr />
+                            }
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-3">
+                            <span class="card-title" style="font-weight: bold; font-size: large;">مبلغ کل</span>
+                        </div>
+                        <div class="col-6">
+                            <span style=" font-size: medium;"> @Model.TotalPrice.ToNumeric() تومان</span>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-3">
+                            <span class="card-title" style="font-weight: bold; font-size:x-large;">هزینه ارسال</span>
+                        </div>
 
-							<div class="col-4">
-								<span class="card-title" style="font-weight: bold; font-size: large;">  کد تخفیف</span>
-							</div>
-							<div class="col-6">
-								<input type="text"
-									   name="DiscountCode"
-									   class="form-control"
-									   aria-required="true" />
-							</div>
-							<div class="col-6">
-								<input type="text"
-									   name="shopcardId"
-									   value="@Model.Id"
-									   hidden />
-							</div>
-							<div class="col-6">
-								<input type="text"
-									   name="AddressId"
-									   value="@TempData["AddressId"]"
-									   hidden />
-							</div>
-							<div class="col-6">
-								<input type="text"
-									   name="FreeTimeId"
-									   value="@Model.FreeTimeId"
-									   hidden />
-							</div>
-							<br />
-							<div class="col-4">
-								<button type="submit" class="btn btn-success">اعمال کد تخفیف </button>
+                        @if (Model.FreeTimeTitle == "تیپاکس(۴۸ تا ۷۲ ساعت)" || Model.FreeTimeTitle == "پست پیشتاز(حداکثر 5 روز کاری)")
+                        {
+                            <div class="col-6">
+                                <span style=" font-size: medium;">
 
-							</div>
-							@if (Model.DiscountPercent != 0)
-							{
-								<br />
-								<h5 style="color:green;">  @Model.DiscountPercent درصد کد تخفیف به شما تعلق گرفت</h5>
-							}
-						</form>
-					</div>
+                                    به صورت پس کرایه هنگام تحویل دریافت میشود
+                                </span>
+                            </div>
+                        }
+                        else if (Model.FreeTimeTitle == "ارسال با اسنپ باکس")
+                        {
+                            <div class="col-6">
+                                <span style=" font-size: medium;">
+                                    هزینه اسنپ با راننده اسنپ حساب جداگانه میشود
+                                </span>
+                            </div>
+                        }
+                        else if (Model.FreeTimeTitle == "ساکن آرین (رایگان)")
+                        {
+                            <div class="col-6">
+                                <span style=" font-size: medium;">
+                                    رایگان
+                                </span>
+                            </div>
+                        }
 
-					
+                        @* @if (Model.TotalPrice >= 500000)
+                        {
+                        <div class="col-6">
+                        <span style=" font-size: medium;">رایگان!</span>
+                        </div>
+                        }
+                        else
+                        {
+                        <div class="col-6">
+                        <span style=" font-size: medium;"> @Model.PostPrice.ToNumeric() تومان</span>
+                        </div>
+                        } *@
+                    </div>
+                    <br>
+                    <hr>
+                    <br>
+                    <div class="form-group round">
+                        <label>اعمال کد تخفیف </label>
+                        <input onclick="func1()" type="checkbox" asp-for="DiscountCheckBox">
+                    </div><!-- /.form-group -->
+                    @*  دیو زیر هیدن هست*@
+                    <div class="row" id="Discount2" hidden>
+                        <form method="get" asp-action="CheckDiscount" asp-controller="shopcard">
 
-					@*  <div class="row">
-						<div class="col-sm-6 col-lg-4 col-md-4 col-6">
-						<a href="/Payment/ProductPay?ShopCardId=@Model.Id&&AddressId=@Model.Address.Id&&FreeTimeId=@Model.FreeTimeId" class="btn bg-success w-100 py-4 br-20 " style="font-size:16px; border-radius:200px;text-align:center;"> زرین پال</a>
-						</div>
-						<div class="col-sm-6 col-lg-4 col-md-4 col-6">
-						<a class="btn bg-success w-100 py-4 br-20 disabled" style="font-size:26px; border-radius:200px;text-align:center;">ملت</a>
-						</div>
-						<div class="col-sm-6 col-lg-4 col-md-4 col-6">
-						<a class="btn bg-success w-100 py-4 br-20 disabled" style="font-size:26px; border-radius:200px;text-align:center;"> نقدی</a>
-						</div>
-						</div>*@
+                            <div class="col-4">
+                                <span class="card-title" style="font-weight: bold; font-size: large;">  کد تخفیف</span>
+                            </div>
+                            <div class="col-6">
+                                <input type="text"
+                                       name="DiscountCode"
+                                       class="form-control"
+                                       aria-required="true" />
+                            </div>
+                            <div class="col-6">
+                                <input type="text"
+                                       name="shopcardId"
+                                       value="@Model.Id"
+                                       hidden />
+                            </div>
+                            <div class="col-6">
+                                <input type="text"
+                                       name="AddressId"
+                                       value="@TempData["AddressId"]"
+                                       hidden />
+                            </div>
+                            <div class="col-6">
+                                <input type="text"
+                                       name="FreeTimeId"
+                                       value="@Model.FreeTimeId"
+                                       hidden />
+                            </div>
+                            <br />
+                            <div class="col-4">
+                                <button type="submit" class="btn btn-success">اعمال کد تخفیف </button>
 
-
-				</div>
-			</div>
-		</div>
-		<div class="col-12 col-lg-3 col-md-12 col-sm-12">
-
-			<div class="card br-20 w-100">
-				<div class="card-body">
-					<div class="row">
-						<div class="col-6">
-							<span class="card-title" style="font-weight: bold; font-size: large;">مبلغ قابل پرداخت</span>
-						</div>
-						<div class="col-6">
-							<span class="text-success" style="font-weight: bold; font-size: medium;"> @Model.FinalTotalPrice.ToNumeric() تومان</span>
-						</div>
-					</div>
-					<br>
-					<div class="row justify-content-start">
-						<div class="col-12  justify-content-start">
-							<div dir="rtl">
-								@*  <div class="form-check my-2">
-									<label class="form-check-label disabled" for="flexRadioDefault1">
-
-									<img src="/assets/images/bank/cardtocard.png" style="width:50px;" />
-									کارت به کارت
-
-									</label>
-									<input class="form-check-input disabled" type="radio" name="flexRadioDefault" id="flexRadioDefault1" disabled>
-
-									</div>*@
-								<div class="form-check-reverse my-2">
-									<label class="form-check-label disabled" for="flexRadioDefault1">
-										@*بانک ملت*@
-										<img src="/assets/images/bank/mellatbank.png" style="width:50px;" />
-										بانک ملت
-									</label>
-									<input class="form-check-input disabled" type="radio" name="flexRadioDefault" id="flexRadioDefault1" disabled>
-
-								</div>
-								<div class="form-check-reverse my-2">
-									<label class="form-check-label" for="flexRadioDefault2">
-										<img src="/assets/images/bank/zarinpal.png" style="width:50px;" />
-
-										زرین پال
+                            </div>
+                            @if (Model.DiscountPercent != 0)
+                            {
+                                <br />
+                                <h5 style="color:green;">  @Model.DiscountPercent درصد کد تخفیف به شما تعلق گرفت</h5>
+                            }
+                        </form>
+                    </div>
 
 
-									</label>
-									<input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
 
-								</div>
-							</div>
+                    @*  <div class="row">
+                    <div class="col-sm-6 col-lg-4 col-md-4 col-6">
+                    <a href="/Payment/ProductPay?ShopCardId=@Model.Id&&AddressId=@Model.Address.Id&&FreeTimeId=@Model.FreeTimeId" class="btn bg-success w-100 py-4 br-20 " style="font-size:16px; border-radius:200px;text-align:center;"> زرین پال</a>
+                    </div>
+                    <div class="col-sm-6 col-lg-4 col-md-4 col-6">
+                    <a class="btn bg-success w-100 py-4 br-20 disabled" style="font-size:26px; border-radius:200px;text-align:center;">ملت</a>
+                    </div>
+                    <div class="col-sm-6 col-lg-4 col-md-4 col-6">
+                    <a class="btn bg-success w-100 py-4 br-20 disabled" style="font-size:26px; border-radius:200px;text-align:center;"> نقدی</a>
+                    </div>
+                    </div>*@
 
-						</div>
-					</div>
-					<br>
-					<div class="row">
-						<p class="text-danger">
-							لطفا قبل از ورود به درگاه پرداخت از خاموش بودن وی پی ان خود اطمینان حاصل فرمایید
-						</p>
-					</div>
-					@*                      <div class="row">
-						<p class="text-danger">
-						لطفا قبل از وارد شدن به درگاه  پرداخت از خاموش بودن VPN خود اطمینان حاصل فرمایید
-						</p>
-						</div>*@
-					<br />
-							<a href="/Payment/ProductPay?ShopCardId=@Model.Id&&AddressId=@Model.Address.Id&&FreeTimeId=@Model.FreeTimeId" class="btn bg-success py-4 br-20 w-100" style="font-size:20px;font-weight:bold; border-radius:200px; text-align:center;  margin-left: auto; margin-right: auto;"> پرداخت </a>
 
-				</div>
-			</div>
-		</div>
-	</div>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 col-lg-3 col-md-12 col-sm-12">
+
+            <div class="card br-20 w-100">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-6">
+                            <span class="card-title" style="font-weight: bold; font-size: large;">مبلغ قابل پرداخت</span>
+                        </div>
+                        <div class="col-6">
+                            <span class="text-success" style="font-weight: bold; font-size: medium;"> @Model.FinalTotalPrice.ToNumeric() تومان</span>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row justify-content-start">
+                        <div class="col-12  justify-content-start">
+                            <div dir="rtl">
+                                @*  <div class="form-check my-2">
+                                <label class="form-check-label disabled" for="flexRadioDefault1">
+
+                                <img src="/assets/images/bank/cardtocard.png" style="width:50px;" />
+                                کارت به کارت
+
+                                </label>
+                                <input class="form-check-input disabled" type="radio" name="flexRadioDefault" id="flexRadioDefault1" disabled>
+
+                                </div>*@
+                                @* <div class="form-check-reverse my-2">
+                                <label class="form-check-label disabled" for="flexRadioDefault1">
+                                <img src="/assets/images/bank/mellatbank.png" style="width:50px;" />
+                                بانک ملت
+                                </label>
+                                <input class="form-check-input disabled" type="radio" name="flexRadioDefault" id="flexRadioDefault1" disabled>
+
+                                </div> *@
+                                @if (Model.FreeTimeTitle == "ساکن آرین (رایگان)")
+                                {
+
+                                   
+                                    <div class="form-check-reverse my-2">
+                                        <label class="form-check-label " for="flexRadioDefault2">
+                                            <img src="/assets/images/bank/zarinpal.png" style="width:50px;"  />
+
+                                            پرداخت درب منزل
+
+
+                                        </label>
+                                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
+
+                                    </div>
+                                    <div class="form-check-reverse my-2">
+                                        <label class="form-check-label" for="flexRadioDefault2">
+                                            <img src="/assets/images/bank/zarinpal.png" style="width:50px;" />
+
+                                            کارت بکارت
+
+
+                                        </label>
+                                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2">
+
+                                    </div>
+                                }
+                                else
+                                {
+
+
+                                    <div class="form-check-reverse my-2">
+                                        <label class="form-check-label disabled" for="flexRadioDefault2">
+                                            <img src="/assets/images/bank/zarinpal.png" style="width:50px;" disabled />
+
+                                            پرداخت درب منزل(غیرفعال)
+
+
+                                        </label>
+                                        <input class="form-check-input disabled" type="radio" name="flexRadioDefault" id="flexRadioDefault2" disabled>
+
+                                    </div>
+                                    <div class="form-check-reverse my-2">
+                                        <label class="form-check-label " for="flexRadioDefault2">
+                                            <img src="/assets/images/bank/zarinpal.png" style="width:50px;" />
+
+                                            کارت بکارت
+
+                                        </label>
+                                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
+
+                                    </div>
+                                }
+                            </div>
+
+                        </div>
+                    </div>
+                    <br>
+                    @* <div class="row">
+                    <p class="text-danger">
+                    لطفا قبل از ورود به درگاه پرداخت از خاموش بودن وی پی ان خود اطمینان حاصل فرمایید
+                    </p>
+                    </div>
+                    *@
+                    <br />
+                    <a href="/Payment/ProductPay?ShopCardId=@Model.Id&&AddressId=@Model.Address.Id&&FreeTimeId=@Model.FreeTimeId" class="btn bg-success py-4 br-20 w-100" style="font-size:20px;font-weight:bold; border-radius:200px; text-align:center;  margin-left: auto; margin-right: auto;"> پرداخت </a>
+
+                </div>
+            </div>
+        </div>
+    </div>
 
 
 </div>
 
 @section Scripts{
-<script>
-	$(document).ready(function () {
-		//// START PRODUCT PAGE
-		if ($(".product-page").length) {
-			$(".product_related .product_related_select").change(function () {
-				var id = $(this).children("option:selected").data("id");
-				var max = $(this).children("option:selected").data("max");
-				var price = $(this).children("option:selected").data("price");
-				$(".product_related .select").removeClass("select");
-				$(this).children("option:selected").addClass("select");
-				$(".add-to-cart").data("product", id);
-				$(".form-count input").val(1).attr("max", max);
-				$(".form-price-value span")
-					.text(formatPrice(price) + " تومان")
-					.data("fee", price);
-			});
+    <script>
+        $(document).ready(function () {
+            //// START PRODUCT PAGE
+            if ($(".product-page").length) {
+                $(".product_related .product_related_select").change(function () {
+                    var id = $(this).children("option:selected").data("id");
+                    var max = $(this).children("option:selected").data("max");
+                    var price = $(this).children("option:selected").data("price");
+                    $(".product_related .select").removeClass("select");
+                    $(this).children("option:selected").addClass("select");
+                    $(".add-to-cart").data("product", id);
+                    $(".form-count input").val(1).attr("max", max);
+                    $(".form-price-value span")
+                        .text(formatPrice(price) + " تومان")
+                        .data("fee", price);
+                });
 
-			var formatPrice = function formatPrice() {
-				var text =
-					arguments.length > 0 && arguments[0] !== undefined
-						? arguments[0]
-						: "";
-				return (text + "")
-					.split("")
-					.reverse()
-					.reduce(function (tmp, char, i) {
-						tmp.push(i > 1 && i % 3 === 0 ? char + "," : char);
-						return tmp;
-					}, [])
-					.reverse()
-					.join("");
-			};
+                var formatPrice = function formatPrice() {
+                    var text =
+                        arguments.length > 0 && arguments[0] !== undefined
+                            ? arguments[0]
+                            : "";
+                    return (text + "")
+                        .split("")
+                        .reverse()
+                        .reduce(function (tmp, char, i) {
+                            tmp.push(i > 1 && i % 3 === 0 ? char + "," : char);
+                            return tmp;
+                        }, [])
+                        .reverse()
+                        .join("");
+                };
 
-			//make progress bar green by percent
-			$.each($(".score_range--child"), function () {
-				var rangeWidth = parseInt($(this).data("range")) + "%";
-				$(this).css({ width: rangeWidth });
-			});
+                //make progress bar green by percent
+                $.each($(".score_range--child"), function () {
+                    var rangeWidth = parseInt($(this).data("range")) + "%";
+                    $(this).css({ width: rangeWidth });
+                });
 
-			// $(".buy-num").change(function() {
-			var changeFormCount = function changeFormCount(step) {
-				return function (e) {
-					e.preventDefault();
-					e.stopPropagation();
-					var buyCount = $('[data-value="buy-count"]');
-					var priceDisplay = $("[data-fee]");
-					var count = parseInt(buyCount.val(), 10) + step;
+                // $(".buy-num").change(function() {
+                var changeFormCount = function changeFormCount(step) {
+                    return function (e) {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        var buyCount = $('[data-value="buy-count"]');
+                        var priceDisplay = $("[data-fee]");
+                        var count = parseInt(buyCount.val(), 10) + step;
 
-					if (count === 0) {
-						count = 1;
-					}
+                        if (count === 0) {
+                            count = 1;
+                        }
 
-					priceDisplay.text(
-						priceDisplay
-							.data("display")
-							.replace(
-								/%price%/g,
-								formatPrice(priceDisplay.data("fee") * count)
-							)
-					);
-					// buyCount.css({
-					//     width: count < 20 ? '16px' : '24px'
-					// });
-					buyCount.val(count);
-				};
-			};
-			// });
+                        priceDisplay.text(
+                            priceDisplay
+                                .data("display")
+                                .replace(
+                                    /%price%/g,
+                                    formatPrice(priceDisplay.data("fee") * count)
+                                )
+                        );
+                        // buyCount.css({
+                        //     width: count < 20 ? '16px' : '24px'
+                        // });
+                        buyCount.val(count);
+                    };
+                };
+                // });
 
-			var highlightActiveRadio = function highlightActiveRadio() {
-				var options = $(".form-option");
-				options.removeClass("checked");
-				options.each(function () {
-					if ($(this).find("input").prop("checked")) {
-						$(this).addClass("checked");
-					}
-				});
-			};
+                var highlightActiveRadio = function highlightActiveRadio() {
+                    var options = $(".form-option");
+                    options.removeClass("checked");
+                    options.each(function () {
+                        if ($(this).find("input").prop("checked")) {
+                            $(this).addClass("checked");
+                        }
+                    });
+                };
 
-			var changeTab = function changeTab(e) {
-				e.preventDefault();
-				e.stopPropagation();
-				$(".tabs-trail [data-tab-action]").removeClass("active");
-				$(this).addClass("active");
-				$(".tab[data-tab]").removeClass("active");
-				$('[data-tab="'.concat($(this).data("tab-action"), '"]')).addClass(
-					"active"
-				);
-			};
+                var changeTab = function changeTab(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    $(".tabs-trail [data-tab-action]").removeClass("active");
+                    $(this).addClass("active");
+                    $(".tab[data-tab]").removeClass("active");
+                    $('[data-tab="'.concat($(this).data("tab-action"), '"]')).addClass(
+                        "active"
+                    );
+                };
 
-			$('[data-action="addCount"]').on("click", changeFormCount(1));
-			$(".buy-num").on("change", changeFormCount(0));
-			$('[data-action="subtractCount"]').on("click", changeFormCount(-1));
-			$('.form-option input[type="radio"]').on(
-				"change",
-				highlightActiveRadio
-			);
-			$(".tabs .tabs-trail [data-tab-action]").on("click", changeTab);
-			//$(".gallery-active").slick({
-			//	slidesToShow: 1,
-			//	slidesToScroll: 1,
-			//	initialSlide: 0,
-			//	autoplay: false,
-			//	autoplaySpeed: 2000,
-			//	pauseOnFocus: true,
-			//	centerMode: false,
-			//	arrows: true,
-			//	asNavFor: ".gallery-thumbnails",
-			//	draggable: false,
-			//	swipe: false,
-			//});
-			//$(".gallery-thumbnails").slick({
-			//	infinite: true,
-			//	slidesToShow: 3,
-			//	slidesToScroll: 1,
-			//	pauseOnFocus: true,
-			//	focusOnSelect: true,
-			//	asNavFor: ".gallery-active",
-			//	prevArrow: $(".prev-custom-arrow"),
-			//	nextArrow: $(".next-custom-arrow"),
-			//});
-			$(".farmer-selector").click(function (e) {
-				e.preventDefault();
-				var commodity = $(this).data("type");
-				var id_product = $(this).data("id");
-				var url = $("head base").attr("href");
-				$.post(
-					url + "farmer/cart-farmers",
-					{
-						commodity: commodity,
-						id_product: id_product,
-					},
-					function (data, status) {
-						$(".alert-modal .modal-inner").html(data);
-						$(".alert-modal").modal("show");
-					}
-				);
-			});
-			$(".addCount").click(function (e) {
-				var $input = $(this).siblings("label").find("input");
-				var val = parseInt($input.val());
-				var max = $input.attr("max");
-				if (val > max) {
-					val = max;
-					alert(
-						"موجودی این محصول تنها " +
-						max +
-						" بسته می باشد.\nامکان خرید بیشتر نمی باشد."
-					);
-				}
-				$input.val(val);
-				var priceDisplay = $("[data-fee]");
-				priceDisplay.text(
-					priceDisplay
-						.data("display")
-						.replace(
-							/%price%/g,
-							formatPrice(priceDisplay.data("fee") * val)
-						)
-				);
-			});
-			$(".form-count input").change(function (e) {
-				// var type = $(this).data('type');
-				var max = $(this).attr("max");
-				var min = $(this).attr("min");
-				var val = parseInt($(this).val());
-				if (val > max) {
-					val = max;
-					alert(
-						"موجودی این محصول تنها " +
-						max +
-						" بسته می باشد.\nامکان خرید بیشتر نمی باشد."
-					);
-				}
-				if (val < min) val = min;
-				$(this).val(val);
-			});
-			$(".lab-reference").click(function (e) {
-				if ($('li[data-tab-action = "laboratory-result"]').length !== 0) {
-					e.preventDefault();
-					$('li[data-tab-action = "laboratory-result"]').addClass("active");
-					$('div[data-tab = "laboratory-result"]').addClass("active");
-					$('li[data-tab-action = "attributes-product"]').removeClass(
-						"active"
-					);
-					$('div[data-tab = "attributes-product"]').removeClass("active");
-					$('li[data-tab-action = "seller"]').removeClass("active");
-					$('div[data-tab = "seller"]').removeClass("active");
-					$("html, body").animate(
-						{
-							scrollTop:
-								$('div[data-tab = "laboratory-result"] img').offset().top -
-								250,
-						},
-						500
-					);
-				}
-			});
-			$(".identity-reference").click(function (e) {
-				$('li[data-tab-action = "attributes-product"]').addClass("active");
-				$('div[data-tab = "attributes-product"]').addClass("active");
-				$('li[data-tab-action = "seller"]').removeClass("active");
-				$('div[data-tab = "seller"]').removeClass("active");
-				$('li[data-tab-action = "laboratory-result"]').removeClass(
-					"active"
-				);
-				$('div[data-tab = "laboratory-result"]').removeClass("active");
-				$("html, body").animate(
-					{
-						scrollTop:
-							$('div[data-tab = "attributes-product"]').offset().top - 250,
-					},
-					500
-				);
-			});
-			// $('.pricing-transparency').click(function (e) {
-			//     $('li[data-tab-action = "attributes-product"]').addClass('active');
-			//     $('div[data-tab = "attributes-product"]').addClass('active');
-			//     $('li[data-tab-action = "seller"]').removeClass('active');
-			//     $('div[data-tab = "seller"]').removeClass('active');
-			//     $('li[data-tab-action = "laboratory-result"]').removeClass('active');
-			//     $('div[data-tab = "laboratory-result"]').removeClass('active');
-			//     $('html, body').animate({
-			//         scrollTop: $('div[data-tab = "attributes-product"] canvas').offset().top-250
-			//     }, 500);
-			// });
+                $('[data-action="addCount"]').on("click", changeFormCount(1));
+                $(".buy-num").on("change", changeFormCount(0));
+                $('[data-action="subtractCount"]').on("click", changeFormCount(-1));
+                $('.form-option input[type="radio"]').on(
+                    "change",
+                    highlightActiveRadio
+                );
+                $(".tabs .tabs-trail [data-tab-action]").on("click", changeTab);
+                //$(".gallery-active").slick({
+                //	slidesToShow: 1,
+                //	slidesToScroll: 1,
+                //	initialSlide: 0,
+                //	autoplay: false,
+                //	autoplaySpeed: 2000,
+                //	pauseOnFocus: true,
+                //	centerMode: false,
+                //	arrows: true,
+                //	asNavFor: ".gallery-thumbnails",
+                //	draggable: false,
+                //	swipe: false,
+                //});
+                //$(".gallery-thumbnails").slick({
+                //	infinite: true,
+                //	slidesToShow: 3,
+                //	slidesToScroll: 1,
+                //	pauseOnFocus: true,
+                //	focusOnSelect: true,
+                //	asNavFor: ".gallery-active",
+                //	prevArrow: $(".prev-custom-arrow"),
+                //	nextArrow: $(".next-custom-arrow"),
+                //});
+                $(".farmer-selector").click(function (e) {
+                    e.preventDefault();
+                    var commodity = $(this).data("type");
+                    var id_product = $(this).data("id");
+                    var url = $("head base").attr("href");
+                    $.post(
+                        url + "farmer/cart-farmers",
+                        {
+                            commodity: commodity,
+                            id_product: id_product,
+                        },
+                        function (data, status) {
+                            $(".alert-modal .modal-inner").html(data);
+                            $(".alert-modal").modal("show");
+                        }
+                    );
+                });
+                $(".addCount").click(function (e) {
+                    var $input = $(this).siblings("label").find("input");
+                    var val = parseInt($input.val());
+                    var max = $input.attr("max");
+                    if (val > max) {
+                        val = max;
+                        alert(
+                            "موجودی این محصول تنها " +
+                            max +
+                            " بسته می باشد.\nامکان خرید بیشتر نمی باشد."
+                        );
+                    }
+                    $input.val(val);
+                    var priceDisplay = $("[data-fee]");
+                    priceDisplay.text(
+                        priceDisplay
+                            .data("display")
+                            .replace(
+                                /%price%/g,
+                                formatPrice(priceDisplay.data("fee") * val)
+                            )
+                    );
+                });
+                $(".form-count input").change(function (e) {
+                    // var type = $(this).data('type');
+                    var max = $(this).attr("max");
+                    var min = $(this).attr("min");
+                    var val = parseInt($(this).val());
+                    if (val > max) {
+                        val = max;
+                        alert(
+                            "موجودی این محصول تنها " +
+                            max +
+                            " بسته می باشد.\nامکان خرید بیشتر نمی باشد."
+                        );
+                    }
+                    if (val < min) val = min;
+                    $(this).val(val);
+                });
+                $(".lab-reference").click(function (e) {
+                    if ($('li[data-tab-action = "laboratory-result"]').length !== 0) {
+                        e.preventDefault();
+                        $('li[data-tab-action = "laboratory-result"]').addClass("active");
+                        $('div[data-tab = "laboratory-result"]').addClass("active");
+                        $('li[data-tab-action = "attributes-product"]').removeClass(
+                            "active"
+                        );
+                        $('div[data-tab = "attributes-product"]').removeClass("active");
+                        $('li[data-tab-action = "seller"]').removeClass("active");
+                        $('div[data-tab = "seller"]').removeClass("active");
+                        $("html, body").animate(
+                            {
+                                scrollTop:
+                                    $('div[data-tab = "laboratory-result"] img').offset().top -
+                                    250,
+                            },
+                            500
+                        );
+                    }
+                });
+                $(".identity-reference").click(function (e) {
+                    $('li[data-tab-action = "attributes-product"]').addClass("active");
+                    $('div[data-tab = "attributes-product"]').addClass("active");
+                    $('li[data-tab-action = "seller"]').removeClass("active");
+                    $('div[data-tab = "seller"]').removeClass("active");
+                    $('li[data-tab-action = "laboratory-result"]').removeClass(
+                        "active"
+                    );
+                    $('div[data-tab = "laboratory-result"]').removeClass("active");
+                    $("html, body").animate(
+                        {
+                            scrollTop:
+                                $('div[data-tab = "attributes-product"]').offset().top - 250,
+                        },
+                        500
+                    );
+                });
+                // $('.pricing-transparency').click(function (e) {
+                //     $('li[data-tab-action = "attributes-product"]').addClass('active');
+                //     $('div[data-tab = "attributes-product"]').addClass('active');
+                //     $('li[data-tab-action = "seller"]').removeClass('active');
+                //     $('div[data-tab = "seller"]').removeClass('active');
+                //     $('li[data-tab-action = "laboratory-result"]').removeClass('active');
+                //     $('div[data-tab = "laboratory-result"]').removeClass('active');
+                //     $('html, body').animate({
+                //         scrollTop: $('div[data-tab = "attributes-product"] canvas').offset().top-250
+                //     }, 500);
+                // });
 
-			//change like-image based on data-status(liked or not liked)
-			var homeUrl = $("head base").attr("href");
-			$('.comment_thumb_img[data-status="true"]').attr(
-				"src",
-				homeUrl + "images/template/thumbs-up@2xactive.png"
-			);
-			$('.comment_thumb_img[data-status="true"]').addClass("is-liked");
-			$('.comment_thumb_img[data-status="false"]').attr(
-				"src",
-				homeUrl + "images/template/thumbs-up@2x.png"
-			);
-			$('.comment_thumb_img[data-status="false"]').removeClass("is-liked");
+                //change like-image based on data-status(liked or not liked)
+                var homeUrl = $("head base").attr("href");
+                $('.comment_thumb_img[data-status="true"]').attr(
+                    "src",
+                    homeUrl + "images/template/thumbs-up@2xactive.png"
+                );
+                $('.comment_thumb_img[data-status="true"]').addClass("is-liked");
+                $('.comment_thumb_img[data-status="false"]').attr(
+                    "src",
+                    homeUrl + "images/template/thumbs-up@2x.png"
+                );
+                $('.comment_thumb_img[data-status="false"]').removeClass("is-liked");
 
-			$(".comment_thumb_img").on("click", function () {
-				if ($(".comment_thumb_a").data("link") === null) {
-					alert("لطفا برای ثبت نظر ابتدا وارد حساب کاربری شوید.");
-				} else {
-					var homeUrl = $("head base").attr("href");
-					var likes_count = $(this).parent().siblings(".comment_thumb_p");
-					var id_answer = $(this).parents(".review__comment").attr("id");
-					// change action based on data-status
-					var action = $(this).data("status") === false ? "like" : "clear";
-					if ($(this).data("status") === false) {
-						$(this).data("status", true);
-					} else {
-						$(this).data("status", false);
-					}
-					//showing some UI for liking a comment
-					$(this).toggleClass("is-liked");
-					if ($(this).hasClass("is-liked")) {
-						likes_count.html(parseInt(likes_count.html()) + 1);
-						$(this).attr(
-							"src",
-							homeUrl + "images/template/thumbs-up@2xactive.png"
-						);
-					} else {
-						likes_count.html(parseInt(likes_count.html()) - 1);
-						$(this).attr(
-							"src",
-							homeUrl + "images/template/thumbs-up@2x.png"
-						);
-					}
-					// ajax to send action type and id_answer
-					$.post(
-						homeUrl + "review/like",
-						{
-							id_answer: id_answer,
-							action: action,
-						},
-						function (data, status) {
-							$(this).data("status", data);
-						}
-					);
-				}
-			});
-		}
-		//// END PRODUCT PAGE
-	});
-</script>
-<script asp-append-version="true">
+                $(".comment_thumb_img").on("click", function () {
+                    if ($(".comment_thumb_a").data("link") === null) {
+                        alert("لطفا برای ثبت نظر ابتدا وارد حساب کاربری شوید.");
+                    } else {
+                        var homeUrl = $("head base").attr("href");
+                        var likes_count = $(this).parent().siblings(".comment_thumb_p");
+                        var id_answer = $(this).parents(".review__comment").attr("id");
+                        // change action based on data-status
+                        var action = $(this).data("status") === false ? "like" : "clear";
+                        if ($(this).data("status") === false) {
+                            $(this).data("status", true);
+                        } else {
+                            $(this).data("status", false);
+                        }
+                        //showing some UI for liking a comment
+                        $(this).toggleClass("is-liked");
+                        if ($(this).hasClass("is-liked")) {
+                            likes_count.html(parseInt(likes_count.html()) + 1);
+                            $(this).attr(
+                                "src",
+                                homeUrl + "images/template/thumbs-up@2xactive.png"
+                            );
+                        } else {
+                            likes_count.html(parseInt(likes_count.html()) - 1);
+                            $(this).attr(
+                                "src",
+                                homeUrl + "images/template/thumbs-up@2x.png"
+                            );
+                        }
+                        // ajax to send action type and id_answer
+                        $.post(
+                            homeUrl + "review/like",
+                            {
+                                id_answer: id_answer,
+                                action: action,
+                            },
+                            function (data, status) {
+                                $(this).data("status", data);
+                            }
+                        );
+                    }
+                });
+            }
+            //// END PRODUCT PAGE
+        });
+    </script>
+    <script asp-append-version="true">
 
 
-	if ($('#DiscountCheckBox').is(':checked')) {
+        if ($('#DiscountCheckBox').is(':checked')) {
 
-		$('#Discount2').attr("hidden", false);
-	}
+            $('#Discount2').attr("hidden", false);
+        }
 
-	function func1() {
-		console.log('hi');
+        function func1() {
+            console.log('hi');
 
-		if ($('#DiscountCheckBox').is(':checked')) {
+            if ($('#DiscountCheckBox').is(':checked')) {
 
-			$('#Discount2').attr("hidden", false);
-		}
-		else {
-			console.log('hi');
+                $('#Discount2').attr("hidden", false);
+            }
+            else {
+                console.log('hi');
 
-			$('#Discount2').attr("hidden", true);
-		}
-	}
-</script>
+                $('#Discount2').attr("hidden", true);
+            }
+        }
+    </script>
 }

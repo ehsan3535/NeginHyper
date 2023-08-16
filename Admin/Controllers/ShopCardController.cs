@@ -186,22 +186,25 @@ namespace Client.Controllers
             var User = await userManager.FindByNameAsync(HttpContext.User.Identity.Name);
             var model = await shopcardrepo.TableNoTracking.Where(x => x.UserId == User.Id).ProjectTo<ShopCardDto>(mapper.ConfigurationProvider).FirstOrDefaultAsync(cancellationToken);
             model.PostPrice = setting.PostPrice;
+            var Address = AddressRepo.TableNoTracking.Where(x => x.Id == AddressId).FirstOrDefault();
             var AddressCity = await AddressRepo.TableNoTracking.Where(x => x.Id == AddressId).Select(x => x.City).FirstOrDefaultAsync();
-            if (AddressCity.ProvinceId == Guid.Parse("d25d4546-7137-ee11-81b3-f0761c623f70"))
-            {
-                model.FreeTimes = freeTimeRepo.TableNoTracking.Where(x => x.Out == false).ProjectTo<FreeTimeDto>(mapper.ConfigurationProvider).ToList();
-                //foreach (var item in model.FreeTimes.Where(x=>x.Day == DateTime.Now.Date.ToString() && x.ToHour.ToInt() <= DateTime.Now.Hour))
-                //{
-                //    item.Free = false;
-                //    //this will be false temperory.not in database.
-                //}
-            }
-            else
+            Guid ShirazId = Guid.Parse("df5d4546-7137-ee11-81b3-f0761c623f70");
+            Guid MarvdashtId = Guid.Parse("dd5d4546-7137-ee11-81b3-f0761c623f70");
+
+            if (AddressCity.Id == ShirazId && Address.FromArian)
             {
                 model.FreeTimes = freeTimeRepo.TableNoTracking.Where(x => x.Out).ProjectTo<FreeTimeDto>(mapper.ConfigurationProvider).ToList();
             }
+            else if (AddressCity.Id == ShirazId || AddressCity.Id == MarvdashtId)
+            {
+                model.FreeTimes = freeTimeRepo.TableNoTracking.Where(x => x.Out).ProjectTo<FreeTimeDto>(mapper.ConfigurationProvider).ToList();
+            }
+            else
+            {
+                model.FreeTimes = freeTimeRepo.TableNoTracking.Where(x => x.Out && x.Title != "ساکن آرین (رایگان)" && x.Title != "ارسال با اسنپ باکس").ProjectTo<FreeTimeDto>(mapper.ConfigurationProvider).ToList();
+            }
 
-            if (model.TotalPrice >= 500000 || AddressCity.ProvinceId == Guid.Parse("1D0048DC-0810-EE11-A9D7-8CA6B29B3F38"))
+            if (model.TotalPrice >= 500000 || AddressCity.Id == Guid.Parse("d25d4546-7137-ee11-81b3-f0761c623f70"))
             {
                 model.FinalTotalPrice = model.TotalPrice;
             }
@@ -209,8 +212,8 @@ namespace Client.Controllers
             {
                 model.FinalTotalPrice = model.TotalPrice + model.PostPrice;
             }
-            var shopcard = model.ToEntity(mapper);
-            shopcardrepo.Update(shopcard);
+            //var shopcard = model.ToEntity(mapper);
+            //shopcardrepo.Update(shopcard);
             model.AddressId = AddressId;
             return View(model);
         }
@@ -226,7 +229,7 @@ namespace Client.Controllers
             model.AddressId = AddressId;
             if (FreeTimeId == null)
             {
-                notification.AddErrorToastMessage("ابتدا یک زمان برای ارسال انتخاب کنید");
+                notification.AddErrorToastMessage("ابتدا یک روش برای ارسال انتخاب کنید:");
                 return RedirectToAction("ShopCard_Detail3", "ShopCard", new { AddressId = model.AddressId });
             }
 
@@ -236,13 +239,24 @@ namespace Client.Controllers
 
             var freeTime = freeTimeRepo.GetById(FreeTimeId);
             model.PostPrice = setting.PostPrice;
-            if (model.TotalPrice >= 500000)
+            var Shopcard = await shopcardrepo.TableNoTracking.Where(x => x.UserId == User.Id).FirstOrDefaultAsync(cancellationToken);
+            if (freeTime.Out)
             {
                 model.FinalTotalPrice = model.TotalPrice;
+                Shopcard.FinalTotalPrice = model.TotalPrice;
+                shopcardrepo.Update(Shopcard);
+            }
+            else if (model.TotalPrice >= 500000)
+            {
+                model.FinalTotalPrice = model.TotalPrice;
+                Shopcard.FinalTotalPrice = model.TotalPrice;
+                shopcardrepo.Update(Shopcard);
             }
             else
             {
                 model.FinalTotalPrice = model.TotalPrice + model.PostPrice;
+                Shopcard.FinalTotalPrice = model.TotalPrice + model.PostPrice;
+                shopcardrepo.Update(Shopcard);
             }
             model.Addresses = await AddressRepo.TableNoTracking.Where(x => x.ClientId == User.Id).ProjectTo<AddressDto>(mapper.ConfigurationProvider).ToListAsync();
             model.Address.Id = model.AddressId ?? Guid.Empty;

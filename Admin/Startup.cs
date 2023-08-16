@@ -37,7 +37,7 @@ namespace Admin
             services.ConfigureApplicationCookie(delegate (CookieAuthenticationOptions options)
             {
                 options.Cookie.HttpOnly = true;
-                options.ExpireTimeSpan = TimeSpan.FromMinutes(60);
+                options.ExpireTimeSpan = TimeSpan.FromDays(60);
                 options.SlidingExpiration = true;
                 options.LoginPath = "/hoem/index";
                 options.LogoutPath = "/auth/Logout";

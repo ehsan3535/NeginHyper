@@ -66,14 +66,14 @@
                                                     @item.Name
                                                 </span>
                                                 <br>
+                                                
+                                                @if (@item.FromArian)
+                                                {
+                                                <p stye="color:blue;"> ساکن آرین</p>
+                                                }
                                                 <label class="form-check-label" for="@item.Id">
-                                                    @item.CityName @if (@item.FromArian)
-                                                    {
-                                                        <br />
 
-                                                        <p> ساکن آرین</p>
-                                                    }
-                                                    <br />@item.Location <br /> کدپستی: @item.PostalCode <br />واحد: @item.vahed <br /> پلاک : @item.pelak
+                                                   شهر: @item.CityName <br/>نشانی: @item.Location <br /> کدپستی: @item.PostalCode <br />واحد: @item.vahed <br /> پلاک : @item.pelak
                                                 </label>
                                                 <br>
                                                 <div class="row justify-content-end">
@@ -119,7 +119,7 @@
 
                 <div class="card br-20">
                     <div class="card-body">
-                        <div class="row">
+                      @*   <div class="row">
                             <div class="col-6">
                                 <span class="card-title" style="font-weight: bold; font-size: large;">مبلغ کل</span>
                             </div>
@@ -148,7 +148,7 @@
                         <br>
 
                         <hr>
-                        <br>
+                        <br> *@
 
                         <div class="row">
                             <div class="col-6">
@@ -297,7 +297,6 @@
                                         <input type="checkbox"
                                                asp-for="FromArian" 
                                                value="false"
-                                              
                                                />
                                         <label for="FromArian">
 
@@ -348,26 +347,17 @@
 
     <script>
 
-        // function func2() {
-        //    console.log($("#FromArian").val());
-        //     if ($('#FromArian').is(':checked')) {
-
-        //         $("#FromArian").attr('value', true);
-        //    }
-        //    else {
-        //         $("#FromArian").attr('value', false);
-        //    }
-        // }
-
+       
         function arians() {
             var cityid = $('#carModelDropDown').find(":selected").val();
-
+            //اگر شهر شیراز باشه چک باکس نمایش داده میشه
             if (cityid == "df5d4546-7137-ee11-81b3-f0761c623f70") {
                 $("#arian").attr('hidden', false);
-            }
+            }//اگه شیراز نباشه و یا از شیراز برداشته بشه چک باکس مخفی بشه و تیک برداشته بشه و فالس هم بشه
             else {
                 $("#arian").attr('hidden', true);
                 $("#FromArian").attr('value', false);
+                //$("#FromArian").attr('checked', false);
                 document.getElementById("FromArian").checked = false;
                 console.log($("#FromArian").val());
             }

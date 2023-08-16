@@ -160,7 +160,7 @@ namespace Services.DataInitializer
                     "                      is a little bit longer.",
 
                 });
-               
+
             }
             if (!Productrepo.TableNoTracking.Any())
             {
@@ -306,6 +306,54 @@ namespace Services.DataInitializer
                         });
                     }
                 }
+            }
+            if (!freeTimeRepo.TableNoTracking.Where(x => x.Out == true).Any())
+            {
+                freeTimeRepo.Add(new FreeTime
+                {
+                    Day = "0",
+                    FromHour = "0",
+                    ToHour = "0",
+                    Out = true,
+                    Free = true,
+                    Title = "پست پیشتاز(حداکثر ۵ روز کاری)",
+                });
+                freeTimeRepo.Add(new FreeTime
+                {
+                    Day = "0",
+                    FromHour = "0",
+                    ToHour = "0",
+                    Out = true,
+                    Free = true,
+                    Title = "تیپاکس(۴۸ تا ۷۲ ساعت)",
+                });
+                freeTimeRepo.Add(new FreeTime
+                {
+                    Day = "0",
+                    FromHour = "0",
+                    ToHour = "0",
+                    Out = true,
+                    Free = true,
+                    Title = "ساکن آرین (رایگان)",
+                });
+                freeTimeRepo.Add(new FreeTime
+                {
+                    Day = "0",
+                    FromHour = "0",
+                    ToHour = "0",
+                    Out = true,
+                    Free = true,
+                    Title = "ارسال با اسنپ باکس",
+                });
+                freeTimeRepo.Add(new FreeTime
+                {
+                    Day = "0",
+                    FromHour = "0",
+                    ToHour = "0",
+                    Out = true,
+                    Free = true,
+                    Title = "ارسال با اسنپ باکس",
+                });
             }
             if (!Orderrepo.TableNoTracking.Any())
             {
