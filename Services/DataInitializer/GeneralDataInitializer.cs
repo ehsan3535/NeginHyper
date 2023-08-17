@@ -355,7 +355,7 @@ namespace Services.DataInitializer
                     Title = "ارسال با اسنپ باکس",
                 });
             }
-            if (!Orderrepo.TableNoTracking.Any())
+        /*    if (!Orderrepo.TableNoTracking.Any())
             {
                 Orderrepo.Add(new Order
                 {
@@ -391,7 +391,7 @@ namespace Services.DataInitializer
                     OrderId = Orderrepo.TableNoTracking.FirstOrDefault(x => x.TotalPrice == 200).Id,
                     CreationDateTime = DateTime.Now
                 });
-            }
+            }*/
             if (!Notificationrepo.TableNoTracking.Any())
             {
                 Notificationrepo.Add(new Notification

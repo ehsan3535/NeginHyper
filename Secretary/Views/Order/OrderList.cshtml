@@ -46,9 +46,9 @@
                             <tr>
                                 <th><i class="icon-energy"></i></th>
                                 <th>نام خریدار</th>
-                                <th>مبلغ کل سبد</th>
-                                <th> وضعیت</th>
-                                <th> زمان ارسال</th>
+                                <th>مبلغ کل</th>
+                                <th>وضعیت</th>
+                                <th>روش ارسال</th>
                                 <th>شماره فاکتور</th>
                                 <th>تخفیف</th>
                                 <th>تغییر وضعیت به</th>
@@ -103,7 +103,7 @@
                                             </td>
                                         }
                                         <td>
-                                            @if (item.FreeTimeDay == "1")
+                                           @*  @if (item.FreeTimeDay == "1")
                                             {
                                                 <span>
                                                     ساعت @item.FreeTimeFromHour تا @item.FreeTimeToHour - شنبه
@@ -144,8 +144,10 @@
                                                 <span>
                                                     ساعت @item.FreeTimeFromHour تا @item.FreeTimeToHour - جمعه
                                                 </span>
-                                            }
-
+                                            } *@
+                                            <span>
+                                                 @item.FreeTimeTitle
+                                            </span>
                                         </td>
                                         <td>@item.FactorNumber</td>
                                         <td>@item.DiscountPercent %</td>
@@ -173,20 +175,20 @@
                                                 فاکتور
                                             </a>
                                             <br>
-                                            <a href="/Order/OrderDetail?UserId=@item.UserId" class="btn btn-success btn-round">
+                                            <a href="/Order/OrderDetail?OrderId=@item.Id" class="btn btn-success btn-round">
                                                 <i class="icon-eyeglass"></i>
                                                 سفارشات
                                             </a>
                                             <br>
                                             <a href="/auth/UserDetail?id=@item.UserId" class="btn btn-info btn-round">
                                                 <i class="icon-note"></i>
-                                                آدرس و مشخصات مشتری
+                                                مشخصات مشتری
                                             </a>
-                                            <br>
+                                            @* <br>
                                             <a href="/Order/DeleteOrder?Id=@item.Id" class="btn btn-danger btn-round btn-noty-with-buttons">
                                                 <i class="icon-trash"></i>
                                                 حذف
-                                            </a>
+                                            </a> *@
                                         </td>
 
                                     </tr>

@@ -50,44 +50,36 @@ namespace Admin.Controllers
             this.userManager = userManager;
             this.notification = notification;
         }
-
         public async Task<IActionResult> OrderList(CancellationToken cancellationToken)
-
         {
             var model = await Orderripo.TableNoTracking.ProjectTo<OrderDto>(mapper.ConfigurationProvider).ToListAsync(cancellationToken);
             return View(model);
         }
 
-        public async Task<IActionResult> OrderDetail(Guid UserId, CancellationToken cancellationToken)
+        public async Task<IActionResult> OrderDetail(Guid OrderId, CancellationToken cancellationToken)
         {
-            var model = await Orderripo.TableNoTracking.Where(x => x.UserId == UserId).ProjectTo<OrderDto>(mapper.ConfigurationProvider).FirstOrDefaultAsync(cancellationToken);
-            if (model != null)
-            {
-                model.OrderDetails = await OrderDetailripo.TableNoTracking.Where(x => x.OrderId == model.Id).ProjectTo<OrderDetailDto>(mapper.ConfigurationProvider).ToListAsync(cancellationToken);
-                return View(model);
-            }
-            return View();
+            var model = await Orderripo.TableNoTracking.Where(x => x.Id == OrderId).ProjectTo<OrderDto>(mapper.ConfigurationProvider).FirstOrDefaultAsync(cancellationToken);
+            model.OrderDetails = await OrderDetailripo.TableNoTracking.Where(x => x.OrderId == OrderId).ProjectTo<OrderDetailDto>(mapper.ConfigurationProvider).ToListAsync(cancellationToken);
+            return View(model);
         }
-        public async Task<IActionResult> DeleteOrder(Guid Id, CancellationToken cancellationToken)
+       /* public async Task<IActionResult> DeleteOrder(Guid Id, CancellationToken cancellationToken)
         {
-            var User = await userManager.FindByNameAsync(HttpContext.User.Identity.Name);
-            var model = await Orderripo.TableNoTracking.Where(x => x.UserId == User.Id).FirstOrDefaultAsync(cancellationToken);
-            var orderdateillist = OrderDetailripo.Entities.ToList();
+            var model = await Orderripo.TableNoTracking.Where(x => x.Id == Id).FirstOrDefaultAsync(cancellationToken);
+            var orderdateillist = await OrderDetailripo.TableNoTracking.Where(x => x.OrderId == model.Id).ToListAsync(cancellationToken);
 
-            var NewOrderDetailList = new List<OrderDetail>();
             foreach (var item in orderdateillist)
             {
-                NewOrderDetailList.Add(item);
+                item.Add(item);
             }
             OrderDetailripo.DeleteRange(NewOrderDetailList);
             model.TotalPrice = 0;
             await Orderripo.UpdateAsync(model, cancellationToken);
             return RedirectToAction(nameof(OrderList));
-        }
+        }*/
         [HttpPost]
         public async Task<IActionResult> ChangeStatus(OrderDto Dto, CancellationToken cancellationToken)
         {
-            
+
             var Order = Orderripo.GetById(Dto.Id);
             Order.PaymentStatus = Dto.PaymentStatus;
             await Orderripo.UpdateAsync(Order, cancellationToken);
@@ -100,7 +92,7 @@ namespace Admin.Controllers
         public async Task<IActionResult> Invoice(Guid OrderId, CancellationToken cancellationToken)
         {
             var order = await Orderripo.TableNoTracking.Where(x => x.Id == OrderId).ProjectTo<OrderDto>(mapper.ConfigurationProvider).FirstOrDefaultAsync(cancellationToken);
-            var User = await userManager.Users.FirstOrDefaultAsync(x=>x.Id == order.UserId);
+            var User = await userManager.Users.FirstOrDefaultAsync(x => x.Id == order.UserId);
             var model = await OrderDetailripo.TableNoTracking.Where(x => x.OrderId == OrderId).ProjectTo<OrderDetailDto>(mapper.ConfigurationProvider).ToListAsync(cancellationToken);
 
             var Address = await AddressRepo.TableNoTracking.FirstOrDefaultAsync(t => t.Id == order.AddressId, cancellationToken);

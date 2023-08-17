@@ -41,7 +41,7 @@
                                 <div class="card shadow my-2">
                                     <h5 class="card-header">@item.CreationDateTime.ToLongPersianDateString()</h5>
                                     <div class="card-body">
-                                        <h5 class="card-title">قیمت پرداختی : @item.TotalPrice.ToNumeric() </h5>
+                                        <h5 class="card-title">قیمت : @item.TotalPrice.ToNumeric() </h5>
                                         <p class="card-text"> وضعیت : @item.PaymentStatus.ToDisplay() </p>
                                         <a href="/Order/Invoice?OrderId=@item.Id" class="btn bg-success">مشاهده فاکتور </a>
                                     </div>

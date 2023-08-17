@@ -14,13 +14,12 @@ namespace Client.Models.Orders
         public string UserAddress { get; set; }
         public int TotalPrice { get; set; }
         public int FactorNumber { get; set; }
-
         public int DiscountPercent { get; set; }
         public PaymentStatus PaymentStatus { get; set; }
         public List<OrderDetailDto> OrderDetails { get; set; }
         public DateTime CreationDateTime { get; set; }
-
-
+        public string PaymentImg { get; set; }
+        public IFormFile File { get; set; }
         public int PostPrice { get; set; }
         public Guid? AddressId { get; set; }
         public Guid? FreeTimeId { get; set; }

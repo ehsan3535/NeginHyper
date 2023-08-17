@@ -85,6 +85,20 @@
                                                 <i class="icon-eyeglass"></i>
                                                 مشاهده محصول
                                             </a>
+                                            @if (Model.PaymentImg != null)
+                                            {
+                                                    
+                                            <a href="@Model.PaymentImg" class="btn btn-success btn-round">
+                                                <i class="icon-eyeglass"></i>
+                                                رسید پرداخت
+                                            </a>
+                                            }
+                                            else
+                                            {
+                                                <a href="#" class="btn btn-danger btn-round">
+                                                    رسید ندارد
+                                                </a>
+                                            }
                                         </td>
                                     </tr>
                                 }

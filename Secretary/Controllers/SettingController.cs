@@ -42,6 +42,11 @@ namespace Secretary.Controllers
         public async Task<IActionResult> Setting(Guid? settingId, CancellationToken cancellationToken)
         {
             var model = await settingrepo.TableNoTracking.ProjectTo<SettingDto>(mapper.ConfigurationProvider).FirstOrDefaultAsync(cancellationToken);
+            if (model.SeggestDate == DateTime.MinValue)
+            {
+                //for eror
+                model.SeggestDate = DateTime.Now;
+            }
             return View(model);
         }
         [HttpPost]

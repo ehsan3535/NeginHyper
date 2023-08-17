@@ -8,9 +8,11 @@ using Data.Repositories;
 using Dto.Payment;
 using Entities;
 using Entities.Address;
+using Entities.FreeTime;
 using Entities.Orders;
 using Entities.Product;
 using Entities.ShopCards;
+using Humanizer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -193,6 +195,122 @@ namespace Client.Controllers
             User.TotalPrice = setting.PostPrice + ShopCard.TotalPrice;
             User.ShopcardId = ShopCard.Id;
             return View(User);
+        }
+        [HttpPost]
+        public async Task<IActionResult> SubmitOrder(SubmitOrderDto Dto, CancellationToken cancellationToken)
+        {
+            var User = await userManager.FindByNameAsync(HttpContext.User.Identity.Name);
+            var setting = await settingrepo.TableNoTracking.FirstOrDefaultAsync();
+            var address = await addressrepo.TableNoTracking.FirstOrDefaultAsync(x => x.Id == Dto.AddressId);
+            var ShopCard = await ShopCardRepo.TableNoTracking.FirstOrDefaultAsync(x => x.Id == Dto.ShopCardId && x.UserId == User.Id);
+            if (ShopCard != null)
+            {
+                var ShopCardDetail = await ShopCardDetailRepo.TableNoTracking.Where(x => x.ShopCardId == Dto.ShopCardId).ToListAsync(cancellationToken);
+                var orderlistCount = OrderRepo.TableNoTracking.Count();
+                var order = new Order()
+                {
+                    PaymentStatus = Entities.Constants.PaymentStatus.Cash,
+                    TotalPrice = 0,
+                    UserId = User.Id,
+                    AddressId = Dto.AddressId,
+                    FreeTimeId = Dto.FreeTimeId,
+                    DiscountPercent = ShopCard.DiscountPercent,
+                    CreationDateTime = DateTime.Now,
+                    FactorNumber = 1001 + orderlistCount
+                };
+
+                if (Dto.PaymentType == "cartTocart")
+                {
+                    order.PaymentStatus = Entities.Constants.PaymentStatus.Waiting;
+                    if (Dto.File != null)
+                    {
+                        order.PaymentImg = UploadImage.SaveImage(Dto.File, "PaymentImage");
+                        order.PaymentStatus = Entities.Constants.PaymentStatus.Payed;
+                    }
+                }
+                OrderRepo.Add(order);
+                //یکی از لیست های زیر برای اپدیت اوردر دیتیل ریپازیتوری هست و اون یکی برای اد کردنه
+                var Listorderdetail1 = new List<OrderDetail>();
+                var Listorderdetail2 = new List<OrderDetail>();
+                var Product = new Products();
+                var ProductList = new List<Products>();
+                string SMS_ProductList = "";
+                foreach (var item in ShopCardDetail)
+                {
+                    Product = new();
+                    Product = await productrepo.TableNoTracking.FirstOrDefaultAsync(x => x.Id == item.ProductsId);
+                    Product.Count -= item.Count;
+                    ProductList.Add(Product);
+                    SMS_ProductList += item.Count + "عدد " + Product.Name + " , " + "\n";
+
+                    var RepeatedOrderDetail = OrderDetailRepo.TableNoTracking.Where(x => x.OrderId == order.Id && x.ProductsId == item.ProductsId).FirstOrDefault();
+                    if (RepeatedOrderDetail != null)
+                    {
+                        RepeatedOrderDetail.Count += item.Count;
+                        RepeatedOrderDetail.CreationDateTime = item.CreationDateTime;
+                        Listorderdetail1.Add(RepeatedOrderDetail);
+                    }
+                    else
+                    {
+                        var neworderdetail = new OrderDetail()
+                        {
+                            OrderId = order.Id,
+                            ProductsId = item.ProductsId,
+                            CreationDateTime = DateTime.Now,
+                            Price = item.Price,
+                            Count = item.Count,
+                        };
+                        Listorderdetail2.Add(neworderdetail);
+                    }
+                }
+                await productrepo.UpdateRangeAsync(ProductList, cancellationToken);
+                order.TotalPrice += ShopCard.TotalPrice;
+                if (Listorderdetail1 != null)
+                {
+                    OrderDetailRepo.UpdateRange(Listorderdetail1);
+                }
+                if (Listorderdetail2 != null)
+                {
+                    OrderDetailRepo.AddRange(Listorderdetail2);
+                }
+                ShopCardDetailRepo.DeleteRange(ShopCardDetail);
+
+                ShopCard.TotalPrice = 0;
+                ShopCard.FinalTotalPrice = 0;
+                ShopCard.DiscountPercent = 0;
+                ShopCardRepo.Update(ShopCard);
+                OrderRepo.Update(order);
+                notification.AddSuccessToastMessage("سفارش با موفقیت ثبت شد");
+                Guid ShirazId = Guid.Parse("df5d4546-7137-ee11-81b3-f0761c623f70");
+                Guid MarvdashtId = Guid.Parse("dd5d4546-7137-ee11-81b3-f0761c623f70");
+
+                MeliPayamak.Simple_Rest(User.PhoneNumber, $"نگین هایپری عزیز\nسفارشتان با موفقیت ثبت شد\n" +
+                    $"مشاهده وضعیت سفارش:\nNeginHyper.Com/Order/OrderList\nشماره تماس:\n09387285366");
+
+                if (address.FromArian)
+                {
+                    MeliPayamak.Simple_Rest(setting.PHoneNumber1, "سفارش ازآرین ثبت شد" + "\n" + "Admin.NeginHyper.com");
+                    MeliPayamak.Simple_Rest(setting.PHoneNumber2, "سفارش ازآرین ثبت شد" + "\n" + "Admin.NeginHyper.com");
+                }
+                else if (address.CityId == MarvdashtId)
+                {
+                    MeliPayamak.Simple_Rest(setting.PHoneNumber1, "سفارش مرودشت ثبت شد" + "\n" + "Admin.NeginHyper.com");
+                    MeliPayamak.Simple_Rest(setting.PHoneNumber2, "سفارش مرودشت ثبت شد" + "\n" + "Admin.NeginHyper.com");
+                }
+                else if (address.CityId == ShirazId)
+                {
+                    MeliPayamak.Simple_Rest(setting.PHoneNumber1, "سفارش ازشیراز ثبت شد" + "\n" + "Admin.NeginHyper.com");
+                    MeliPayamak.Simple_Rest(setting.PHoneNumber2, "سفارش ازشیراز ثبت شد" + "\n" + "Admin.NeginHyper.com");
+                }
+                else
+                {
+                    MeliPayamak.Simple_Rest(setting.PHoneNumber1, "سفارش شهرستان ثبت شد" + "\n" + "Admin.NeginHyper.com");
+                    MeliPayamak.Simple_Rest(setting.PHoneNumber2, "سفارش شهرستان ثبت شد" + "\n" + "Admin.NeginHyper.com");
+                }
+                return RedirectToAction("OrderList", "Order");
+            }
+            notification.AddErrorToastMessage("ثبت سفارش با مشکل مواجه شد");
+            return RedirectToAction("index", "Home");
         }
     }
 }

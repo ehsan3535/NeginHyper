@@ -100,7 +100,7 @@
                             <span class="card-title" style="font-weight: bold; font-size:x-large;">هزینه ارسال</span>
                         </div>
 
-                        @if (Model.FreeTimeTitle == "تیپاکس(۴۸ تا ۷۲ ساعت)" || Model.FreeTimeTitle == "پست پیشتاز(حداکثر 5 روز کاری)")
+                        @if (Model.FreeTimeTitle == "تیپاکس(48 تا 72 ساعت)" || Model.FreeTimeTitle == "پست پیشتاز(حداکثر 5 روز کاری)")
                         {
                             <div class="col-6">
                                 <span style=" font-size: medium;">
@@ -221,6 +221,8 @@
                         </div>
                     </div>
                     <br>
+                    <form enctype="multipart/form-data" asp-controller="Payment" asp-action="SubmitOrder" method="post">
+
                     <div class="row justify-content-start">
                         <div class="col-12  justify-content-start">
                             <div dir="rtl">
@@ -245,16 +247,16 @@
                                 @if (Model.FreeTimeTitle == "ساکن آرین (رایگان)")
                                 {
 
-                                   
+
                                     <div class="form-check-reverse my-2">
                                         <label class="form-check-label " for="flexRadioDefault2">
-                                            <img src="/assets/images/bank/zarinpal.png" style="width:50px;"  />
+                                            <img src="/assets/images/bank/zarinpal.png" style="width:50px;" />
 
                                             پرداخت درب منزل
 
 
                                         </label>
-                                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
+                                            <input class="form-check-input" type="radio" value="cash" name="PaymentType" id="PayWay" onchange="CartBox2()" checked>
 
                                     </div>
                                     <div class="form-check-reverse my-2">
@@ -265,14 +267,24 @@
 
 
                                         </label>
-                                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2">
+                                            <input class="form-check-input" type="radio" name="PaymentType" value="cartTocart" id="PayWay2" onchange="CartBox()">
+                                       
+                                    </div>
+                                    <br />
 
+                                    <div class="border p-1" id="CardToCard" hidden>
+
+                                        <h5>6037998133700277</h5>
+                                        <h6>بنام احسان حق جو </h6>
+                                        <h6>پس از کارت بکارت عکس رسید را در قسمت زیر وارد کنید </h6>
+                                        <div class="form-group relative">
+                                            <input asp-for="File" type="file" class="form-control">
+                                            <div class="help-block"></div>
+                                        </div><!-- /.form-group -->
                                     </div>
                                 }
                                 else
                                 {
-
-
                                     <div class="form-check-reverse my-2">
                                         <label class="form-check-label disabled" for="flexRadioDefault2">
                                             <img src="/assets/images/bank/zarinpal.png" style="width:50px;" disabled />
@@ -281,7 +293,7 @@
 
 
                                         </label>
-                                        <input class="form-check-input disabled" type="radio" name="flexRadioDefault" id="flexRadioDefault2" disabled>
+                                            <input class="form-check-input disabled" type="radio" name="PaymentType" value="cash" id="flexRadioDefault2" disabled>
 
                                     </div>
                                     <div class="form-check-reverse my-2">
@@ -291,24 +303,40 @@
                                             کارت بکارت
 
                                         </label>
-                                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
+                                            <input class="form-check-input" type="radio" name="PaymentType" value="cartTocart" id="flexRadioDefault2" checked>
 
+                                       
+                                    </div>
+                                        <br />
+                                    <div class="border p-1" >
+
+                                        <h5>6037998133700277</h5>
+                                        <h6>بنام احسان حق جو </h6>
+                                        <h6>پس از کارت بکارت عکس رسید را در قسمت زیر وارد کنید </h6>
+                                        <div class="form-group relative">
+                                            <input name="File" type="file" class="form-control">
+                                            <div class="help-block"></div>
+                                        </div><!-- /.form-group -->
                                     </div>
                                 }
                             </div>
 
                         </div>
                     </div>
-                    <br>
+                    <br />
+
                     @* <div class="row">
                     <p class="text-danger">
                     لطفا قبل از ورود به درگاه پرداخت از خاموش بودن وی پی ان خود اطمینان حاصل فرمایید
                     </p>
                     </div>
                     *@
-                    <br />
-                    <a href="/Payment/ProductPay?ShopCardId=@Model.Id&&AddressId=@Model.Address.Id&&FreeTimeId=@Model.FreeTimeId" class="btn bg-success py-4 br-20 w-100" style="font-size:20px;font-weight:bold; border-radius:200px; text-align:center;  margin-left: auto; margin-right: auto;"> پرداخت </a>
-
+                    <input hidden type="text" name="AddressId" value="@Model.AddressId" />
+                    <input hidden type="text" name="FreeTimeId" value="@Model.FreeTimeId" />
+                    <input hidden type="text" name="ShopCardId" value="@Model.Id" />
+                    <button type="submit" class="btn bg-success py-4 br-20 w-100" style="font-size:20px;font-weight:bold; border-radius:200px; text-align:center;  margin-left: auto; margin-right: auto;"> ثبت سفارش </button>
+                    
+                    </form>
                 </div>
             </div>
         </div>
@@ -318,6 +346,19 @@
 </div>
 
 @section Scripts{
+
+
+    <script asp-append-version="true">
+        function CartBox(){
+
+            $('#CardToCard').attr('hidden', false);
+        }
+        function CartBox2() {
+
+            $('#CardToCard').attr('hidden', true);
+        }
+        </script>
+
     <script>
         $(document).ready(function () {
             //// START PRODUCT PAGE

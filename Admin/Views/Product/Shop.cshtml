@@ -125,6 +125,12 @@
                                 <span class="text-ceenter bg-primary-gradient px-2 py-1 br-20">
                                     <i class="fa fa-star m-2"> @item.Rate / 5</i>
                                 </span>
+                                @if (item.darage != 0)
+                                {
+                                <span class="text-ceenter bg-primary-gradient px-2 py-1 br-20">
+                                        <span class="text-ceenter bg-primary-gradient px-2 py-1 br-20" style="text-align:center;">درجه @item.darage</span>
+                                    </span>
+                                }
                             </div>
                             @*<div class="product-list__badge--container"></div>*@
                             <div class="product-list__button-container">
@@ -150,7 +156,7 @@
                                           <p class="product-list__card_h3 h3--price h3--desktop">
                                     @if(item.Discount != item.Price)
                                     {
-                                    <span class="price_format" style="text-decoration:line-through">@item.Price.ToNumeric() تومان</span> 
+                                    <span class="price_format" style="text-decoration:line-through;color:red;">@item.Price.ToNumeric()</span> 
                                         
                                     }
                                                                            <span class="price_format">@item.Discount.ToNumeric()</span> تومان

@@ -44,6 +44,7 @@ namespace Client.Models.ShopCards
         public bool DiscountCheckBox { get; set; }
         public bool FromArian { get; set; }
         public Guid CookieId { get; set; }
+        public IFormFile File { get; set; }
 
     }
 

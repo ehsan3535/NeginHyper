@@ -11,6 +11,7 @@ namespace Secretary.Models.Orders
         public string FreeTimeFromHour { get; set; }
         public string FreeTimeToHour { get; set; }
         public string FreeTimeDay { get; set; }
+        public string FreeTimeTitle { get; set; }
         public Guid AddressId { get; set; }
         public string AddressLocation { get; set; }
         public Guid UserId { get; set; }
@@ -28,6 +29,7 @@ namespace Secretary.Models.Orders
         public PaymentStatus PaymentStatus { get; set; }
         public List<OrderDetailDto> OrderDetails { get; set; }
 
+        public string PaymentImg { get; set; }
 
         //factor
         public List<AddressDto> Addresses { get; set; }

@@ -17,6 +17,7 @@ namespace Entities.Orders
         public int FactorNumber { get; set; }
         public int TotalPrice { get; set; }
         public int DiscountPercent { get; set; }
+        public string PaymentImg { get; set; }
         public PaymentStatus PaymentStatus { get; set; }
         public ICollection<OrderDetail> OrderDetails { get; set; }
     }

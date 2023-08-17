@@ -17,6 +17,9 @@ namespace Entities.Constants
         Sent,
 
         [Display(Name = "دریافت شده ")]
-        Gived
+        Gived,
+
+             [Display(Name = "نقدی ")]
+        Cash
     }
 }
