@@ -17,27 +17,30 @@
                         فهرست سفارشات
                     </h3>
                 </div><!-- /.portlet-title -->
-                <div class="buttons-box">
-                    <a class="btn btn-sm btn-default btn-round btn-code" rel="tooltip" title="کدها" href="#">
-                        <i class="icon-arrow-left"></i><span>/</span><i class="icon-arrow-right"></i>
-                    </a>
-                    <div class="code-modal hide">
-                    </div>
-                    <a class="btn btn-sm btn-default btn-round btn-fullscreen" rel="tooltip" title="تمام صفحه" href="#">
-                        <i class="icon-size-fullscreen"></i>
-                    </a>
-                    <a class="btn btn-sm btn-default btn-round btn-collapse" rel="tooltip" title="کوچک کردن" href="#">
-                        <i class="icon-arrow-up"></i>
-                    </a>
-                </div><!-- /.buttons-box -->
+                <div class="portlet-title">
+                    <form >
+
+                        <select onchange="function2()" name="Sort" class="form-select round" style="width:200px; margin-right:330px;">
+                            <option selected value="">مرتب کردن بر اساس وضعیت</option>
+                            <option value="0">در انتظار پرداخت</option>
+                            <option value="1">پرداخت شده </option>
+                            <option value="2">درحال ارسال</option>
+                            <option value="3">ارسال شده</option>
+                            <option value="4">دریافت شده</option>
+                        </select>
+                        <button type="submit" id="ggg" style="background-color:#4e8f97;" class="btn btn-danger btn-round btn-noty-with-buttons" hidden>ثبت </button>
+
+                    </form>
+
+                </div><!-- /.portlet-title -->
             </div><!-- /.portlet-heading -->
             <div class="portlet-body">
                 <div class="row">
-                   @* <div class="col-md-4 col-12 m-b-20">
-                        <a class="btn btn-success btn-round" href="javascript:window.print()">
-                            <i class="icon-plus"></i>
-                           پرینت
-                        </a>
+                    @* <div class="col-md-4 col-12 m-b-20">
+                    <a class="btn btn-success btn-round" href="javascript:window.print()">
+                    <i class="icon-plus"></i>
+                    پرینت
+                    </a>
                     </div><!-- /.col-md-4 -->*@
                 </div><!-- /.row -->
                 <div class="table-responsive">
@@ -72,50 +75,50 @@
                                         </td>
                                         <td>@item.TotalPrice</td>
                                         <td>
-                                           @*  @if (item.FreeTimeDay == "1")
-                                            {
-                                                <span>
-                                                    ساعت @item.FreeTimeFromHour تا @item.FreeTimeToHour - شنبه
-                                                </span>
-                                            }
-                                            @if (item.FreeTimeDay == "2")
-                                            {
-                                                <span>
-                                                    ساعت @item.FreeTimeFromHour تا @item.FreeTimeToHour - یک شنبه
-                                                </span>
-                                            }
-                                            @if (item.FreeTimeDay == "3")
-                                            {
-                                                <span>
-                                                    ساعت @item.FreeTimeFromHour  تا @item.FreeTimeToHour - دو شنبه
-                                                </span>
-                                            }
-                                            @if (item.FreeTimeDay == "4")
-                                            {
-                                                <span>
-                                                    ساعت @item.FreeTimeFromHour تا @item.FreeTimeToHour - سه شنبه
-                                                </span>
-                                            }
-                                            @if (item.FreeTimeDay == "5")
-                                            {
-                                                <span>
-                                                    ساعت @item.FreeTimeFromHour تا @item.FreeTimeToHour - چهارشنبه
-                                                </span>
-                                            }
-                                            @if (item.FreeTimeDay == "6")
-                                            {
-                                                <span>
-                                                    ساعت @item.FreeTimeFromHour تا  @item.FreeTimeToHour - پنج شنبه
-                                                </span>
-                                            }
-                                            @if (item.FreeTimeDay == "7")
-                                            {
-                                                <span>
-                                                    ساعت @item.FreeTimeFromHour تا @item.FreeTimeToHour - جمعه
-                                                </span>
-                                            } *@
+                                            @*  @if (item.FreeTimeDay == "1")
+                                    {
+                                    <span>
+                                    ساعت @item.FreeTimeFromHour تا @item.FreeTimeToHour - شنبه
+                                    </span>
+                                    }
+                                    @if (item.FreeTimeDay == "2")
+                                    {
+                                    <span>
+                                    ساعت @item.FreeTimeFromHour تا @item.FreeTimeToHour - یک شنبه
+                                    </span>
+                                    }
+                                    @if (item.FreeTimeDay == "3")
+                                    {
+                                    <span>
+                                    ساعت @item.FreeTimeFromHour  تا @item.FreeTimeToHour - دو شنبه
+                                    </span>
+                                    }
+                                    @if (item.FreeTimeDay == "4")
+                                    {
+                                    <span>
+                                    ساعت @item.FreeTimeFromHour تا @item.FreeTimeToHour - سه شنبه
+                                    </span>
+                                    }
+                                    @if (item.FreeTimeDay == "5")
+                                    {
+                                    <span>
+                                    ساعت @item.FreeTimeFromHour تا @item.FreeTimeToHour - چهارشنبه
+                                    </span>
+                                    }
+                                    @if (item.FreeTimeDay == "6")
+                                    {
+                                    <span>
+                                    ساعت @item.FreeTimeFromHour تا  @item.FreeTimeToHour - پنج شنبه
+                                    </span>
+                                    }
+                                    @if (item.FreeTimeDay == "7")
+                                    {
+                                    <span>
+                                    ساعت @item.FreeTimeFromHour تا @item.FreeTimeToHour - جمعه
+                                    </span>
+                                    } *@
                                             <span>
-                                                 @item.FreeTimeTitle
+                                                @item.FreeTimeTitle
                                             </span>
                                         </td>
                                         <td>@item.FactorNumber</td>
@@ -134,7 +137,7 @@
                                                 <option value="4">دریافت شده</option>
                                             </select>
                                         </td>
-                                            <button type="submit" id="gg" style="background-color:#4e8f97;" class="btn btn-danger btn-round btn-noty-with-buttons" hidden >ثبت </button>
+                                        <button type="submit" id="gg" style="background-color:#4e8f97;" class="btn btn-danger btn-round btn-noty-with-buttons" hidden>ثبت </button>
                                         </form>
                                         <td>
                                             <!-- مودال مشاهده یه تگ دیو داره که بعد از بادی قرارش دادم -->
@@ -153,10 +156,10 @@
                                                 مشخصات مشتری
                                             </a>
                                             @* <br>
-                                            <a href="/Order/DeleteOrder?Id=@item.Id" class="btn btn-danger btn-round btn-noty-with-buttons">
-                                                <i class="icon-trash"></i>
-                                                حذف
-                                            </a> *@
+                                    <a href="/Order/DeleteOrder?Id=@item.Id" class="btn btn-danger btn-round btn-noty-with-buttons">
+                                    <i class="icon-trash"></i>
+                                    حذف
+                                    </a> *@
                                         </td>
 
                                     </tr>
@@ -216,12 +219,15 @@
 @section Scripts{
     <script asp-append-version="true">
         function function1() {
-            console.log('d');
             //document.getElementsByName("Shop").submit();
             document.getElementById("gg").click();
         }
+        function function2() {
+            //document.getElementsByName("Shop").submit();
+            document.getElementById("ggg").click();
+        }
     </script>
 
-@*     <script src="~/assets_Admin/plugins/noty/js/noty/packaged/jquery.noty.packaged.min.js"></script>
+    @*     <script src="~/assets_Admin/plugins/noty/js/noty/packaged/jquery.noty.packaged.min.js"></script>
     <script src="~/assets_Admin/js/pages/noty.js"></script> *@
                 }
