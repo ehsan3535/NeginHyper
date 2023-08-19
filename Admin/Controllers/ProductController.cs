@@ -116,8 +116,9 @@ namespace Client.Controllers
             TempData["Page"] = page;
 
             int skip = (page - 1) * 9;
+            int Take = 0;
 
-            int Take = productripo.TableNoTracking.Count();
+                Take = productripo.TableNoTracking.Count();
             int Count = Take;
             if (Take > 9)
             {

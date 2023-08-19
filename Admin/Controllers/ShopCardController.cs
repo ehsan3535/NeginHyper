@@ -77,22 +77,22 @@ namespace Client.Controllers
                 };
                 await shopcardrepo.AddAsync(ShopCard, cancellationToken);
             }
-        /*    if (HttpContext.User.Identity.IsAuthenticated)
-            {
-                var FindUser = await userManager.FindByNameAsync(HttpContext.User.Identity.Name);
-                var OldShopCard = await shopcardrepo.TableNoTracking.Where(x => x.UserId == FindUser.Id && x.Id != ShopCard.Id).ToListAsync(cancellationToken);
-                if (OldShopCard.Any())
+            /*    if (HttpContext.User.Identity.IsAuthenticated)
                 {
-                    var OldShopCardDetails = await shopcardrepo.TableNoTracking.Where(x => x.UserId == FindUser.Id && x.Id != ShopCard.Id).SelectMany(x => x.ShopCardDetails).ToListAsync(cancellationToken);
-                    if (OldShopCardDetails.Any())
+                    var FindUser = await userManager.FindByNameAsync(HttpContext.User.Identity.Name);
+                    var OldShopCard = await shopcardrepo.TableNoTracking.Where(x => x.UserId == FindUser.Id && x.Id != ShopCard.Id).ToListAsync(cancellationToken);
+                    if (OldShopCard.Any())
                     {
-                        await shopcardDetailrepo.DeleteRangeAsync(OldShopCardDetails, cancellationToken);
+                        var OldShopCardDetails = await shopcardrepo.TableNoTracking.Where(x => x.UserId == FindUser.Id && x.Id != ShopCard.Id).SelectMany(x => x.ShopCardDetails).ToListAsync(cancellationToken);
+                        if (OldShopCardDetails.Any())
+                        {
+                            await shopcardDetailrepo.DeleteRangeAsync(OldShopCardDetails, cancellationToken);
+                        }
+                        await shopcardrepo.DeleteRangeAsync(OldShopCard, cancellationToken);
                     }
-                    await shopcardrepo.DeleteRangeAsync(OldShopCard, cancellationToken);
-                }
-                ShopCard.UserId = FindUser.Id;
-                await shopcardrepo.UpdateAsync(ShopCard, cancellationToken);
-            }*/
+                    ShopCard.UserId = FindUser.Id;
+                    await shopcardrepo.UpdateAsync(ShopCard, cancellationToken);
+                }*/
             model = mapper.Map<ShopCardDto>(ShopCard);
             model.ShopCardDetails = await shopcardDetailrepo.TableNoTracking.Where(x => x.ShopCardId == model.Id).ProjectTo<ShopCardDetailDto>(mapper.ConfigurationProvider).ToListAsync(cancellationToken);
             //this if is for full imagelink with first image of productimage entity.
@@ -217,7 +217,7 @@ namespace Client.Controllers
             model.AddressId = AddressId;
             return View(model);
         }
-        public async Task<IActionResult> ShopCard_Detail4(Guid? FreeTimeId,Guid? AddressId, CancellationToken cancellationToken)
+        public async Task<IActionResult> ShopCard_Detail4(Guid? FreeTimeId, Guid? AddressId, CancellationToken cancellationToken)
         {
             //TempData["AddressId"] = TempData["AddressId"].ToString();
             var setting = await settingrepo.TableNoTracking.FirstOrDefaultAsync();
@@ -539,9 +539,12 @@ namespace Client.Controllers
         [HttpPost]
         public async Task<IActionResult> AddAddress(AddressDto dto, CancellationToken cancellationToken)
         {
-            var User =await userManager.FindByNameAsync(HttpContext.User.Identity.Name);
-            User.Fname = dto.Name;
-            User.PostalCode = dto.PostalCode;
+            var User = await userManager.FindByNameAsync(HttpContext.User.Identity.Name);
+            if (User.Fname == null)
+            {
+                User.Fname = dto.Name;
+                User.PostalCode = dto.PostalCode;
+            }
             await userManager.UpdateAsync(User);
             var model = dto.ToEntity(mapper);
             model.ClientId = User.Id;
