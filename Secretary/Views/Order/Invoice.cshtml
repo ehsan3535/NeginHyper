@@ -5,12 +5,6 @@
 
 
     <div class="row">
-        <div class="col-md-4 col-12 m-b-20">
-            <a class="btn btn-success btn-round" href="javascript:window.print()">
-                <i class="icon-plus"></i>
-                پرینت
-            </a>
-        </div><!-- /.col-md-4 -->
 
         <div class="col-12 ">
             <div class="card br-20">
@@ -20,52 +14,20 @@
                             <span class="card-title" style="font-weight: bold; font-size: large;"> آدرس </span>
                         </div>
                         <div class="col-6">
-                            <span style=" font-size: medium;">@Model.AddressLocation</span>
+                            <span style=" font-size: medium;">@Model.Address.CityName <br /> @Model.Address.Location <br /> کدپستی: @Model.Address.PostalCode <br />واحد: @Model.Address.pelak <br /> پلاک : @Model.Address.vahed </span>
+                            <hr />
                         </div>
                     </div>
                     <br>
+
                     <div class="row">
                         <div class="col-6">
-                            <span class="card-title" style="font-weight: bold; font-size: large;">روز  </span>
+                            <span class="card-title" style="font-weight: bold; font-size: large;">شیوه ارسال  </span>
                         </div>
                         <div class="col-6">
-                            @if (Model.Day == "1")
-                            {
-                                <span style=" font-size: medium;"> شنبه </span>
-                            }
-                            @if (Model.Day == "2")
-                            {
-                                <span style=" font-size: medium;"> یکشنبه </span>
-                            }
-                            @if (Model.Day == "3")
-                            {
-                                <span style=" font-size: medium;">دو شنبه </span>
-                            }
-                            @if (Model.Day == "4")
-                            {
-                                <span style=" font-size: medium;"> سه شنبه </span>
-                            }
-                            @if (Model.Day == "5")
-                            {
-                                <span style=" font-size: medium;">چهار شنبه </span>
-                            }
-                            @if (Model.Day == "5")
-                            {
-                                <span style=" font-size: medium;"> پنج شنبه </span>
-                            }
-                            @if (Model.Day == "6")
-                            {
-                                <span style=" font-size: medium;"> جمعه </span>
-                            }
-                        </div>
-                    </div>
-                    <br>
-                    <div class="row">
-                        <div class="col-6">
-                            <span class="card-title" style="font-weight: bold; font-size: large;">ساعت  </span>
-                        </div>
-                        <div class="col-6">
-                            <span style=" font-size: medium;"> @Model.Hour </span>
+                            <span style=" font-size: medium;"> @Model.FreeTimeTitle </span>
+                            <hr />
+
                         </div>
                     </div>
                     <br>
@@ -78,11 +40,9 @@
                             {
                                 <span style=" font-size: medium;">@item.ProductsName - @item.Count عدد </span>
                                 <hr />
-
                             }
                         </div>
                     </div>
-                    <br>
 
                     @if (Model.TotalPrice >= 500000)
                     {
@@ -106,36 +66,60 @@
                     }
                     else
                     {
-                        <div class="row">
-                            <div class="col-6">
-                                <span class="card-title" style="font-weight: bold; font-size: large;">مبلغ کل</span>
-                            </div>
-                            @{
-                                int price = Model.TotalPrice - Model.PostPrice;
-                            }
-                            <div class="col-6">
-                                <span style=" font-size: medium;">@price.ToNumeric() تومان</span>
-                            </div>
-                        </div>
+                        @*  <div class="row">
+                    <div class="col-6">
+                    <span class="card-title" style="font-weight: bold; font-size: large;">مبلغ کل</span>
+                    </div>
+                    @{
+                    int price = Model.TotalPrice - Model.PostPrice;
+                    }
+                    <div class="col-6">
+                    <span style=" font-size: medium;">@price.ToNumeric() تومان</span>
+                    </div>
+                    </div> *@
                         <br>
                         <div class="row">
                             <div class="col-6">
                                 <span class="card-title" style="font-weight: bold; font-size: large;">هزینه ارسال</span>
                             </div>
-                            <div class="col-6">
-                                <span style=" font-size: medium;"> @Model.PostPrice.ToNumeric() تومان</span>
-                            </div>
+                            @if (Model.FreeTimeTitle == "تیپاکس(48 تا 72 ساعت)" || Model.FreeTimeTitle == "پست پیشتاز(حداکثر 5 روز کاری)")
+                            {
+                                <div class="col-6">
+                                    <span style=" font-size: medium;">
+
+                                        به صورت پس کرایه هنگام تحویل دریافت میشود
+                                    </span>
+                                </div>
+                            }
+                            else if (Model.FreeTimeTitle == "ارسال با اسنپ باکس")
+                            {
+                                <div class="col-6">
+                                    <span style=" font-size: medium;">
+                                        هزینه اسنپ با راننده اسنپ حساب جداگانه میشود
+                                    </span>
+                                </div>
+                            }
+                            else if (Model.FreeTimeTitle == "ساکن آرین (ارسال توسط فروشنده و رایگان)")
+                            {
+                                <div class="col-6">
+                                    <span style=" font-size: medium;">
+                                        رایگان
+                                    </span>
+                                </div>
+                            }
+
                         </div>
                     }
                     <br>
                     <hr>
+
 
                 </div>
 
                 <br>
                 <div class="row">
                     <div class="col-6">
-                        <span class="card-title" style="font-weight: bold; font-size: large;">مبلغ پرداخت شده</span>
+                        <span class="card-title px-1" style="font-weight: bold; font-size: large;">مبلغ کل</span>
                     </div>
                     <div class="col-6">
                         <span class="text-success" style="font-weight: bold; font-size: medium;"> @Model.TotalPrice.ToNumeric() تومان</span>

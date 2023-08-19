@@ -23,10 +23,12 @@ namespace Client.Models.Orders
         public int PostPrice { get; set; }
         public Guid? AddressId { get; set; }
         public Guid? FreeTimeId { get; set; }
+        public string FreeTimeTitle { get; set; }
         public string Day { get; set; }
         public string Hour { get; set; }
         public string AddressLocation { get; set; }
         public List<AddressDto> Addresses { get; set; }
+        public AddressDto Address { get; set; }
     }
     public class OrderDetailDto : BaseDto<OrderDetailDto, OrderDetail, Guid>
     {

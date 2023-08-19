@@ -17,7 +17,6 @@ using Secretary.Models;
 using Secretary.Models.Orders;
 using Sentry;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -92,20 +91,12 @@ namespace Admin.Controllers
         public async Task<IActionResult> Invoice(Guid OrderId, CancellationToken cancellationToken)
         {
             var order = await Orderripo.TableNoTracking.Where(x => x.Id == OrderId).ProjectTo<OrderDto>(mapper.ConfigurationProvider).FirstOrDefaultAsync(cancellationToken);
-            var User = await userManager.Users.FirstOrDefaultAsync(x => x.Id == order.UserId);
             var model = await OrderDetailripo.TableNoTracking.Where(x => x.OrderId == OrderId).ProjectTo<OrderDetailDto>(mapper.ConfigurationProvider).ToListAsync(cancellationToken);
+            var Address = await AddressRepo.TableNoTracking.ProjectTo<AddressDto>(mapper.ConfigurationProvider).FirstOrDefaultAsync(t => t.Id == order.AddressId, cancellationToken);
 
-            var Address = await AddressRepo.TableNoTracking.FirstOrDefaultAsync(t => t.Id == order.AddressId, cancellationToken);
-            var setting = await settingrepo.TableNoTracking.FirstOrDefaultAsync();
-            var freeTime = freeTimeRepo.GetById(order.FreeTimeId);
-            order.PostPrice = setting.PostPrice;
-            order.AddressLocation = Address.Location;
-            order.Addresses = await AddressRepo.TableNoTracking.Where(x => x.ClientId == User.Id).ProjectTo<AddressDto>(mapper.ConfigurationProvider).ToListAsync();
-            order.AddressId = Address.Id;
-            order.FreeTimeId = freeTime.Id;
-            order.Day = freeTime.Day;
-            order.CreationDateTime = freeTime.DateTime;
-            order.Hour = freeTime.FromHour + "تا" + freeTime.ToHour;
+            order.Address = Address;
+            order.FreeTimeId = order.FreeTimeId;
+            order.CreationDateTime = order.CreationDateTime;
             return View(order);
         }
 

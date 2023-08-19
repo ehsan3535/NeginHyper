@@ -158,6 +158,7 @@ namespace Secretary.Controllers
             }
             model.First().AllTimes = await freeTimeRepo.TableNoTracking.Where(x => x.Out == false).ProjectTo<FreeTimeDto>(mapper.ConfigurationProvider).ToListAsync(cancellationToken);
             model.First().AllTimes = model.First().AllTimes.DistinctBy(x => x.Day).ToList();
+
             return View(model);
         }
         [HttpPost]

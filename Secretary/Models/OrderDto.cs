@@ -33,6 +33,7 @@ namespace Secretary.Models.Orders
 
         //factor
         public List<AddressDto> Addresses { get; set; }
+        public AddressDto Address { get; set; }
         public int PostPrice { get; set; }
         public string Day { get; set; }
         public string Hour { get; set; }

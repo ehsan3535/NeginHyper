@@ -539,8 +539,12 @@ namespace Client.Controllers
         [HttpPost]
         public async Task<IActionResult> AddAddress(AddressDto dto, CancellationToken cancellationToken)
         {
+            var User =await userManager.FindByNameAsync(HttpContext.User.Identity.Name);
+            User.Fname = dto.Name;
+            User.PostalCode = dto.PostalCode;
+            await userManager.UpdateAsync(User);
             var model = dto.ToEntity(mapper);
-            model.ClientId = userManager.FindByNameAsync(HttpContext.User.Identity.Name).Result.Id;
+            model.ClientId = User.Id;
             await AddressRepo.AddAsync(model, cancellationToken);
             notification.AddSuccessToastMessage("آدرس با موفقیت ثبت شد");
             if (dto.ReturnUrl == "AddressProfile")

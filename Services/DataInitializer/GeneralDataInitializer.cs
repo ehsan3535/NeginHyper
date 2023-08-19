@@ -327,15 +327,7 @@ namespace Services.DataInitializer
                     Free = true,
                     Title = "تیپاکس(۴۸ تا ۷۲ ساعت)",
                 });
-                freeTimeRepo.Add(new FreeTime
-                {
-                    Day = "0",
-                    FromHour = "0",
-                    ToHour = "0",
-                    Out = true,
-                    Free = true,
-                    Title = "ساکن آرین (رایگان)",
-                });
+               
                 freeTimeRepo.Add(new FreeTime
                 {
                     Day = "0",
@@ -352,7 +344,7 @@ namespace Services.DataInitializer
                     ToHour = "0",
                     Out = true,
                     Free = true,
-                    Title = "ارسال با اسنپ باکس",
+                    Title = "ساکن آرین (ارسال توسط فروشنده و رایگان)",
                 });
             }
         /*    if (!Orderrepo.TableNoTracking.Any())

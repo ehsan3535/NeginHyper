@@ -35,7 +35,7 @@
     <div class="navbar navbar-fixed-top" id="main-navbar">
         <div class="header-right">
             <a href="dashboard.html" class="logo-con">
-                <img src="~/assets/Group 8.png" width="40px" height="40px" class="img-responsive center-block" alt="لوگو قالب مدیران"> 
+                <img src="~/assets/Group 8.png" width="40px" height="40px" class="img-responsive center-block" alt="لوگو قالب مدیران">
             </a>
         </div><!-- /.header-right -->
         <div class="header-left">
@@ -123,32 +123,10 @@
             </div><!-- /.sidebar-top -->
             <div class="side-menu-container">
                 <ul class="metismenu" id="side-menu">
-                    <li>
-                        <a href="#" class="dropdown-toggle">
-                            <i class=" fas fa-file-lines"></i>
-                            <span>مقاله</span>
-                        </a>
-                        <ul>
-                           
-                            <li>
-                                <a href="/Blog/BlogList" class="">
-                                    <i class="icon-home"></i>
-                                    <span>لیست مقالات </span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="/Category/BlogCategoryList" class="">
-                                    <i class="icon-home"></i>
-                                    <span>دسته بندی مقالات </span>
-                                </a>
-                            </li>
-                           
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="#" class="">
+                     <li>
+                        <a href="/Order/OrderList" class="">
                             <i class="fa-unlock"></i>
-                            <span>سئو SEO</span>
+                            <span>لیست سفارشات</span>
                         </a>
                     </li>
                     <li>
@@ -157,7 +135,7 @@
                             <span>محصولات</span>
                         </a>
                         <ul>
-                           
+
                             <li>
                                 <a href="/Product/ListProduct" class="">
                                     <i class="icon-home"></i>
@@ -170,9 +148,38 @@
                                     <span>دسته بندی محصولات </span>
                                 </a>
                             </li>
-                           
+
                         </ul>
                     </li>
+                    <li>
+                        <a href="#" class="dropdown-toggle">
+                            <i class=" fas fa-file-lines"></i>
+                            <span>مقاله</span>
+                        </a>
+                        <ul>
+
+                            <li>
+                                <a href="/Blog/BlogList" class="">
+                                    <i class="icon-home"></i>
+                                    <span>لیست مقالات </span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/Category/BlogCategoryList" class="">
+                                    <i class="icon-home"></i>
+                                    <span>دسته بندی مقالات </span>
+                                </a>
+                            </li>
+
+                        </ul>
+                    </li>
+                    @*  <li>
+                    <a href="#" class="">
+                    <i class="fa-unlock"></i>
+                    <span>سئو SEO</span>
+                    </a>
+                    </li> *@
+
                     <li>
                         <a href="#" class="dropdown-toggle">
                             <i class=" fas fa-file-lines"></i>
@@ -193,12 +200,7 @@
                             </li>
                         </ul>
                     </li>
-                    <li>
-                        <a href="/Order/OrderList" class="">
-                            <i class="fa-unlock"></i>
-                            <span>لیست سفارشات</span>
-                        </a>
-                    </li>
+                   
                     <li>
                         <a href="/Auth/UserList" class="">
                             <i class="fa-unlock"></i>
@@ -235,37 +237,37 @@
                             <span>مشتریان ما</span>
                         </a>
                     </li>
-                    <li class="open active conditional-bg">
+                   @*  <li class="open active conditional-bg">
                         <a href="/Notification/NotificationList">
                             <i class="icon-speech"></i>
                             <span>اعلانات</span>
                         </a>
-                    </li> 
+                    </li> *@
                     <li class="open active conditional-bg">
                         <a href="/comment/ProductCommentList">
                             <i class="icon-speech"></i>
                             <span>نظرات</span>
                         </a>
                     </li>
-                   @* <li>
-                        <a href="#" class="dropdown-toggle">
-                            <i class=" fas fa-file-lines"></i>
-                            <span>نظرات</span>
-                        </a>
-                        <ul>
-                            <li>
-                                <a href="/comment/BlogCommentList" class="">
-                                    <i class="icon-home"></i>
-                                    <span>نظرات مقالات</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="/comment/ProductCommentList" class="">
-                                    <i class="icon-home"></i>
-                                    <span>نظرات محصولات</span>
-                                </a>
-                            </li>
-                        </ul>
+                    @* <li>
+                    <a href="#" class="dropdown-toggle">
+                    <i class=" fas fa-file-lines"></i>
+                    <span>نظرات</span>
+                    </a>
+                    <ul>
+                    <li>
+                    <a href="/comment/BlogCommentList" class="">
+                    <i class="icon-home"></i>
+                    <span>نظرات مقالات</span>
+                    </a>
+                    </li>
+                    <li>
+                    <a href="/comment/ProductCommentList" class="">
+                    <i class="icon-home"></i>
+                    <span>نظرات محصولات</span>
+                    </a>
+                    </li>
+                    </ul>
                     </li> *@
                     <li>
                         <a href="#" class="dropdown-toggle">
@@ -279,13 +281,13 @@
                                     <span> تنظیمات کلی</span>
                                 </a>
                             </li>
-                            <li>
+                            @* <li>
                                 <a href="/Setting/FreeTimes?Day=1" class="">
                                     <i class="icon-home"></i>
                                     <span> تنظیمات زمان ارسال</span>
                                 </a>
-                            </li>
-                             @if (User.IsInRole("Admin"))
+                            </li> *@
+                            @if (User.IsInRole("Admin"))
                             {
                                 <li>
                                     <a href="/auth/adminlist" class="">
@@ -302,7 +304,7 @@
                             <span>خروج</span>
                         </a>
                     </li>
-                  
+
                 </ul><!-- /#side-menu -->
             </div><!-- /.side-menu-container -->
         </div><!-- /#sidebar -->
