@@ -129,6 +129,11 @@ namespace Client.Controllers
                         Product.Count -= item.Count;
                         ProductList.Add(Product);
                         SMS_ProductList += item.Count + "عدد " + Product.Name + " , " + "\n";
+                        if (Product.Count <= 0)
+                        {
+                            MeliPayamak.Simple_Rest(setting.PHoneNumber1, "موجودی" + Product.Name + "به پایان رسید");
+                            MeliPayamak.Simple_Rest(setting.PHoneNumber2, "موجودی" + Product.Name + "به پایان رسید");
+                        }
 
                         var RepeatedOrderDetail = OrderDetailRepo.TableNoTracking.Where(x => x.OrderId == order.Id && x.ProductsId == item.ProductsId).FirstOrDefault();
                         if (RepeatedOrderDetail != null)
@@ -240,6 +245,11 @@ namespace Client.Controllers
                     Product = new();
                     Product = await productrepo.TableNoTracking.FirstOrDefaultAsync(x => x.Id == item.ProductsId);
                     Product.Count -= item.Count;
+                    if (Product.Count <= 0 )
+                    {
+                        MeliPayamak.Simple_Rest(setting.PHoneNumber1, "موجودی" + Product.Name + "به پایان رسید");
+                        MeliPayamak.Simple_Rest(setting.PHoneNumber2, "موجودی" + Product.Name + "به پایان رسید");
+                    }
                     ProductList.Add(Product);
                     SMS_ProductList += item.Count + "عدد " + Product.Name + " , " + "\n";
 
