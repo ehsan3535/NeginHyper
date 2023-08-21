@@ -68,24 +68,7 @@
                     <label>کد محصول</label>
                     <input type="number" asp-for="Number" class="form-control" placeholder="شماره محصول">
                 </div><!-- /.form-group -->
-                <div class="form-group">
-                    <label>نام محصول</label>
-                    <div class="input-group">
-                        <span class="input-group-addon">
-                            <i class="icon-basket-loaded fa-flip-horizontal"></i>
-                        </span>
-                        <input type="text" asp-for="Name" class="form-control" placeholder="نام">
-                    </div><!-- /.input-group -->
-                </div><!-- /.form-group -->
-                @* <div class="form-group">
-                <label>طعم</label>
-                <div class="input-group">
-                <span class="input-group-addon">
-                <i class="fas fa-circle-notch"></i>
-                </span>
-                <input type="text" asp-for="Test" class="form-control">
-                </div><!-- /.input-group -->
-                </div><!-- /.form-group -->*@
+
                 <div class="form-group">
                     <label>دسته بندی</label>
                     <div class="input-group">
@@ -101,15 +84,21 @@
                         </select>
                     </div><!-- /.input-group -->
                 </div><!-- /.form-group -->
-                @*<div class="form-group round">
-                <label>برند</label>
-                <input type="text" asp-for="Brand" class="form-control" placeholder="برند">
-                </div><!-- /.form-group -->*@
+
+                <div class="form-group">
+                    <label>نام محصول</label>
+                    <div class="input-group">
+                        <span class="input-group-addon">
+                            <i class="icon-basket-loaded fa-flip-horizontal"></i>
+                        </span>
+                        <input type="text" asp-for="Name" class="form-control" placeholder="نام">
+                    </div><!-- /.input-group -->
+                </div><!-- /.form-group -->
+               
                 <div class="form-group round">
                     <label>قیمت</label>
                     <input type="number" asp-for="Price" class="form-control" placeholder="قیمت">
                 </div><!-- /.form-group -->
-
 
                 <div class="form-group round">
                     <label>اعمال تخفیف </label>
@@ -130,7 +119,6 @@
                     <label>تعداد انبار</label>
                     <input type="number" asp-for="Count" class="form-control" placeholder=" انبار">
                 </div><!-- /.form-group -->
-
 
                @*  <div class="form-group round">
                     <label> شیوه نگهداری</label>
@@ -156,7 +144,6 @@
                     <label> مناسب برای</label>
                     <input type="text" asp-for="GoodForWhat" class="form-control" placeholder=" انبار">
                 </div><!-- /.form-group --> *@
-
 
                 <div class="form-group">
                     <label>توضیحات  محصول </label>
