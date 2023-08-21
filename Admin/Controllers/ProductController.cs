@@ -118,7 +118,7 @@ namespace Client.Controllers
             int skip = (page - 1) * 9;
             int Take = 0;
 
-                Take = productripo.TableNoTracking.Count();
+            Take = productripo.TableNoTracking.Count();
             int Count = Take;
             if (Take > 9)
             {
@@ -251,6 +251,17 @@ namespace Client.Controllers
             #endregion
 
             return View(model);
+        }
+        public async Task<IActionResult> ReplaceString(CancellationToken cancellationToken)
+        {
+            var productList = productripo.TableNoTracking.ToList();
+            foreach (var item in productList)
+            {
+                item.ImageCoverUrl = item.ImageCoverUrl.Replace("http://admin.NeginHyper.Com", "https://localhost:44382");
+                productripo.Update(item);
+            }
+
+            return RedirectToAction("shop");
         }
     }
 }

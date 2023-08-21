@@ -16982,11 +16982,12 @@ select.form-control {
 	padding-top: 0px;
 }
 .product-list__card_img {
-  height: 320px;
-  width:100%;
-  /*width: 243.6px;*/
-  width:100%;
-  margin: 5px 5px 10px;
+	height: 320px;
+	width: 100%;
+	width: 243.6px;
+	margin: 5px 5px 10px;
+	object-fit: fill;
+	background-color: #ffffff;
 }
 .product-list__card--farmer-img {
   position: absolute;

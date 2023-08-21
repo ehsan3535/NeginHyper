@@ -11,6 +11,7 @@ using Microsoft.EntityFrameworkCore;
 using NToastNotify;
 using Secretary.Models;
 using Secretary.Models.ProductDto;
+using Stimulsoft.Report.Check;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -310,5 +311,7 @@ namespace Secretary.Controllers
             }
             return RedirectToAction("listProduct", new {page = page });
         }
+
+       
     }
 }
