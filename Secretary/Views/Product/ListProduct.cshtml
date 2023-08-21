@@ -31,7 +31,7 @@
                         int pageCounttt = (int)TempData["PageCount"];
                         int pageCounttt2 = pageCounttt + 1;
                     }
-                    @if (Model.Count() == 10)
+                    @if (TempData["Page"].ToString() == pageCounttt.ToString() &&  Model.Count() == 10)
                     {
                         <div class="col-md-4 col-12 m-b-20">
                             <a class="btn btn-success btn-round" href="/Product/Add_Edit_Product?page=@pageCounttt2">
@@ -161,7 +161,7 @@
                                                 <i class="icon-note"></i>
                                                 ویرایش
                                             </a>
-                                            <a href="/Product/DeleteProduct?id=@item.Id" class="btn btn-danger btn-round">
+                                            <a href="/Product/DeleteProduct?id=@item.Id&page=@TempData["Page"]" class="btn btn-danger btn-round">
                                                 <i class="icon-trash"></i>
                                                 حذف
                                             </a>

@@ -12,7 +12,7 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="M:Secretary.Controllers.ProductController.DeleteProduct(System.Guid,System.Threading.CancellationToken)">
+        <member name="M:Secretary.Controllers.ProductController.DeleteProduct(System.Guid,System.Int32,System.Threading.CancellationToken)">
             <summary>
             to inactive the product 
             </summary>

@@ -299,16 +299,16 @@ namespace Secretary.Controllers
         /// <param name="id"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        public async Task<IActionResult> DeleteProduct(Guid id, CancellationToken cancellationToken)
+        public async Task<IActionResult> DeleteProduct(Guid id,int page, CancellationToken cancellationToken)
         {
             var model = productripo.GetById(id);
             if (model != null)
             {
                 model.Active = false;
                 await productripo.UpdateAsync(model, cancellationToken);
-                return RedirectToAction("listProduct");
+                return RedirectToAction("listProduct", new { page = page });
             }
-            return RedirectToAction("listProduct");
+            return RedirectToAction("listProduct", new {page = page });
         }
     }
 }
