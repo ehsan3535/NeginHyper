@@ -198,26 +198,26 @@ namespace Secretary.Controllers
                 page = 1;
             TempData["Page"] = page;
 
-            int skip = (page - 1) * 9;
+            int skip = (page - 1) * 10;
 
             int Take = productripo.TableNoTracking.Count();
             int Count = Take;
-            if (Take > 9)
+            if (Take > 10)
             {
-                Take = 9;
+                Take = 10;
             }
-            var baghimande = Count % 9;
-            if (Take < 9)
+            var baghimande = Count % 10;
+            if (Take < 10)
             {
                 TempData["PageCount"] = 1;
             }
             else if (baghimande == 0)
             {
-                TempData["PageCount"] = Count / 9;
+                TempData["PageCount"] = Count / 10;
             }
             else if (baghimande != 0)
             {
-                TempData["PageCount"] = (Count / 9) + 1;
+                TempData["PageCount"] = (Count / 10) + 1;
             }
             #endregion
 
@@ -254,22 +254,22 @@ namespace Secretary.Controllers
                 {
                     Take = model.Count();
                     Count = Take;
-                    if (Take > 9)
+                    if (Take > 10)
                     {
-                        Take = 9;
+                        Take = 10;
                     }
-                    baghimande = Count % 9;
-                    if (Take < 9)
+                    baghimande = Count % 10;
+                    if (Take < 10)
                     {
                         TempData["PageCount"] = 1;
                     }
                     else if (baghimande == 0)
                     {
-                        TempData["PageCount"] = Count / 9;
+                        TempData["PageCount"] = Count / 10;
                     }
                     else if (baghimande != 0)
                     {
-                        TempData["PageCount"] = (Count / 9) + 1;
+                        TempData["PageCount"] = (Count / 10) + 1;
                     }
                 }
                 //اگر سرچ پیدا نکرد کل محصولات رو بفرست با نوتیفیکیشن

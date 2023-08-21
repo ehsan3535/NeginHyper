@@ -23,31 +23,33 @@
                         فهرست  محصولات
                     </h3>
                 </div><!-- /.portlet-title -->
-                <div class="buttons-box">
-                    <a class="btn btn-sm btn-default btn-round btn-code" rel="tooltip" title="کدها" href="#">
-                        <i class="icon-arrow-left"></i><span>/</span><i class="icon-arrow-right"></i>
-                    </a>
-                    <div class="code-modal hide">
-                    </div>
-                    <a class="btn btn-sm btn-default btn-round btn-fullscreen" rel="tooltip" title="تمام صفحه" href="#">
-                        <i class="icon-size-fullscreen"></i>
-                    </a>
-                    <a class="btn btn-sm btn-default btn-round btn-collapse" rel="tooltip" title="کوچک کردن" href="#">
-                        <i class="icon-arrow-up"></i>
-                    </a>
-                </div><!-- /.buttons-box -->
+
             </div><!-- /.portlet-heading -->
             <div class="portlet-body">
                 <div class="row">
                     @{
                         int pageCounttt = (int)TempData["PageCount"];
+                        int pageCounttt2 = pageCounttt + 1;
                     }
-                    <div class="col-md-4 col-12 m-b-20">
-                        <a class="btn btn-success btn-round" href="/Product/Add_Edit_Product?page=@pageCounttt">
-                            <i class="icon-plus"></i>
-                            افزودن
-                        </a>
-                    </div><!-- /.col-md-4 -->
+                    @if (Model.Count() == 10)
+                    {
+                        <div class="col-md-4 col-12 m-b-20">
+                            <a class="btn btn-success btn-round" href="/Product/Add_Edit_Product?page=@pageCounttt2">
+                                <i class="icon-plus"></i>
+                                افزودن
+                            </a>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="col-md-4 col-12 m-b-20">
+                            <a class="btn btn-success btn-round" href="/Product/Add_Edit_Product?page=@pageCounttt">
+                                <i class="icon-plus"></i>
+                                افزودن
+                            </a>
+                        </div>
+                    }
+
                     <div class="col-md-4 col-12 m-b-20">
                         <form role="form" method="get" asp-action="ListProduct" asp-controller="Product">
                             <div class="input-group round">
@@ -61,14 +63,14 @@
                             </div><!-- ./input-group -->
                         </form>
                     </div><!-- /.col-md-4 -->
-                  @*  <div class="col-md-4 col-12 m-b-20">
-                        <div class="portlet-body">
-                            <div class="form-group">
-                                <select class="form-control select2 round">
-                                    <option value="101" placeholder="دسته بندی">ایسلندی(Icelandic)</option>
-                                </select>
-                            </div><!-- /.form-group -->
-                        </div><!-- /.portlet-body -->
+                    @*  <div class="col-md-4 col-12 m-b-20">
+                    <div class="portlet-body">
+                    <div class="form-group">
+                    <select class="form-control select2 round">
+                    <option value="101" placeholder="دسته بندی">ایسلندی(Icelandic)</option>
+                    </select>
+                    </div><!-- /.form-group -->
+                    </div><!-- /.portlet-body -->
                     </div><!-- /.portlet-body -->*@
                     @*  <div class="col-lg-6">
                     <div class="portlet box border shadow">
@@ -118,7 +120,7 @@
                                 <th>عنوان</th>
                                 <th> دسته بندی</th>
                                 <th>قیمت</th>
-                                 <th>قیمت با تخفیف</th>
+                                <th>قیمت با تخفیف</th>
                                 <th> درصد تخفیف</th>
                                 <th>تعداد</th>
                                 <th>امتیاز</th>
@@ -127,7 +129,8 @@
                         </thead>
                         <tbody>
                             @{
-                                var j = 0;
+                                int pagee = (int)TempData["Page"];
+                                var j = (pagee - 1) * 10;
                             }
                             @if (!Model.Any())
                             {
@@ -145,8 +148,8 @@
                                         <td>@item.Name</td>
                                         <td>@item.CategorysName</td>
                                         <td>@item.Price.ToNumeric()</td>
-                                         <td>@item.Discount.ToNumeric()</td>
-                                <td>@item.Percent %</td>
+                                        <td>@item.Discount.ToNumeric()</td>
+                                        <td>@item.Percent %</td>
                                         <td>@item.Count</td>
                                         <td>@item.Rate</td>
                                         <td>
@@ -175,7 +178,7 @@
                 }
                 <div class="text-center">
                     <ul class="pagination round">
-                       
+
 
                         @if ((pageNumber) > 1)
                         {
@@ -191,19 +194,19 @@
                                 <a href="ListProduct?Page=@(pageNumber - 6)">@(pageNumber - 6)</a>
                             </li>
                         }
-                         @if ((pageNumber) > 5)
+                        @if ((pageNumber) > 5)
                         {
                             <li>
                                 <a href="ListProduct?Page=@(pageNumber - 5)">@(pageNumber - 5)</a>
                             </li>
                         }
-                         @if ((pageNumber) > 4)
+                        @if ((pageNumber) > 4)
                         {
                             <li>
                                 <a href="ListProduct?Page=@(pageNumber - 4)">@(pageNumber - 4)</a>
                             </li>
                         }
-                         @if ((pageNumber) > 3)
+                        @if ((pageNumber) > 3)
                         {
                             <li>
                                 <a href="ListProduct?Page=@(pageNumber - 3)">@(pageNumber - 3)</a>
@@ -241,19 +244,19 @@
                                 <a href="ListProduct?Page=@(pageNumber + 3)">@(pageNumber + 3)</a>
                             </li>
                         }
-                         @if ((pageNumber) < pageCount - 3)
+                        @if ((pageNumber) < pageCount - 3)
                         {
                             <li>
                                 <a href="ListProduct?Page=@(pageNumber + 4)">@(pageNumber + 4)</a>
                             </li>
                         }
-                         @if ((pageNumber) < pageCount - 4)
+                        @if ((pageNumber) < pageCount - 4)
                         {
                             <li>
                                 <a href="ListProduct?Page=@(pageNumber + 5)">@(pageNumber + 5)</a>
                             </li>
                         }
-                         @if ((pageNumber) < pageCount - 5)
+                        @if ((pageNumber) < pageCount - 5)
                         {
                             <li>
                                 <a href="ListProduct?Page=@(pageNumber + 6)">@(pageNumber + 6)</a>
@@ -267,7 +270,7 @@
                             </a>
                         }
 
-                       
+
                     </ul>
                 </div><!-- /.text-center -->
             </div><!-- /.portlet-body -->
