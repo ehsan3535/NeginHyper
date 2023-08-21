@@ -221,7 +221,7 @@ namespace Secretary.Controllers
             }
             #endregion
 
-            var model2 = productripo.TableNoTracking.ProjectTo<ProductDto>(mapper.ConfigurationProvider).OrderBy(x => x.Number).ToList();
+            var model2 = productripo.TableNoTracking.ProjectTo<ProductDto>(mapper.ConfigurationProvider).ToList();
             var model = new List<ProductDto>();
             //if (CategoryId != null)
             //{
@@ -290,7 +290,7 @@ namespace Secretary.Controllers
             {
                 model = model2;
             }
-            model = model.Skip(skip).Take(Take).OrderBy(x=>x.Number).ToList();
+            model = model.Skip(skip).Take(Take).ToList();
             return View(model);
         }
         /// <summary>
