@@ -14,7 +14,7 @@ namespace Common.Utilities
                 Directory.CreateDirectory(path);
             IFormFile Image = file;
             string SaveName = Guid.NewGuid().ToString() + Image.FileName;
-            var SavedUrl = $"http://admin.NeginHyper.Com/{CategoryName}/{SaveName}";
+            var SavedUrl = $"http://admin.NeginHyper.ir/{CategoryName}/{SaveName}";
             var filepath = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", CategoryName)).Root + $@"\{SaveName}";
             using (FileStream fs = File.Create(filepath))
             {
@@ -28,7 +28,7 @@ namespace Common.Utilities
             var path = Path.Combine(Directory.GetCurrentDirectory() + @"\wwwroot" + @$"\CKE_Images\");
             if (!Directory.Exists(path))
                 Directory.CreateDirectory(path);
-            var url = $"http://admin.NeginHyper.Com{"/CKE_Images/"}{fileName}";
+            var url = $"http://admin.NeginHyper.ir{"/CKE_Images/"}{fileName}";
             var filepath = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "CKE_Images")).Root + $@"\{fileName}";
             using (FileStream fs = File.Create(filepath))
             {

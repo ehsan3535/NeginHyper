@@ -257,7 +257,7 @@ namespace Client.Controllers
             var productList = productripo.TableNoTracking.ToList();
             foreach (var item in productList)
             {
-                 item.ImageCoverUrl = item.ImageCoverUrl.Replace("http://admin.NeginHyper.Com", "https://localhost:44382");
+                 item.ImageCoverUrl = item.ImageCoverUrl.Replace("http://admin.NeginHyper.ir", "https://localhost:44382");
                 productripo.Update(item);
             }
 
@@ -268,7 +268,7 @@ namespace Client.Controllers
             var productList = productripo.TableNoTracking.ToList();
             foreach (var item in productList)
             {
-                item.ImageCoverUrl = item.ImageCoverUrl.Replace("https://localhost:44382", "http://admin.NeginHyper.Com");
+                item.ImageCoverUrl = item.ImageCoverUrl.Replace("https://localhost:44382", "http://admin.NeginHyper.ir");
                 productripo.Update(item);
             }
 
