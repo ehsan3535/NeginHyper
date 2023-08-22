@@ -252,17 +252,28 @@ namespace Client.Controllers
 
             return View(model);
         }
-        public async Task<IActionResult> ReplaceString(CancellationToken cancellationToken)
+        public async Task<IActionResult> ReplaceForLocal(CancellationToken cancellationToken)
         {
             var productList = productripo.TableNoTracking.ToList();
             foreach (var item in productList)
             {
-                 //item.ImageCoverUrl = item.ImageCoverUrl.Replace("http://admin.NeginHyper.Com", "https://localhost:44382");
-                 item.ImageCoverUrl = item.ImageCoverUrl.Replace("https://localhost:44382", "http://admin.NeginHyper.Com");
+                 item.ImageCoverUrl = item.ImageCoverUrl.Replace("http://admin.NeginHyper.Com", "https://localhost:44382");
                 productripo.Update(item);
             }
 
             return RedirectToAction("shop");
         }
+        public async Task<IActionResult> ReplaceForServer(CancellationToken cancellationToken)
+        {
+            var productList = productripo.TableNoTracking.ToList();
+            foreach (var item in productList)
+            {
+                item.ImageCoverUrl = item.ImageCoverUrl.Replace("https://localhost:44382", "http://admin.NeginHyper.Com");
+                productripo.Update(item);
+            }
+
+            return RedirectToAction("shop");
+        }
+
     }
 }
