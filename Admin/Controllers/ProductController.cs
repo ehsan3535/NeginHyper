@@ -274,6 +274,15 @@ namespace Client.Controllers
 
             return RedirectToAction("shop");
         }
-
-    }
+		public async Task<IActionResult> Ir(CancellationToken cancellationToken)
+		{
+			var productList = productripo.TableNoTracking.ToList();
+			foreach (var item in productList)
+			{
+				item.ImageCoverUrl = item.ImageCoverUrl.Replace("http://admin.NeginHyper.Com", "http://admin.NeginHyper.ir");
+				productripo.Update(item);
+			}
+			return RedirectToAction("shop");
+		}
+	}
 }
