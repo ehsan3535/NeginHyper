@@ -17,7 +17,15 @@
 						<h3 class="product-list__card_h3">@item.Name</h3>
 					</a>
 					<div class="product-list__card--detail justify-content-center">
-						<span class="text-ceenter bg-primary-gradient px-2 py-1 br-20">درجه @item.darage</span>
+						<span class="text-ceenter bg-primary-gradient px-2 py-1 br-20">
+							<i class="fa fa-star m-2"> @item.Rate / 5</i>
+						</span>
+						@if (item.darage != 0)
+						{
+							<span class="text-ceenter bg-primary-gradient px-2 py-1 br-20">
+								<span class="text-ceenter bg-primary-gradient px-2 py-1 br-20" style="text-align:center;">درجه @item.darage</span>
+							</span>
+						}
 					</div>
 
 					<div class="product-list__button-container">

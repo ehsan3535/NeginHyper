@@ -16987,7 +16987,7 @@ select.form-control {
 	width: 243.6px;
 	margin: 5px 5px 10px;
 	object-fit: fill;
-	background-color: #ffffff;
+	background-color: #ffffff !important;
 }
 .product-list__card--farmer-img {
   position: absolute;
