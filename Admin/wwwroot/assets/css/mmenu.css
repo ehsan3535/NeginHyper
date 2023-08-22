@@ -518,16 +518,16 @@
   .mobilemenu--header {
     display: flex;
   }
-  .mc_mobile_header {
-    display: flex;
-    justify-content: space-between;
-    height: 50px;
-    align-items: center;
-    /* box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.16); */
-    border: 1px solid #f3f3f3;
-    user-select: none;
-	position:fixed;
-  }
+	.mc_mobile_header {
+		display: flex;
+		justify-content: space-between;
+		height: 50px;
+		align-items: center;
+		/* box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.16); */
+		border: 1px solid #f3f3f3;
+		user-select: none;
+		
+	}
   .mc_desktop_header {
     display: none;
   }
